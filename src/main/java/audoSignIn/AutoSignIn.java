@@ -336,6 +336,7 @@ public class AutoSignIn
     		
     	Thread.sleep(3000);s_deng(3);
     	touch(driver,960,1888);s_dianji("我的");
+    	stepX(driver,"//android.widget.TextView[@text='更多']");s_dianji("任务");
     	stepX(driver,"//android.widget.TextView[@text='任务']");s_dianji("任务");
     	Thread.sleep(1000);
     	}catch (Exception e) {System.out.println("旅法师营地出错"+e.toString());}
