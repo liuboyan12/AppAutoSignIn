@@ -42,7 +42,7 @@ public class AutoSignIn
     	Yunyinyue();
     	Iyingdi();
 //    	iqiyi();
-    	chiji();
+//    	chiji();
     	zhifubao();
     }
    
@@ -612,7 +612,16 @@ public class AutoSignIn
     	@SuppressWarnings("rawtypes")
 		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),appInffo(packageName, ActivityName));
     	try 
-    	{
+    	{	
+    		Thread.sleep(2000);
+    		stepX(driver,"//android.widget.TextView[@text='运动']");
+    		Thread.sleep(1000);
+    		untilX(driver,"//android.widget.TextView[@text='我的行走']");
+    		touch(driver,555,1332);
+    		Thread.sleep(1000);
+    		touch(driver,751,1546);
+    		Thread.sleep(1000);
+    		touch(driver,33,175);//[0,66][132,210]
     		stepX(driver, "//android.widget.TextView[@text='大学生活']");
     		Thread.sleep(10000);
     		untilX(driver, "//android.widget.TextView[@text='湘潭大学']");
