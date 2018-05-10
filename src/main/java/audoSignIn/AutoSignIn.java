@@ -1,11 +1,15 @@
 package audoSignIn;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -99,7 +103,14 @@ public class AutoSignIn
     	if(emWozhidaole!=null) 
     		{
     		stepX(driver,"//android.widget.Button[@text='马上观看']");		s_dianji("马上观看");
-    		s_deng(32);Thread.sleep(32000);										
+    		s_deng(32);Thread.sleep(32000);		
+    		
+    		
+//    		截图1然后对比图是否在一定时间内无变化
+    		screenShot(driver,"");
+    		
+    		
+    		
     		driver.pressKeyCode(AndroidKeyCode.BACK);					s_dianji("返回");
     		}
     		
@@ -444,8 +455,7 @@ public class AutoSignIn
     {
     	String packageName = "com.taobao.taobao";
     	String ActivityName = "com.taobao.tao.welcome.Welcome";
-    	@SuppressWarnings("rawtypes")
-		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),appInffo(packageName, ActivityName));
+    	AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),appInffo(packageName, ActivityName));
     	s_jinru("淘宝");
     	try {
     	s_deng(5);Thread.sleep(5000);
@@ -568,7 +578,6 @@ public class AutoSignIn
     	
     	
     	Thread.sleep(2000);
-    	s_tuichu("淘宝");
     	}catch (Exception e) {System.out.println("淘宝报错"+e.toString());}
     	s_tuichu("淘宝");
     	driver.quit();
@@ -747,7 +756,27 @@ public class AutoSignIn
 	{
 	  System.out.println("正在判断"+a+"。");  
 	}
-
+  
+  public static void screenShot(@SuppressWarnings("rawtypes") AndroidDriver driver,String sFilePath)  
+  {  
+      File file=new File(sFilePath);  
+      // 如果截图存在先删除  
+      try {  
+          if(file.exists())  
+          {  
+              file.delete();  
+          }  
+      } catch (Exception e) {  
+          e.printStackTrace();  
+      }  
+      // 截图  
+      File newFile=driver.getScreenshotAs(OutputType.FILE);  
+      try {  
+          FileUtils.copyFile(newFile, file);  
+      } catch (IOException e) {  
+          e.printStackTrace();  
+      }     
+  }  
 }
 
 
