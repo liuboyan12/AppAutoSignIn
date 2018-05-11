@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -19,37 +20,69 @@ import io.appium.java_client.android.AndroidDriver;
 
 public class App
 	{
-    	public static void main( String[] args ) throws MalformedURLException, InterruptedException 
+    	public static void main( String[] args ) throws InterruptedException, IOException 
     		{ 
+    		int rgbR;
+    		int rgbG;
+    		int rgbB;
+    		int i,j;
+    		
+    		int size = 100;
+    		int[] ifcode=new int[size];
+    		
+    		
     		String prints = System.getProperty("user.dir");
     		String relative_path = "\\screenShot\\test2.png" ;
     		String filepath = prints+relative_path;
     		
+    		String prints2 = System.getProperty("user.dir");
+    		String relative_path2 = "\\screenShot\\test2.png" ;
+    		String filepath2 = prints2+relative_path2;
     		
-    		int rgbR;
-    		int rgbG;
-    		int rgbB;
-    		int minx = 0;
-    		int miny = 0;
+    		Random rand = new Random();
+
     		try {
-    		File file = new File("E:\\dd.png");
-    		BufferedImage image = ImageIO.read(file);
-    		int width = image.getWidth();//图片宽度
-    		int height = image.getHeight();//图片高度
-    		for (int i = minx; i < width; i++) {  
-    		for (int j = miny; j < height; j++) {  
-    		int pixel = image.getRGB(i, j); // 下面三行代码将一个数字转换为RGB数字  
-    		rgbR = (pixel & 0xff0000) >> 16;  
-    		rgbG = (pixel & 0xff00) >> 8;  
-    		rgbB = (pixel & 0xff);  
-    		System.out.println("i=" + i + ",j=" + j + ":(" + rgbR + ","  + rgbG + "," + rgbB + ")");  
-    		}  
-    		} 
-    		System.out.println("图片宽度为："+width+",高度为:"+height);
-    		} catch (IOException e) {
-    		System.out.println("读取文件出错");
-    		e.printStackTrace();
-    		}
+        		File file = new File(filepath);
+        		BufferedImage image = ImageIO.read(file);
+        		
+        		File file2 = new File(filepath2);
+        		BufferedImage image2 = ImageIO.read(file2);
+        		
+        		
+        		int width = image.getWidth();//图片宽度
+        		int height = image.getHeight();//图片高度
+        		
+        	
+        		for(int forcode=0;forcode<100;forcode++) //循环
+        		{
+        			i = rand.nextInt(width);
+            		j = rand.nextInt(height);//选点
+            		{
+            			
+            			int pixel1 = image.getRGB(i, j); //取1
+            			int pixel2 = image2.getRGB(i, j);//取2
+            			{
+            				if(pixel1 == pixel2) 
+            				{
+            					ifcode[forcode]=0;
+            				}else {
+            					ifcode[forcode]=-1;
+            				}
+            			}
+            			
+            		}
+        		}
+        		
+        		for(int forcode1 = 0;forcode1<ifcode.length;forcode1++) 
+        		{
+        			
+        		}
+        		
+        		
+    		}catch (Exception e) {
+    			System.out.println(e.toString());
+			}
+    		
     	    }  
     	
             
