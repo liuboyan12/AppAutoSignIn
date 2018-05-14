@@ -1,11 +1,15 @@
 package audoSignIn;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
+import javax.imageio.ImageIO;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
@@ -103,11 +107,87 @@ public class AutoSignIn
     	if(emWozhidaole!=null) 
     		{
     		stepX(driver,"//android.widget.Button[@text='马上观看']");		s_dianji("马上观看");
-    		s_deng(32);Thread.sleep(32000);		
+//    		s_deng(32);Thread.sleep(32000);		
+//    		截图++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    		while(1<2) {
+    		Thread.sleep(500);
+    		String prints = System.getProperty("user.dir");
+    		String relative_path = "\\screenShot\\test1.png" ;
+    		String filepath = prints+relative_path;
     		
+    		String prints2 = System.getProperty("user.dir");
+    		String relative_path2 = "\\screenShot\\test2.png" ;
+    		String filepath2 = prints2+relative_path2;
     		
-//    		截图1然后对比图是否在一定时间内无变化
-    		screenShot(driver,"");
+    		screenShot(driver,filepath);
+    		Thread.sleep(3000);
+    		screenShot(driver,filepath2);
+    		Thread.sleep(1000);
+    		
+//    		截图1然后对比图是否在一定时间内无变化++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=
+    		
+    		int i,j;
+    		int size = 100;
+    		int[] ifcode=new int[size];
+    		
+
+    		Random rand = new Random();
+
+    		try {
+        		File file = new File(filepath);
+        		BufferedImage image = ImageIO.read(file);
+        		
+        		File file2 = new File(filepath2);
+        		BufferedImage image2 = ImageIO.read(file2);
+        		
+        		
+        		int width = image.getWidth();//图片宽度
+        		int height = image.getHeight();//图片高度
+        		
+        	
+        		for(int forcode=0;forcode<100;forcode++) //循环
+        		{
+        			i = rand.nextInt(width);
+            		j = rand.nextInt(height);//选点
+            		{
+            			
+            			int pixel1 = image.getRGB(i, j); //取1
+//            			System.out.println("pixel1:"+pixel1);
+            			int pixel2 = image2.getRGB(i, j);//取2
+//            			System.out.println("pixel2:"+pixel2);
+            			{
+            				if(pixel1 == pixel2) 
+            				{
+            					ifcode[forcode]=0;
+            				}else {
+            					ifcode[forcode]=-1;
+            				}
+            			}
+            			
+            		}
+        		}
+        		
+        		String string = "相同";
+        		for(int forcode1 = 0;forcode1<ifcode.length;forcode1++) 
+        		{
+        			int num = ifcode[forcode1];
+        			if(num == -1)
+        			{
+        				string = "不同";
+        				break;
+        			}else{}
+        		}
+        		if(string == "相同") 
+        		{
+        			break;
+        		}
+        		
+        		
+    		}catch (Exception e) {
+    			System.out.println(e.toString());
+			}
+//    		+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    		}
     		
     		
     		

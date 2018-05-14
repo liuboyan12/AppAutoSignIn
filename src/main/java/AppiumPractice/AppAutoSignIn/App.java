@@ -28,11 +28,13 @@ public class App
     		int i,j;
     		
     		int size = 100;
+    		
+    		
     		int[] ifcode=new int[size];
     		
     		
     		String prints = System.getProperty("user.dir");
-    		String relative_path = "\\screenShot\\test2.png" ;
+    		String relative_path = "\\screenShot\\test1.png" ;
     		String filepath = prints+relative_path;
     		
     		String prints2 = System.getProperty("user.dir");
@@ -60,7 +62,9 @@ public class App
             		{
             			
             			int pixel1 = image.getRGB(i, j); //取1
+//            			System.out.println("pixel1:"+pixel1);
             			int pixel2 = image2.getRGB(i, j);//取2
+//            			System.out.println("pixel2:"+pixel2);
             			{
             				if(pixel1 == pixel2) 
             				{
@@ -73,10 +77,12 @@ public class App
             		}
         		}
         		
-        		for(int forcode1 = 0;forcode1<ifcode.length;forcode1++) 
-        		{
-        			
-        		}
+        		for(int forcode2=0;forcode2<100;forcode2++) 
+        		{System.out.println(ifcode[forcode2]);}
+//        		for(int forcode1 = 0;forcode1<ifcode.length;forcode1++) 
+//        		{
+//        			
+//        		}
         		
         		
     		}catch (Exception e) {
