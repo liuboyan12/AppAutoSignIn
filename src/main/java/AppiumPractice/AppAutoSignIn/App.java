@@ -22,16 +22,9 @@ public class App
 	{
     	public static void main( String[] args ) throws InterruptedException, IOException 
     		{ 
-    		int rgbR;
-    		int rgbG;
-    		int rgbB;
     		int i,j;
-    		
     		int size = 100;
-    		
-    		
     		int[] ifcode=new int[size];
-    		
     		
     		String prints = System.getProperty("user.dir");
     		String relative_path = "\\screenShot\\test1.png" ;
@@ -77,12 +70,17 @@ public class App
             		}
         		}
         		
-        		for(int forcode2=0;forcode2<100;forcode2++) 
-        		{System.out.println(ifcode[forcode2]);}
-//        		for(int forcode1 = 0;forcode1<ifcode.length;forcode1++) 
-//        		{
-//        			
-//        		}
+        		String string = "";
+        		for(int forcode1 = 0;forcode1<ifcode.length;forcode1++) 
+        		{
+        			int num = ifcode[forcode1];
+        			if(num == -1)
+        			{
+        				string = "不同";
+        				break;
+        			}else{}
+        		}
+        		
         		
         		
     		}catch (Exception e) {
