@@ -120,7 +120,7 @@ public class AutoSignIn
     		String filepath2 = prints2+relative_path2;
     		
     		screenShot(driver,filepath);
-    		Thread.sleep(3000);
+    		Thread.sleep(1000);
     		screenShot(driver,filepath2);
     		Thread.sleep(1000);
     		
