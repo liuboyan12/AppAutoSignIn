@@ -37,6 +37,10 @@ public class AutoSignIn
 //    	zhifubao();
 //    	iqiyi();
 //    	zhifubao();
+//    	String a1 = "a";
+//    	String a2 = "a";
+//    	System.out.println(a1.equals(a2));
+    	
     	}
 
      static void SignEveryDayTryVersion() throws MalformedURLException, InterruptedException
@@ -108,86 +112,143 @@ public class AutoSignIn
     		{
     		stepX(driver,"//android.widget.Button[@text='马上观看']");		s_dianji("马上观看");
 //    		s_deng(32);Thread.sleep(32000);		
-//    		截图++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    		while(1<2) {
-    		Thread.sleep(500);
-    		String prints = System.getProperty("user.dir");
-    		String relative_path = "\\screenShot\\test1.png" ;
-    		String filepath = prints+relative_path;
-    		
-    		String prints2 = System.getProperty("user.dir");
-    		String relative_path2 = "\\screenShot\\test2.png" ;
-    		String filepath2 = prints2+relative_path2;
-    		
-    		screenShot(driver,filepath);
-    		Thread.sleep(1000);
-    		screenShot(driver,filepath2);
-    		Thread.sleep(1000);
-    		
-//    		截图1然后对比图是否在一定时间内无变化++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=
-    		
-    		int i,j;
-    		int size = 100;
-    		int[] ifcode=new int[size];
-    		
-
-    		Random rand = new Random();
-
-    		try {
-        		File file = new File(filepath);
-        		BufferedImage image = ImageIO.read(file);
-        		
-        		File file2 = new File(filepath2);
-        		BufferedImage image2 = ImageIO.read(file2);
-        		
-        		
-        		int width = image.getWidth();//图片宽度
-        		int height = image.getHeight();//图片高度
-        		
-        	
-        		for(int forcode=0;forcode<100;forcode++) //循环
-        		{
-        			i = rand.nextInt(width);
-            		j = rand.nextInt(height);//选点
-            		{
-            			
-            			int pixel1 = image.getRGB(i, j); //取1
-//            			System.out.println("pixel1:"+pixel1);
-            			int pixel2 = image2.getRGB(i, j);//取2
-//            			System.out.println("pixel2:"+pixel2);
-            			{
-            				if(pixel1 == pixel2) 
-            				{
-            					ifcode[forcode]=0;
-            				}else {
-            					ifcode[forcode]=-1;
-            				}
-            			}
-            			
-            		}
-        		}
-        		
-        		String string = "相同";
-        		for(int forcode1 = 0;forcode1<ifcode.length;forcode1++) 
-        		{
-        			int num = ifcode[forcode1];
-        			if(num == -1)
-        			{
-        				string = "不同";
-        				break;
-        			}else{}
-        		}
-        		if(string == "相同") 
-        		{
-        			break;
-        		}
-        		
-        		
-    		}catch (Exception e) {
-    			System.out.println(e.toString());
-			}
+////    截图方法1++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//    		while(1<2) {
+//    		Thread.sleep(500);
+//    		String prints = System.getProperty("user.dir");
+//    		String relative_path = "\\screenShot\\test1.png" ;
+//    		String filepath = prints+relative_path;
+//    		
+//    		String prints2 = System.getProperty("user.dir");
+//    		String relative_path2 = "\\screenShot\\test2.png" ;
+//    		String filepath2 = prints2+relative_path2;
+//    		
+//    		screenShot(driver,filepath);
+//    		Thread.sleep(1000);
+//    		screenShot(driver,filepath2);
+//    		Thread.sleep(1000);
+//    		
+////    		截图1然后对比图是否在一定时间内无变化++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=
+//    		
+//    		int i,j;
+//    		int size = 100;
+//    		int[] ifcode=new int[size];
+//    		
+//
+//    		Random rand = new Random();
+//
+//    		try {
+//        		File file = new File(filepath);
+//        		BufferedImage image = ImageIO.read(file);
+//        		
+//        		File file2 = new File(filepath2);
+//        		BufferedImage image2 = ImageIO.read(file2);
+//        		
+//        		
+//        		int width = image.getWidth();//图片宽度
+//        		int height = image.getHeight();//图片高度
+//        		
+//        	
+//        		for(int forcode=0;forcode<100;forcode++) //循环
+//        		{
+//        			i = rand.nextInt(width);
+//            		j = rand.nextInt(height);//选点
+//            		{
+//            			
+//            			int pixel1 = image.getRGB(i, j); //取1
+////            			System.out.println("pixel1:"+pixel1);
+//            			int pixel2 = image2.getRGB(i, j);//取2
+////            			System.out.println("pixel2:"+pixel2);
+//            			{
+//            				if(pixel1 == pixel2) 
+//            				{
+//            					ifcode[forcode]=0;
+//            				}else {
+//            					ifcode[forcode]=-1;
+//            				}
+//            			}
+//            			
+//            		}
+//        		}
+//        		
+//        		String string = "相同";
+//        		for(int forcode1 = 0;forcode1<ifcode.length;forcode1++) 
+//        		{
+//        			int num = ifcode[forcode1];
+//        			if(num == -1)
+//        			{
+//        				string = "不同";
+//        				break;
+//        			}else{}
+//        		}
+//        		if(string == "相同") 
+//        		{
+//        			break;
+//        		}
+//        		
+//        		
+//    		}catch (Exception e) {
+//    			System.out.println(e.toString());
+//			}
+//    		}
 //    		+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//    截图方法2++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    		int overtimecode=0;
+    		while(1<2) 
+    		{
+    			if(overtimecode>49) 
+    			{
+    				break;
+    			}else {
+    				overtimecode=overtimecode+1;
+    			}
+    			String as1 =driver.getScreenshotAs(OutputType.BASE64);
+        		Thread.sleep(500);
+        		String as2 =driver.getScreenshotAs(OutputType.BASE64);
+        		Thread.sleep(500);
+        		{
+        			Random rand = new Random();
+        			int as1length = as1.length();
+        			int as2length = as2.length();
+        			if(as1length==as2length) 
+        			{
+        				ArrayList<Integer> list=new ArrayList<Integer>();
+        				for(int foricode=0;foricode<5;foricode++) 
+            			{
+            				int random_num = rand.nextInt(as1length);
+            				as1=as1.substring(random_num,random_num+10);
+                    		as2=as2.substring(random_num,random_num+10);
+                    		if(as1.equals(as2)) 
+                    		{
+                    			list.add(1);
+                    		}else{
+                    			list.add(0);
+                    		}
+                    	
+            			}
+        				int breakcode = 1;
+                		for(int forcodei1=0;forcodei1<list.size();forcodei1++) 
+                		{
+                			int panduan = list.get(forcodei1);
+                			if(panduan==0) 
+                			{
+                				breakcode=2;
+                			}else {
+                				continue;
+                			}
+                		}
+                		if(breakcode==2) 
+                		{
+                			continue;
+                		}else {
+                			break;
+                		}
+        			}else {
+        				continue;
+        			}
+        		}
     		}
+//    		++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++==
     		
     		
     		
@@ -219,9 +280,12 @@ public class AutoSignIn
     	s_deng(2);Thread.sleep(2000);
     	stepX(driver,"//android.widget.TextView[@text='我的']");s_dianji("我的（再次）");
     	s_deng(2);Thread.sleep(2000);
-    	stepX(driver,"//android.widget.TextView[@text='签到']");s_dianji("签到");
+//    	stepX(driver,"//android.widget.TextView[@text='签到']");s_dianji("签到");
+    	stepX(driver,"//android.widget.ImageView[@index='3']");s_dianji("签到");
     	s_deng(2);Thread.sleep(2000);
+    	//android.widget.ImageView[@index='3']
     	stepX(driver,"//android.view.View[@content-desc='立即签到']");s_dianji("立即签到");
+    	
     	s_deng(1);Thread.sleep(1000);
 		}catch (Exception e) {System.out.println("飞猪出错"+e.toString());}
 		s_tuichu("飞猪");

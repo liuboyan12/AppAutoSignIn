@@ -7,91 +7,100 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
 
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
+import com.google.common.primitives.Bytes;
+
 import io.appium.java_client.android.AndroidDriver;
 
 public class App
 	{
     	public static void main( String[] args ) throws InterruptedException, IOException 
     		{ 
-    		int i,j;
-    		int size = 100;
-    		int[] ifcode=new int[size];
-    		
-    		String prints = System.getProperty("user.dir");
-    		String relative_path = "\\screenShot\\test1.png" ;
-    		String filepath = prints+relative_path;
-    		
-    		String prints2 = System.getProperty("user.dir");
-    		String relative_path2 = "\\screenShot\\test2.png" ;
-    		String filepath2 = prints2+relative_path2;
-    		
-    		Random rand = new Random();
-
-    		try {
-        		File file = new File(filepath);
-        		BufferedImage image = ImageIO.read(file);
-        		
-        		File file2 = new File(filepath2);
-        		BufferedImage image2 = ImageIO.read(file2);
-        		
-        		
-        		int width = image.getWidth();//图片宽度
-        		int height = image.getHeight();//图片高度
-        		
-        	
-        		for(int forcode=0;forcode<100;forcode++) //循环
+    		String packageName="com.cainiao.wireless";
+        	String ActivityName=".homepage.presentation.view.activity.HomepageActivity";
+        	@SuppressWarnings("rawtypes")
+    		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),appInffo(packageName, ActivityName));
+        	Thread.sleep(5000);
+        	int overtimecode=0;
+    		while(1<2) 
+    		{
+    			if(overtimecode>49) 
+    			{
+    				break;
+    			}else {
+    				overtimecode=overtimecode+1;
+    			}
+    			String as1 =driver.getScreenshotAs(OutputType.BASE64);
+        		Thread.sleep(500);
+        		String as2 =driver.getScreenshotAs(OutputType.BASE64);
+        		Thread.sleep(500);
         		{
-        			i = rand.nextInt(width);
-            		j = rand.nextInt(height);//选点
-            		{
-            			
-            			int pixel1 = image.getRGB(i, j); //取1
-//            			System.out.println("pixel1:"+pixel1);
-            			int pixel2 = image2.getRGB(i, j);//取2
-//            			System.out.println("pixel2:"+pixel2);
-            			{
-            				if(pixel1 == pixel2) 
-            				{
-            					ifcode[forcode]=0;
-            				}else {
-            					ifcode[forcode]=-1;
-            				}
-            			}
-            			
-            		}
-        		}
-        		
-        		String string = "";
-        		for(int forcode1 = 0;forcode1<ifcode.length;forcode1++) 
-        		{
-        			int num = ifcode[forcode1];
-        			if(num == -1)
+        			Random rand = new Random();
+        			int as1length = as1.length();
+        			int as2length = as2.length();
+        			if(as1length==as2length) 
         			{
-        				string = "不同";
-        				break;
-        			}else{}
+        				ArrayList<Integer> list=new ArrayList<Integer>();
+        				for(int foricode=0;foricode<5;foricode++) 
+            			{
+            				int random_num = rand.nextInt(as1length);
+            				as1=as1.substring(random_num,random_num+10);
+                    		as2=as2.substring(random_num,random_num+10);
+                    		if(as1.equals(as2)) 
+                    		{
+                    			list.add(1);
+                    		}else{
+                    			list.add(0);
+                    		}
+                    	
+            			}
+        				int breakcode = 1;
+                		for(int forcodei1=0;forcodei1<list.size();forcodei1++) 
+                		{
+                			int panduan = list.get(forcodei1);
+                			if(panduan==0) 
+                			{
+                				breakcode=2;
+                			}else {
+                				continue;
+                			}
+                		}
+                		if(breakcode==2) 
+                		{
+                			continue;
+                		}else {
+                			break;
+                		}
+        			}else {
+        				continue;
+        			}
         		}
-        		
-        		
-        		
-    		}catch (Exception e) {
-    			System.out.println(e.toString());
-			}
-    		
+    		}
+    	
     	    }  
     	
             
     		
-
+    	public static void txtIO(String lujing,String neirong) throws FileNotFoundException
+    		{
+	    		FileOutputStream fs = new FileOutputStream(new File(lujing));
+	    		PrintStream p = new PrintStream(fs);
+	    		p.println(neirong);
+	    		p.close();
+    		}	
     		
     	    public static byte[] getFileToByte(File file) {  
     	        byte[] by = new byte[(int) file.length()];  
