@@ -35,8 +35,11 @@ public class App
     		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),appInffo(packageName, ActivityName));
         	Thread.sleep(5000);
         	int overtimecode=0;
+        	int times=0;
     		while(1<2) 
     		{
+    			times++;
+    			System.out.println("次数"+times);
     			if(overtimecode>49) 
     			{
     				break;
@@ -54,19 +57,25 @@ public class App
         			if(as1length==as2length) 
         			{
         				ArrayList<Integer> list=new ArrayList<Integer>();
+        				String listout = "";
         				for(int foricode=0;foricode<5;foricode++) 
-            			{
-            				int random_num = rand.nextInt(as1length);
-            				as1=as1.substring(random_num,random_num+10);
-                    		as2=as2.substring(random_num,random_num+10);
-                    		if(as1.equals(as2)) 
+            			{	
+        					int randome_range = as1length-11;
+            				int random_num = rand.nextInt(randome_range);
+            				String ras1=as1.substring(random_num,random_num+10);
+                    		String ras2=as2.substring(random_num,random_num+10);
+                    		if(ras1.equals(ras2)) 
                     		{
                     			list.add(1);
+                    			listout=listout+1;
                     		}else{
                     			list.add(0);
+                    			listout=listout+0;
                     		}
-                    	
+                    		
+                    		
             			}
+        				System.out.println(listout);
         				int breakcode = 1;
                 		for(int forcodei1=0;forcodei1<list.size();forcodei1++) 
                 		{
@@ -89,6 +98,7 @@ public class App
         			}
         		}
     		}
+    		driver.quit();
     	
     	    }  
     	
