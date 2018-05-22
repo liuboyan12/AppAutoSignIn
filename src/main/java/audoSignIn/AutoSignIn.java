@@ -46,7 +46,7 @@ public class AutoSignIn
 
      static void SignEveryDayTryVersion() throws MalformedURLException, InterruptedException
     {
-//    	Feizhu();
+    	Feizhu();
     	Xianyu();
     	Cainiao();
     	Youdao();
