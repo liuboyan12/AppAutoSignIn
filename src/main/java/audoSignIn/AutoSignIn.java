@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.By.ByXPath;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
@@ -54,7 +55,7 @@ public class AutoSignIn
     	JingdongStock();
     	taobao();
     	Yunyinyue();
-    	Iyingdi();
+//    	Iyingdi();
 //    	iqiyi();
 //    	chiji();
     	zhifubao();
@@ -599,42 +600,72 @@ public class AutoSignIn
     
     	System.out.println("移动币有好店到最上面");
     	Thread.sleep(2000);	
-    	for(int is=0;is<2;is++)
+    	int outcode = 0;
+    	int whilecode = 0;
+    	while(0<1)
+    	{
+    	try 
     		{
-	    		List list=driver.findElements(By.xpath("//android.view.View[@content-desc='签到+']"));
-	    		int listInt = list.size();
-	    		if (listInt==0) {System.out.print("未找到签到");}
-	    			else if(listInt != 0 ) 
-	    				{
-	    				for(int ip=0;ip<listInt;ip++) 
-	    					{	
-	    						Thread.sleep(2000);
-		    					WebElement webelement1= (WebElement) list.get(ip);
-		    					int list_code_Y = (webelement1).getLocation().y;
-		    					int list_code_X = (webelement1).getLocation().x;
-		    					Thread.sleep(2000);
-		    					touch(driver, list_code_X, list_code_Y);
-		    					Thread.sleep(2000);
-		    					untilX(driver, "//android.view.View[@content-desc='店铺热卖']");
-		    					Thread.sleep(2000);
-		    					driver.pressKeyCode(AndroidKeyCode.BACK);
-		    					Thread.sleep(2000);
-	    					}
-	    				WebElement webelement1= (WebElement) list.get(listInt-1);
-	    				if(webelement1==null) 
-	    					{
-	    						System.out.println("界面内无可点击项");
-	    					}
-	    				else if(webelement1!=null)
-	    					{
-	    						int list_code_X = 5;
-	    						int list_code_Y = (webelement1).getLocation().y;
-	    						Thread.sleep(2000);
-	    						swipTo(driver,list_code_X,list_code_Y,100,100);
-		    					Thread.sleep(2000);
-	    					}
-	    				}
+    		driver.findElement(By.xpath("//android.view.View[@content-desc='签到+']"));
+    		int while1code = 0;
+    		while(0<1) 
+	    		{
+		    		driver.findElement(By.xpath("//android.view.View[@content-desc='签到+']")).click();
+		    		Thread.sleep(2000);
+					untilX(driver, "//android.view.View[@content-desc='店铺热卖']");
+					Thread.sleep(2000);
+					driver.pressKeyCode(AndroidKeyCode.BACK);
+					Thread.sleep(2000);
+					while1code++;
+					if(while1code>3) {break;}
+				}
+    		
+    		}catch (Exception e) 
+    		{
+    			outcode++;
     		}
+    	if(outcode >2) {break;}
+    	}
+    	Thread.sleep(2000);
+    	swipTo(driver,100,1000,100,100);
+    	Thread.sleep(2000);
+    	
+//    	for(int is=0;is<2;is++)
+//    		{
+//	    		List list=driver.findElements(By.xpath("//android.view.View[@content-desc='签到+']"));
+//	    		int listInt = list.size();
+//	    		if (listInt==0) {System.out.print("未找到签到");}
+//	    			else if(listInt != 0 ) 
+//	    				{
+//	    				for(int ip=0;ip<listInt;ip++) 
+//	    					{	
+//	    						Thread.sleep(2000);
+//		    					WebElement webelement1= (WebElement) list.get(ip);
+//		    					int list_code_Y = (webelement1).getLocation().y;
+//		    					int list_code_X = (webelement1).getLocation().x;
+//		    					Thread.sleep(2000);
+//		    					touch(driver, list_code_X, list_code_Y);
+//		    					Thread.sleep(2000);
+//		    					untilX(driver, "//android.view.View[@content-desc='店铺热卖']");
+//		    					Thread.sleep(2000);
+//		    					driver.pressKeyCode(AndroidKeyCode.BACK);
+//		    					Thread.sleep(2000);
+//	    					}
+//	    				WebElement webelement1= (WebElement) list.get(listInt-1);
+//	    				if(webelement1==null) 
+//	    					{
+//	    						System.out.println("界面内无可点击项");
+//	    					}
+//	    				else if(webelement1!=null)
+//	    					{
+//	    						int list_code_X = 5;
+//	    						int list_code_Y = (webelement1).getLocation().y;
+//	    						Thread.sleep(2000);
+//	    						swipTo(driver,list_code_X,list_code_Y,100,100);
+//		    					Thread.sleep(2000);
+//	    					}
+//	    				}
+//    		}
     	
     	
     	
