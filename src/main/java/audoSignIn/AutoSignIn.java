@@ -1,6 +1,5 @@
 package audoSignIn;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -8,12 +7,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import javax.imageio.ImageIO;
-
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.By.ByXPath;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
@@ -33,17 +28,7 @@ public class AutoSignIn
     public static void main( String[] args ) throws MalformedURLException, InterruptedException
     {    
     	SignEveryDayTryVersion();
-//    	Youdao();
-//    	chiji();
-//    	zhifubao();
-//    	zhifubao();
-//    	iqiyi();
-//    	zhifubao();
-//    	String a1 = "a";
-//    	String a2 = "a";
-//    	System.out.println(a1.equals(a2));
-    	
-    	}
+        }
 
      static void SignEveryDayTryVersion() throws MalformedURLException, InterruptedException
     {
@@ -51,13 +36,9 @@ public class AutoSignIn
     	Xianyu();
     	Cainiao();
     	Youdao();
-//    	JingdongFinace();
     	JingdongStock();
     	taobao();
     	Yunyinyue();
-//    	Iyingdi();
-//    	iqiyi();
-//    	chiji();
     	zhifubao();
     }
    
@@ -71,7 +52,7 @@ public class AutoSignIn
         Thread.sleep(2000);s_deng(2);
     try{
     	s_jinru("有道云笔记");
-    	stepX(driver,"//android.widget.TextView[@text='我的']");//android.widget.TextView[@text='我的']
+    	stepX(driver,"//android.widget.TextView[@text='我的']");
     	s_dianji("我的");
     	Thread.sleep(2000);s_deng(2);
     	stepX(driver,"//android.widget.TextView[@text='我的']");
@@ -112,7 +93,7 @@ public class AutoSignIn
 				while(1<2) 
 				{
 					times++;
-//					System.out.println("次数"+times);
+
 					if(overtimecode>49) 
 					{
 						break;
@@ -199,10 +180,10 @@ public class AutoSignIn
     	s_deng(2);Thread.sleep(2000);
     	stepX(driver,"//android.widget.TextView[@text='我的']");s_dianji("我的（再次）");
     	s_deng(2);Thread.sleep(2000);
-//    	stepX(driver,"//android.widget.TextView[@text='签到']");s_dianji("签到");
+
     	stepX(driver,"//android.widget.ImageView[@index='3']");s_dianji("签到");
     	s_deng(2);Thread.sleep(2000);
-    	//android.widget.ImageView[@index='3']
+
     	stepX(driver,"//android.view.View[@content-desc='立即签到']");s_dianji("立即签到");
     	
     	s_deng(1);Thread.sleep(1000);
@@ -258,10 +239,7 @@ public class AutoSignIn
     		s_jinru("京东金融");
     		try {
     		s_deng(10);Thread.sleep(10000);
-//    	[0,1687][1080,1770]
-//    	touch(driver,540,1700);
-//    	[870,1782][1020,1909]
-//    	Thread.sleep(2000);s_deng(2);
+
     	touch(driver, 900, 1800);
     	s_dianji("我的");
     	s_deng(2);Thread.sleep(2000);
@@ -330,7 +308,7 @@ public class AutoSignIn
     	s_deng(8);
     	Thread.sleep(8000);
     	try {
-//    	别点出推广
+
     	stepX(driver,"//android.widget.TextView[@text='炉石传说']");s_dianji("炉石传说");
     	s_deng(5);Thread.sleep(5000);
     	s_dianji("第一篇文章");touch(driver,500,1200);//点击第一篇文章	
@@ -338,37 +316,7 @@ public class AutoSignIn
     	s_dianji("第二篇文章");touch(driver,700,1850);//点击评论
     	s_deng(5);Thread.sleep(5000);
     	untilX(driver,"//android.widget.TextView[@text='回复']");s_dengdao("回复");
-//    	======================点赞1======================================
-//    	TouchAction action = new TouchAction(driver);
-//    	int i=0,e=0,r=0;
-//    	while  (r<1) 
-//    	{	 
-//    		@SuppressWarnings("rawtypes")
-//			List xpathList = driver.findElements(By.xpath("//android.widget.TextView[@text='回复']"));
-//			e =  xpathList.size();
-//			System.out.println("本页有"+e+"个赞");
-//    			if(e!=0) 
-//    				{   	
-//    					WebElement em = driver.findElement(By.xpath("//android.widget.TextView[@text='回复']"));
-//    					Thread.sleep(1000);
-//    					int x = em.getLocation().x;
-//    					int y = em.getLocation().y;
-//    					action.tap(x-163,y+15).perform();
-//    					i=i+1;
-//    					System.out.println("点第"+i+"个");
-//    					Thread.sleep(1000);
-//						swipTo(driver,10,1700,10,200);
-//						Thread.sleep(2000);
-//    				}else{ 
-//    					Thread.sleep(1000);
-//						swipTo(driver,10,1700,10,500);
-//						Thread.sleep(2000);
-//    					 }
-//    			if(i==6) {r=2;}
-//    	}
-//    	=======================================================================
-    	
-//    	===============================点赞2====================================
+
     	TouchAction action1 = new TouchAction(driver);
     	System.out.println("进入点赞判断");
     	int i=0,e=0,r=0;
@@ -598,7 +546,7 @@ public class AutoSignIn
     	int by = driver.findElement(By.xpath("//android.view.View[@content-desc='币有好店']")).getLocation().y;
     	swipTo(driver, bx, by, 220, 220);
     
-    	System.out.println("移动币有好店到最上面");
+    	System.out.println("移动币有好店到 最上面");
     	Thread.sleep(2000);	
     	int outcode = 0;
     	int whilecode = 0;
@@ -630,42 +578,7 @@ public class AutoSignIn
     	swipTo(driver,100,1000,100,100);
     	Thread.sleep(2000);
     	
-//    	for(int is=0;is<2;is++)
-//    		{
-//	    		List list=driver.findElements(By.xpath("//android.view.View[@content-desc='签到+']"));
-//	    		int listInt = list.size();
-//	    		if (listInt==0) {System.out.print("未找到签到");}
-//	    			else if(listInt != 0 ) 
-//	    				{
-//	    				for(int ip=0;ip<listInt;ip++) 
-//	    					{	
-//	    						Thread.sleep(2000);
-//		    					WebElement webelement1= (WebElement) list.get(ip);
-//		    					int list_code_Y = (webelement1).getLocation().y;
-//		    					int list_code_X = (webelement1).getLocation().x;
-//		    					Thread.sleep(2000);
-//		    					touch(driver, list_code_X, list_code_Y);
-//		    					Thread.sleep(2000);
-//		    					untilX(driver, "//android.view.View[@content-desc='店铺热卖']");
-//		    					Thread.sleep(2000);
-//		    					driver.pressKeyCode(AndroidKeyCode.BACK);
-//		    					Thread.sleep(2000);
-//	    					}
-//	    				WebElement webelement1= (WebElement) list.get(listInt-1);
-//	    				if(webelement1==null) 
-//	    					{
-//	    						System.out.println("界面内无可点击项");
-//	    					}
-//	    				else if(webelement1!=null)
-//	    					{
-//	    						int list_code_X = 5;
-//	    						int list_code_Y = (webelement1).getLocation().y;
-//	    						Thread.sleep(2000);
-//	    						swipTo(driver,list_code_X,list_code_Y,100,100);
-//		    					Thread.sleep(2000);
-//	    					}
-//	    				}
-//    		}
+
     	
     	
     	
