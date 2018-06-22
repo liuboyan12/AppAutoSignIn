@@ -1,5 +1,4 @@
 package AppiumPractice.AppAutoSignIn;
-import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,7 +7,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,77 +27,17 @@ public class App
 	{
     	public static void main( String[] args ) throws InterruptedException, IOException 
     		{ 
-    		String packageName="com.cainiao.wireless";
-        	String ActivityName=".homepage.presentation.view.activity.HomepageActivity";
+    		String packageName="com.android.settings";
+        	String ActivityName=".Settings";
         	@SuppressWarnings("rawtypes")
-    		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),appInffo(packageName, ActivityName));
-        	Thread.sleep(5000);
-        	int overtimecode=0;
-        	int times=0;
-    		while(1<2) 
-    		{
-    			times++;
-    			System.out.println("次数"+times);
-    			if(overtimecode>49) 
-    			{
-    				break;
-    			}else {
-    				overtimecode=overtimecode+1;
-    			}
-    			String as1 =driver.getScreenshotAs(OutputType.BASE64);
-        		Thread.sleep(500);
-        		String as2 =driver.getScreenshotAs(OutputType.BASE64);
-        		Thread.sleep(500);
-        		{
-        			Random rand = new Random();
-        			int as1length = as1.length();
-        			int as2length = as2.length();
-        			if(as1length==as2length) 
-        			{
-        				ArrayList<Integer> list=new ArrayList<Integer>();
-        				String listout = "";
-        				for(int foricode=0;foricode<5;foricode++) 
-            			{	
-        					int randome_range = as1length-11;
-            				int random_num = rand.nextInt(randome_range);
-            				String ras1=as1.substring(random_num,random_num+10);
-                    		String ras2=as2.substring(random_num,random_num+10);
-                    		if(ras1.equals(ras2)) 
-                    		{
-                    			list.add(1);
-                    			listout=listout+1;
-                    		}else{
-                    			list.add(0);
-                    			listout=listout+0;
-                    		}
-                    		
-                    		
-            			}
-        				System.out.println(listout);
-        				int breakcode = 1;
-                		for(int forcodei1=0;forcodei1<list.size();forcodei1++) 
-                		{
-                			int panduan = list.get(forcodei1);
-                			if(panduan==0) 
-                			{
-                				breakcode=2;
-                			}else {
-                				continue;
-                			}
-                		}
-                		if(breakcode==2) 
-                		{
-                			continue;
-                		}else {
-                			break;
-                		}
-        			}else {
-        				continue;
-        			}
-        		}
-    		}
-    		driver.quit();
+    		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),appInffo(packageName, ActivityName,"810EBND57TB9","5.1"));
+        	
+    		int finalY =driver.manage().window().getSize().height;
+    		int finalX =driver.manage().window().getSize().width;
+    		System.out.println(finalY);
+    		System.out.println(finalX);
     	
+    		driver.quit();
     	    }  
     	
             
@@ -134,13 +72,23 @@ public class App
     	
     	
     	
-    	  static DesiredCapabilities appInffo(String packageName,String ActivityName) 
+    	  static DesiredCapabilities appInffo(String packageName,String ActivityName,String deviceName,String platformVersion) 
     	  {
-    	  	DesiredCapabilities capa = new DesiredCapabilities();
-    	      capa.setCapability("deviceName", "741AECR82S8DF");//741AECR82S8DF
+    		  	String a0="741AECR82S8DF";  
+    		    String b0="6.0.1";  
+    		    if(!(deviceName==null||deviceName.equals("")))  
+    		    {  
+    		        a0=deviceName;  
+    		    }
+    		    if(!(platformVersion==null||platformVersion.equals("")))  
+    		    {  
+    		        b0=platformVersion;  
+    		    }
+    		  DesiredCapabilities capa = new DesiredCapabilities();
+    	      capa.setCapability("deviceName", a0);//741AECR82S8DF
     	      capa.setCapability("automationName", "Appium");
     	      capa.setCapability("platformNme", "Android");
-    	      capa.setCapability("platformVersion", "6.0.1");
+    	      capa.setCapability("platformVersion",b0);
     	      capa.setCapability("appPackage", packageName);
     	      capa.setCapability("appActivity", ActivityName);
     	      capa.setCapability("noReset", true);
