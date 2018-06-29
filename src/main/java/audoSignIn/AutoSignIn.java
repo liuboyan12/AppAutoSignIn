@@ -21,7 +21,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidKeyCode;
 
 /**
- * APPIUM手机自动化签到脚本
+ * APPIUM手机自动化签到脚本 
  *
  */
 public class AutoSignIn {

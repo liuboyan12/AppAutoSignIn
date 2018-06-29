@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +18,7 @@ import javax.imageio.ImageIO;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.google.common.primitives.Bytes;
@@ -25,18 +27,14 @@ import io.appium.java_client.android.AndroidDriver;
 
 public class App
 	{
-    	public static void main( String[] args ) throws InterruptedException, IOException 
-    		{ 
+    	public static void main( String[] args ) throws MalformedURLException { 
     		String packageName="com.android.settings";
         	String ActivityName=".Settings";
         	@SuppressWarnings("rawtypes")
     		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),appInffo(packageName, ActivityName,"810EBND57TB9","5.1"));
-        	
-    		int finalY =driver.manage().window().getSize().height;
-    		int finalX =driver.manage().window().getSize().width;
-    		System.out.println(finalY);
-    		System.out.println(finalX);
-    	
+
+        	String pageresource = driver.getPageSource();
+        	System.out.println(pageresource);
     		driver.quit();
     	    }  
     	
