@@ -17,14 +17,22 @@ public class FalseInterface
 	{
 
 		long unixtime = new FalseInterface().unixTime();
-		String fileName = unixtime+"报错界面";
-		String filepath = new FalseInterface().FilePath(fileName);
-		System.out.println(filepath);
-		File file=new File("错误界面"+filepath);  
-		file .mkdir() ;
-	
-		String Neirong = "111";
-//		txtIO(filepath,Neirong);
+		String fileName = "报错"+unixtime;
+		String filepath = new FalseInterface().FilePath("\\报错界面");
+		String txtfilepath = filepath+"\\"+fileName+".txt";
+
+		
+		fileInputAndOutput us = new fileInputAndOutput();
+		us.floderExist(filepath);
+		us.fileExist(txtfilepath);
+		
+		String screenXpath = "";
+		
+		
+		
+		
+		us.txtInput(txtfilepath, "等待传入界面xpath数据");
+
 				
 		
 	}

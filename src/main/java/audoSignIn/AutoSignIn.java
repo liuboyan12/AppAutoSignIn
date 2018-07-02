@@ -204,16 +204,13 @@ public class AutoSignIn {
 		try {
 			Thread.sleep(8000);
 			s_deng(8);
-			// stepX(driver, "//android.widget.TextView[@text='我']");[930,1779][1014,1914]
 			touch(driver, 980, 1800);
 			s_dianji("我");
 			Thread.sleep(3000);
 			s_deng(3);
 			touch(driver, 540, 630);// [0,546][1080,777]
-			// stepX(driver,"//android.widget.TextView[@text='领裹酱']"); s_dianji("领裹酱");
 			Thread.sleep(3000);
 			s_deng(3);
-			// [45,129][75,189]
 			touch(driver, 60, 150);
 			Thread.sleep(2000);
 			s_deng(2);
@@ -523,8 +520,6 @@ public class AutoSignIn {
 			stepX(driver, "//android.widget.TextView[@text='我的']");
 			s_dianji("我的");
 			stepX(driver, "//android.widget.TextView[@text='我的鱼塘']");
-			//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.ImageView[1]
-			//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[3]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.ImageView[1]
 			int picNum = 0; 
 			for(picNum=0;picNum<3;picNum++) 
 			{
@@ -538,53 +533,6 @@ public class AutoSignIn {
 				Thread.sleep(2000);
 				touch(driver, 74, 150);
 			}
-			//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.support.v7.widget.RecyclerView[1]/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.ImageView[1]。
-
-//			//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.support.v7.widget.RecyclerView[1]/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.ImageView[1]
-//			
-			//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.support.v7.widget.RecyclerView[1]/android.widget.FrameLayout[3]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.ImageView[1]
-//			Point local = driver.findElement(By.xpath("//android.view.View[@content-desc='我的鱼塘']")).getLocation();
-//			int X1 = local.x + 138;// 46+138+23+138+23+138
-//			int Y1 = local.y + 155;// 831+155
-//
-//			s_deng(3);
-//			Thread.sleep(3000);
-//			touch(driver, X1, Y1);
-//			s_dianji("第一个");// [46,552][322,828]第一个
-//			X1 = X1 + 23 + 138 + 138;
-//			untilX(driver, "//android.widget.TextView[@text='签到']");
-//			stepX(driver, "//android.widget.TextView[@text='签到']");
-//			s_dianji("签到");
-//			s_deng(3);
-//			Thread.sleep(3000);// [0,66][153,210]
-//			touch(driver, 74, 150);
-//			s_dianji("返回");
-//			s_deng(2);
-//			Thread.sleep(2000);
-//
-//			touch(driver, X1, Y1);
-//			s_dianji("第二个");// [345,552][621,828]第二个
-//			X1 = X1 + 23 + 138 + 138;
-//			untilX(driver, "//android.widget.TextView[@text='签到']");
-//			clickx(driver, "//android.widget.TextView[@text='签到']");
-//			s_dianji("签到");
-//			s_deng(3);
-//			Thread.sleep(3000);// [0,66][153,210]返回
-//			touch(driver, 74, 150);
-//			s_dianji("返回");
-//			s_deng(2);
-//			Thread.sleep(2000);
-//
-//			touch(driver, X1, Y1);
-//			s_dianji("第三个");// [644,552][920,828]
-//			untilX(driver, "//android.widget.TextView[@text='签到']");
-//			clickx(driver, "//android.widget.TextView[@text='签到']");
-//			s_dianji("签到");// [644,552][920,828]
-//			s_deng(3);
-//			Thread.sleep(3000);// [0,66][153,210]返回
-//			touch(driver, 74, 150);
-//			s_dianji("返回");
-//			s_deng(2);
 			Thread.sleep(2000);
 		} catch (Exception e) {
 			System.out.println("咸鱼出错" + e.toString());
@@ -647,7 +595,6 @@ public class AutoSignIn {
 			s_dianji("我的");
 			Thread.sleep(2000);
 			s_deng(2);
-			// [0,1110][1080,1245]-[0,240][1080,375]
 			swipTo(driver, 50, 1108, 50, 280);
 			stepX(driver, "//android.widget.TextView[@text='查看全部工具']");
 			s_dianji("查看全部工具");
@@ -763,39 +710,6 @@ public class AutoSignIn {
 					break;
 				}
 			}	
-//			int outcode = 0;
-//			int whilecode = 0;
-//			while (0 < 1) {
-//				try {
-//					driver.findElement(By.xpath("//android.view.View[@content-desc='签到+']"));
-//					int while1code = 0;
-//					while (0 < 1) {
-//						driver.findElement(By.xpath("//android.view.View[@content-desc='签到+']")).click();
-//						Thread.sleep(2000);
-//						untilX(driver, "//android.view.View[@content-desc='店铺热卖']");
-//						Thread.sleep(2000);
-//						driver.pressKeyCode(AndroidKeyCode.BACK);
-//						Thread.sleep(2000);
-//						while1code++;
-//						if (while1code > 3) {
-//							break;
-//						}
-//					}
-//
-//				} catch (Exception e) {
-//					outcode++;
-//				}
-//				if (outcode > 2) {
-//					break;
-//				}
-//			}
-//			Thread.sleep(2000);
-//			swipTo(driver, 100, 1000, 100, 100);  滑動
-
-			//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.support.v7.widget.RecyclerView[1]/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.ImageView[1]
-			//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.support.v7.widget.RecyclerView[1]/android.widget.FrameLayout[3]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.ImageView[1]
-			//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.support.v7.widget.RecyclerView[1]/android.widget.FrameLayout[4]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.ImageView[1]
-			//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.support.v7.widget.RecyclerView[1]/android.widget.FrameLayout[4]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.ImageView[1]
 			Thread.sleep(2000);
 		} catch (Exception e) {
 			System.out.println("淘宝报错" + e.toString());
@@ -804,12 +718,6 @@ public class AutoSignIn {
 		driver.quit();
 	}
 
-	// static void dianji_jia5jinbi(driver) {
-	// Thread.sleep(2000);
-	// int list_code_Y = ((WebElement) list.get(i1)).getLocation().y;
-	// int list_code_X = ((WebElement) list.get(i1)).getLocation().x;
-	//
-	// }
 
 	static void chiji() throws MalformedURLException, InterruptedException {
 		String packageName = "com.tencent.wegame.mangod";
@@ -836,7 +744,6 @@ public class AutoSignIn {
 	}
 
 	static void zhifubao() throws MalformedURLException, InterruptedException {
-		// com.eg.android.AlipayGphone
 		String packageName = "com.eg.android.AlipayGphone";
 		String ActivityName = ".AlipayLogin";
 		@SuppressWarnings("rawtypes")
@@ -871,6 +778,32 @@ public class AutoSignIn {
 			Thread.sleep(8000);
 			touch(driver, 880, 355);
 			Thread.sleep(2000);
+			while(1<2) 
+			{	
+				Thread.sleep(200);
+				try {
+					Thread.sleep(1500);
+					WebElement fanhui = driver.findElement(By.xpath("//android.widget.TextView[@resource-id='com.alipay.mobile.nebula:id/h5_tv_nav_back']"));
+					fanhui.click();
+				}catch (Exception e) {
+					break;
+				}
+			}
+			
+			stepX(driver, "//android.widget.TextView[@resource-id='com.alipay.android.phone.wealth.home:id/tab_description']");//我的
+			untilX(driver, "//android.widget.TextView[@resource-id='com.alipay.mobile.nebula:id/h5_tv_title']");
+			WebElement locatedele = driver.findElement(By.xpath("//android.widget.TextView[@resource-id='com.alipay.mobile.nebula:id/h5_tv_title']"));
+			int locX = locatedele.getLocation().x+10;
+			int locY = locatedele.getLocation().y+415;
+			touch(driver, locX, locY);
+			untilX(driver, "//android.view.View[@content-desc='规则说明']");
+			touch(driver, 530, 555);
+			try {
+				Thread.sleep(1500);
+				driver.findElement(By.xpath("//android.view.View[@content-desc='已签到']"));
+			}catch (Exception e) {
+				System.out.println("签到界面出问题");
+			}
 		} catch (Exception e) {
 			System.out.println("支付宝出错");
 		}
@@ -893,7 +826,6 @@ public class AutoSignIn {
 	}
 
 	static void touch(@SuppressWarnings("rawtypes") AndroidDriver driver, int x, int y) {
-//		driver.get_window_size()['height'];
 		int b1 =driver.manage().window().getSize().width;
 		int b2 =driver.manage().window().getSize().height;
 		
