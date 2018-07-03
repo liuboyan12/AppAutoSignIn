@@ -27,14 +27,20 @@ import io.appium.java_client.android.AndroidDriver;
 
 public class App
 	{
-    	public static void main( String[] args ) throws MalformedURLException { 
+    	public static void main( String[] args ) throws MalformedURLException, FileNotFoundException { 
     		String packageName="com.android.settings";
         	String ActivityName=".Settings";
         	@SuppressWarnings("rawtypes")
     		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),appInffo(packageName, ActivityName,"810EBND57TB9","5.1"));
 
-        	String pageresource = driver.getPageSource();
-        	System.out.println(pageresource);
+        	try {
+        		driver.findElement(By.xpath("1"));
+        	}catch (Exception e) {
+        		String error = e.toString();
+        		FalseInterface transfer = new FalseInterface();
+            	transfer.falseInterface(driver,error);
+			}
+       
     		driver.quit();
     	    }  
     	
