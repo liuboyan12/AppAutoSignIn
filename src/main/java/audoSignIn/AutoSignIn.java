@@ -30,13 +30,13 @@ public class AutoSignIn {
 	}
 
 	static void SignEveryDayTryVersion() throws MalformedURLException, InterruptedException {
-		Feizhu();
-		Xianyu();
-		Cainiao();
-		Youdao();
-		JingdongStock();
-		taobao();
-		Yunyinyue();
+//		Feizhu();
+//		Xianyu();
+//		Cainiao();
+//		Youdao();
+//		JingdongStock();
+//		taobao();
+//		Yunyinyue();
 		zhifubao();
 	}
 
@@ -683,7 +683,13 @@ public class AutoSignIn {
 					String finalStrings = stringFirst + (inNum + 2) + stringSecond;
 					stepX(driver, finalStrings);
 					Thread.sleep(2000);
-					untilX(driver, "//android.view.View[@content-desc='店铺热卖']");
+					try {
+						Thread.sleep(3000);
+//						untilX(driver, "//android.view.View[@content-desc='店铺热卖']");
+						driver.findElement(ByXPath.xpath("//android.view.View[@content-desc='店铺热卖']"));
+					}catch (Exception e) {
+					}
+					
 					Thread.sleep(2000);
 					driver.pressKeyCode(AndroidKeyCode.BACK);
 					Thread.sleep(2000);
@@ -763,13 +769,10 @@ public class AutoSignIn {
 			Thread.sleep(1000);
 			touch(driver, 33, 175);// [0,66][132,210]
 			stepX(driver, "//android.widget.TextView[@text='大学生活']");
-			Thread.sleep(10000);
 			untilX(driver, "//android.widget.TextView[@text='湘潭大学']");
-			Thread.sleep(5000);
 			driver.pressKeyCode(AndroidKeyCode.BACK);
 			Thread.sleep(3000);
 			stepX(driver, "//android.widget.TextView[@text='大学生活']");
-			Thread.sleep(10000);
 			untilX(driver, "//android.widget.TextView[@text='湘潭大学']");
 			Thread.sleep(2000);
 			touch(driver, 930, 1860);
@@ -789,8 +792,8 @@ public class AutoSignIn {
 					break;
 				}
 			}
-			
 			stepX(driver, "//android.widget.TextView[@resource-id='com.alipay.android.phone.wealth.home:id/tab_description']");//我的
+			stepX(driver, "//android.widget.TextView[@text='蚂蚁会员']");
 			untilX(driver, "//android.widget.TextView[@resource-id='com.alipay.mobile.nebula:id/h5_tv_title']");
 			WebElement locatedele = driver.findElement(By.xpath("//android.widget.TextView[@resource-id='com.alipay.mobile.nebula:id/h5_tv_title']"));
 			int locX = locatedele.getLocation().x+10;
