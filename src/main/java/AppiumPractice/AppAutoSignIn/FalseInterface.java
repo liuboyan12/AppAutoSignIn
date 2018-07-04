@@ -5,10 +5,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.LineNumberReader;
 import java.io.PrintStream;
 
 import org.apache.commons.io.FileUtils;
@@ -20,25 +18,10 @@ public class FalseInterface
 {	
 	public static void main(String[] args) throws IOException 
 	{
-		FalseInterface thisJava =new FalseInterface();
-		
-		File file = new File("C:\\Users\\Administrator\\Desktop\\空.txt");//文件路径  
-        FileReader fileReader = new FileReader(file);  
-        LineNumberReader reader = new LineNumberReader(fileReader);
-		String strings = reader.toString();
-		reader.close();//问题在读取不了整个txt
-		fileReader.close();
-		System.out.println(strings);
-//		String firstString  = "<";
-//		String secondString = "index";
-//		String replaceString = "node";
-		
-//		thisJava.stringReplaceInsert(strings,firstString,secondString,replaceString);
-		strings = strings.replaceAll("(?<=<).*?(?= index)", "node");
-		
-		System.out.println(strings);
+
 	}
-    
+	
+	
 	
 	public  void falseInterface
 		(@SuppressWarnings("rawtypes") AndroidDriver driver,String e) throws FileNotFoundException
@@ -66,22 +49,60 @@ public class FalseInterface
 		
 		String pngpath = filepath+"\\stopScreen.png";
 		String pagereXpath = driver.getPageSource();
+		String strings = pagereXpath;
+		strings = strings.replace("</hierarchy>", "@@@@@@@@@@@");
+		strings = strings.replaceAll("(?<=</).*?(?=>)", "node");
+		strings = strings.replaceAll("</node>", "###");
+		strings = strings.replaceAll("(?<=<).*?(?= index)", "node");
+		strings = "<?xml version='1.0' encoding='UTF-8' standalone='yes' ?><hierarchy rotation=\"0\">"+strings;
+		strings = strings.replace("@@@@@@@@@@@","</hierarchy>");
+		pagereXpath = strings.replaceAll("###", "</node>");
 		
 		txtIO(txtfilepath, pagereXpath);
 		txtIO(errorlog, e);
 		screenShot(driver, pngpath);
-		
-		
-		
+
 		renameFile(txtfilepath, uixfilepath);
 	}
 	
 	/*辅助方法*/
 	
+	public static String readTxtFile(String filePath){
+		/**（暂未用到）
+		 * 读取文本文件，返回文本文件内容
+		 * 
+		 */
+		String returnresult ="";
+        try {
+                String encoding="GBK";
+                File file=new File(filePath);
+                if(file.isFile() && file.exists()){ //判断文件是否存在
+                    InputStreamReader read = new InputStreamReader(
+                    new FileInputStream(file),encoding);//考虑到编码格式
+                    BufferedReader bufferedReader = new BufferedReader(read);
+                    String lineTxt = null;
+                    while((lineTxt = bufferedReader.readLine()) != null){
+                        returnresult=returnresult+lineTxt;
+                        
+                    }
+                    read.close();
+                    
+        }else{
+            System.out.println("找不到指定的文件");
+        }
+        } catch (Exception e) {
+            System.out.println("读取文件内容出错");
+            e.printStackTrace();
+        }
+        
+		return returnresult;
+      
+    }
+	
 	@SuppressWarnings("unused")
 	private String stringReplaceInsert(String strings,String starString,String endString,String replaceString) 
 	{
-		/**
+		/**暂未用到可以用(?<=<).*?(?= index)替代的
 		 * 传入字符串，找到对应的第一个字符串，找到要找的第二个字符串，然后截取中间的字符进行替换
 		 * strings:要做修改的字符串
 		 * starString：起始字符
@@ -103,6 +124,7 @@ public class FalseInterface
 		}
 		return strings;
 	}
+	
 	private long unixTime()
 	{
 		/**

@@ -1,6 +1,7 @@
 package audoSignIn;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -16,6 +17,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import AppiumPractice.AppAutoSignIn.FalseInterface;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidKeyCode;
@@ -25,18 +28,19 @@ import io.appium.java_client.android.AndroidKeyCode;
  *
  */
 public class AutoSignIn {
-	public static void main(String[] args) throws MalformedURLException, InterruptedException {
+	public static void main(String[] args) throws MalformedURLException, InterruptedException, FileNotFoundException {
 		SignEveryDayTryVersion();
+//		taobao();
 	}
 
-	static void SignEveryDayTryVersion() throws MalformedURLException, InterruptedException {
-//		Feizhu();
-//		Xianyu();
-//		Cainiao();
-//		Youdao();
-//		JingdongStock();
-//		taobao();
-//		Yunyinyue();
+	static void SignEveryDayTryVersion() throws MalformedURLException, InterruptedException, FileNotFoundException {
+		Feizhu();
+		Xianyu();
+		Cainiao();
+		Youdao();
+		JingdongStock();
+		taobao();
+		Yunyinyue();
 		zhifubao();
 	}
 
@@ -155,8 +159,9 @@ public class AutoSignIn {
 		;
 	}
 
-	static void Feizhu() throws MalformedURLException, InterruptedException {
-
+	static void Feizhu() throws MalformedURLException, InterruptedException, FileNotFoundException {
+		
+		
 		String packageName = "com.taobao.trip";
 		String ActivityName = "com.alipay.mobile.quinox.LauncherActivity";
 		@SuppressWarnings("rawtypes")
@@ -188,13 +193,16 @@ public class AutoSignIn {
 			Thread.sleep(1000);
 		} catch (Exception e) {
 			System.out.println("飞猪出错" + e.toString());
+			String error = e.toString();
+			FalseInterface falesdriver = new FalseInterface();
+			falesdriver.falseInterface(driver,error);
 		}
 		s_tuichu("飞猪");
 		driver.quit();
 		;
 	}
 
-	static void Cainiao() throws MalformedURLException, InterruptedException {
+	static void Cainiao() throws MalformedURLException, InterruptedException, FileNotFoundException {
 		String packageName = "com.cainiao.wireless";
 		String ActivityName = ".homepage.presentation.view.activity.HomepageActivity";
 		@SuppressWarnings("rawtypes")
@@ -235,6 +243,9 @@ public class AutoSignIn {
 			s_tuichu("裹裹");
 		} catch (Exception e) {
 			System.out.println("菜鸟出错" + e.toString());
+			String error = e.toString();
+			FalseInterface falesdriver = new FalseInterface();
+			falesdriver.falseInterface(driver,error);
 		}
 		s_tuichu("菜鸟");
 		driver.quit();
@@ -268,6 +279,13 @@ public class AutoSignIn {
 			Thread.sleep(1000);
 		} catch (Exception e) {
 			System.out.println("京东金融出错" + e.toString());
+			String error = e.toString();
+			FalseInterface falesdriver = new FalseInterface();
+			try {
+				falesdriver.falseInterface(driver,error);
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
 		}
 		s_tuichu("京东金融");
 		driver.quit();
@@ -314,6 +332,13 @@ public class AutoSignIn {
 			}
 		} catch (Exception e) {
 			System.out.println("京东股票出错" + e.toString());
+			String error = e.toString();
+			FalseInterface falesdriver = new FalseInterface();
+			try {
+				falesdriver.falseInterface(driver,error);
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
 		}
 		s_tuichu("京东股票");
 		driver.quit();
@@ -340,6 +365,13 @@ public class AutoSignIn {
 			Thread.sleep(5000);
 		} catch (Exception e) {
 			System.out.println("云音乐故障" + e.toString());
+			String error = e.toString();
+			FalseInterface falesdriver = new FalseInterface();
+			try {
+				falesdriver.falseInterface(driver,error);
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
 		}
 		s_tuichu("云音乐");
 		driver.quit();
@@ -424,6 +456,13 @@ public class AutoSignIn {
 			Thread.sleep(1000);
 		} catch (Exception e) {
 			System.out.println("旅法师营地出错" + e.toString());
+			String error = e.toString();
+			FalseInterface falesdriver = new FalseInterface();
+			try {
+				falesdriver.falseInterface(driver,error);
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
 		}
 		s_tuichu("旅法师营地");
 		driver.quit();
@@ -501,6 +540,13 @@ public class AutoSignIn {
 			Thread.sleep(2000);
 		} catch (Exception e) {
 			System.out.println("爱奇艺出错" + e.toString());
+			String error = e.toString();
+			FalseInterface falesdriver = new FalseInterface();
+			try {
+				falesdriver.falseInterface(driver,error);
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
 		}
 		s_tuichu("爱奇艺");
 		driver.quit();
@@ -536,6 +582,13 @@ public class AutoSignIn {
 			Thread.sleep(2000);
 		} catch (Exception e) {
 			System.out.println("咸鱼出错" + e.toString());
+			String error = e.toString();
+			FalseInterface falesdriver = new FalseInterface();
+			try {
+				falesdriver.falseInterface(driver,error);
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
 		}
 		s_tuichu("咸鱼");
 		driver.quit();
@@ -602,7 +655,6 @@ public class AutoSignIn {
 			s_dianji("每日打卡");
 			s_deng(2);
 			Thread.sleep(2000);
-			// stepX(driver,"//android.widget.Image[@content-desc='TB1Af6acwoQMeJjy0FnXXb8gFXa-132-132.png_110x10000.jpg_']");s_dianji("返回");
 			driver.pressKeyCode(AndroidKeyCode.BACK);
 			s_dianji("返回");
 			s_deng(2);
@@ -656,7 +708,6 @@ public class AutoSignIn {
 
 			System.out.println("移动币有好店到 最上面");
 			Thread.sleep(2000);
-			
 			String stringFirst = "//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.support.v7.widget.RecyclerView[1]/android.widget.FrameLayout[";
 			String stringSecond = "]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.ImageView[1]";
 			int inNum = 0;
@@ -684,12 +735,11 @@ public class AutoSignIn {
 					stepX(driver, finalStrings);
 					Thread.sleep(2000);
 					try {
-						Thread.sleep(3000);
-//						untilX(driver, "//android.view.View[@content-desc='店铺热卖']");
-						driver.findElement(ByXPath.xpath("//android.view.View[@content-desc='店铺热卖']"));
+//						Thread.sleep(3000);
+						untilX(driver, "//android.view.View[@content-desc='店铺热卖']");
+//						driver.findElement(ByXPath.xpath("//android.view.View[@content-desc='店铺热卖']"));
 					}catch (Exception e) {
 					}
-					
 					Thread.sleep(2000);
 					driver.pressKeyCode(AndroidKeyCode.BACK);
 					Thread.sleep(2000);
@@ -719,6 +769,13 @@ public class AutoSignIn {
 			Thread.sleep(2000);
 		} catch (Exception e) {
 			System.out.println("淘宝报错" + e.toString());
+			String error = e.toString();
+			FalseInterface falesdriver = new FalseInterface();
+			try {
+				falesdriver.falseInterface(driver,error);
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
 		}
 		s_tuichu("淘宝");
 		driver.quit();
@@ -745,6 +802,13 @@ public class AutoSignIn {
 			s_tuichu("吃鸡");
 		} catch (Exception e) {
 			System.out.println(e.toString());
+			String error = e.toString();
+			FalseInterface falesdriver = new FalseInterface();
+			try {
+				falesdriver.falseInterface(driver,error);
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
 		}
 		driver.quit();
 	}
@@ -809,12 +873,21 @@ public class AutoSignIn {
 			}
 		} catch (Exception e) {
 			System.out.println("支付宝出错");
+			String error = e.toString();
+			FalseInterface falesdriver = new FalseInterface();
+			try {
+				falesdriver.falseInterface(driver,error);
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
 		}
 
 		Thread.sleep(2000);
 		driver.quit();
 	}
-
+	
+	
+/*=============================辅助方法=============================*/
 	static String ifExist(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath) {
 		String eme = null;
 		try {

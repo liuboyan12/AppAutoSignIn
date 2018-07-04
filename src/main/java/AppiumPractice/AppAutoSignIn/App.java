@@ -31,7 +31,7 @@ public class App
     		String packageName="com.android.settings";
         	String ActivityName=".Settings";
         	@SuppressWarnings("rawtypes")
-    		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),appInffo(packageName, ActivityName,"810EBND57TB9","5.1"));
+    		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),appInffo(packageName, ActivityName,"",""));//"810EBND57TB9","5.1"
 
         	try {
         		driver.findElement(By.xpath("1"));
