@@ -29,7 +29,8 @@ import io.appium.java_client.android.AndroidKeyCode;
  */
 public class AutoSignIn {
 	public static void main(String[] args) throws MalformedURLException, InterruptedException, FileNotFoundException {
-		SignEveryDayTryVersion();
+//		SignEveryDayTryVersion();
+		yitao();
 //		taobao();
 	}
 
@@ -42,6 +43,7 @@ public class AutoSignIn {
 		taobao();
 		Yunyinyue();
 		zhifubao();
+		yitao();
 	}
 
 	static void Youdao() throws InterruptedException, MalformedURLException {
@@ -885,6 +887,31 @@ public class AutoSignIn {
 
 		Thread.sleep(2000);
 		driver.quit();
+	}
+	static void yitao() throws MalformedURLException, InterruptedException {
+		String packageName = "com.taobao.etao";
+		String ActivityName = "com.taobao.sns.activity.LaunchActivity";
+		@SuppressWarnings("rawtypes")
+		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),
+				appInffo(packageName, ActivityName));
+		try {
+			stepX(driver,"//android.widget.LinearLayout[@resource-id='com.taobao.etao:id/home_views_circle_nav_container']/android.widget.LinearLayout[1]/android.widget.LinearLayout[3]");
+			untilX(driver, "//android.widget.TextView[@resource-id='com.taobao.etao:id/tv_title_bar_title']");
+			Thread.sleep(5000);
+			touch(driver, 540, 532);
+		}catch (Exception e) {
+			String error = e.toString();
+			FalseInterface falesdriver = new FalseInterface();
+			try {
+				falesdriver.falseInterface(driver,error);
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
+		}
+		driver.quit();
+		
+		
+		
 	}
 	
 	
