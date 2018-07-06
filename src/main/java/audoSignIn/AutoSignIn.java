@@ -227,6 +227,7 @@ public class AutoSignIn {
 			s_panduan("是否签到了");
 			String emmmmm = null;
 			try {
+				Thread.sleep(3000);
 				@SuppressWarnings("unused")
 				WebElement we = driver.findElement(By.xpath("//android.widget.TextView[@text='已签到']"));
 			} catch (Exception e) {
