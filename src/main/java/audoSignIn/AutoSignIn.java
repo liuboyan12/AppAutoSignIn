@@ -24,14 +24,14 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidKeyCode;
 
 /**
- * APPIUM手机自动化签到脚本 
+ * APPIUM手机自动化签到脚本
  *
  */
 public class AutoSignIn {
 	public static void main(String[] args) throws MalformedURLException, InterruptedException, FileNotFoundException {
-//		SignEveryDayTryVersion();
-		yitao();
-//		taobao();
+		SignEveryDayTryVersion();
+		// yitao();
+		// taobao();
 	}
 
 	static void SignEveryDayTryVersion() throws MalformedURLException, InterruptedException, FileNotFoundException {
@@ -162,8 +162,7 @@ public class AutoSignIn {
 	}
 
 	static void Feizhu() throws MalformedURLException, InterruptedException, FileNotFoundException {
-		
-		
+
 		String packageName = "com.taobao.trip";
 		String ActivityName = "com.alipay.mobile.quinox.LauncherActivity";
 		@SuppressWarnings("rawtypes")
@@ -197,7 +196,7 @@ public class AutoSignIn {
 			System.out.println("飞猪出错" + e.toString());
 			String error = e.toString();
 			FalseInterface falesdriver = new FalseInterface();
-			falesdriver.falseInterface(driver,error);
+			falesdriver.falseInterface(driver, error);
 		}
 		s_tuichu("飞猪");
 		driver.quit();
@@ -248,7 +247,7 @@ public class AutoSignIn {
 			System.out.println("菜鸟出错" + e.toString());
 			String error = e.toString();
 			FalseInterface falesdriver = new FalseInterface();
-			falesdriver.falseInterface(driver,error);
+			falesdriver.falseInterface(driver, error);
 		}
 		s_tuichu("菜鸟");
 		driver.quit();
@@ -285,7 +284,7 @@ public class AutoSignIn {
 			String error = e.toString();
 			FalseInterface falesdriver = new FalseInterface();
 			try {
-				falesdriver.falseInterface(driver,error);
+				falesdriver.falseInterface(driver, error);
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 			}
@@ -307,7 +306,8 @@ public class AutoSignIn {
 			try {
 				Thread.sleep(2000);
 				clickx(driver, "//android.widget.Button[@resource-id='com.jd.stock:id/negativeButton']");
-			} catch (Exception e) {}
+			} catch (Exception e) {
+			}
 			stepX(driver, "//android.widget.TextView[@text='我的']");
 			Thread.sleep(2000);
 			try {
@@ -338,7 +338,7 @@ public class AutoSignIn {
 			String error = e.toString();
 			FalseInterface falesdriver = new FalseInterface();
 			try {
-				falesdriver.falseInterface(driver,error);
+				falesdriver.falseInterface(driver, error);
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 			}
@@ -371,7 +371,7 @@ public class AutoSignIn {
 			String error = e.toString();
 			FalseInterface falesdriver = new FalseInterface();
 			try {
-				falesdriver.falseInterface(driver,error);
+				falesdriver.falseInterface(driver, error);
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 			}
@@ -462,7 +462,7 @@ public class AutoSignIn {
 			String error = e.toString();
 			FalseInterface falesdriver = new FalseInterface();
 			try {
-				falesdriver.falseInterface(driver,error);
+				falesdriver.falseInterface(driver, error);
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 			}
@@ -546,7 +546,7 @@ public class AutoSignIn {
 			String error = e.toString();
 			FalseInterface falesdriver = new FalseInterface();
 			try {
-				falesdriver.falseInterface(driver,error);
+				falesdriver.falseInterface(driver, error);
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 			}
@@ -569,13 +569,12 @@ public class AutoSignIn {
 			stepX(driver, "//android.widget.TextView[@text='我的']");
 			s_dianji("我的");
 			stepX(driver, "//android.widget.TextView[@text='我的鱼塘']");
-			int picNum = 0; 
-			for(picNum=0;picNum<3;picNum++) 
-			{
+			int picNum = 0;
+			for (picNum = 0; picNum < 3; picNum++) {
 				String firstString = "//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[";
 				String secondString = "]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.ImageView[1]";
-				
-				String finalString = firstString + (picNum+2) + secondString;
+
+				String finalString = firstString + (picNum + 2) + secondString;
 				s_panduan(finalString);
 				stepX(driver, finalString);
 				stepX(driver, "//android.widget.TextView[@text='签到']");
@@ -588,7 +587,7 @@ public class AutoSignIn {
 			String error = e.toString();
 			FalseInterface falesdriver = new FalseInterface();
 			try {
-				falesdriver.falseInterface(driver,error);
+				falesdriver.falseInterface(driver, error);
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 			}
@@ -705,11 +704,20 @@ public class AutoSignIn {
 
 			Thread.sleep(2000);
 			s_deng(2);
-			int bx = driver.findElement(By.xpath("//android.view.View[@content-desc='币有好店']")).getLocation().x;
-			int by = driver.findElement(By.xpath("//android.view.View[@content-desc='币有好店']")).getLocation().y;
+
+			Thread.sleep(2000);
+			WebElement dianele = null;
+			try {
+				dianele = driver.findElement(By.xpath("//android.view.View[@content-desc='好店签到']"));
+			} catch (Exception e1) {
+				dianele = driver.findElement(By.xpath("//android.view.View[@content-desc='币有好店']"));
+			}
+			int bx = dianele.getLocation().x;
+			int by = dianele.getLocation().y;
+
 			swipTo(driver, bx, by, 220, 220);
 
-			System.out.println("移动币有好店到 最上面");
+			System.out.println("移动好店到 最上面");
 			Thread.sleep(2000);
 			String stringFirst = "//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.support.v7.widget.RecyclerView[1]/android.widget.FrameLayout[";
 			String stringSecond = "]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.ImageView[1]";
@@ -738,10 +746,10 @@ public class AutoSignIn {
 					stepX(driver, finalStrings);
 					Thread.sleep(2000);
 					try {
-//						Thread.sleep(3000);
+						// Thread.sleep(3000);
 						untilX(driver, "//android.view.View[@content-desc='店铺热卖']");
-//						driver.findElement(ByXPath.xpath("//android.view.View[@content-desc='店铺热卖']"));
-					}catch (Exception e) {
+						// driver.findElement(ByXPath.xpath("//android.view.View[@content-desc='店铺热卖']"));
+					} catch (Exception e) {
 					}
 					Thread.sleep(2000);
 					driver.pressKeyCode(AndroidKeyCode.BACK);
@@ -765,17 +773,17 @@ public class AutoSignIn {
 				}
 				try {
 					driver.findElement(By.xpath(stringFirst + "2" + stringSecond));
-				}catch (Exception e1111) {
+				} catch (Exception e1111) {
 					break;
 				}
-			}	
+			}
 			Thread.sleep(2000);
 		} catch (Exception e) {
 			System.out.println("淘宝报错" + e.toString());
 			String error = e.toString();
 			FalseInterface falesdriver = new FalseInterface();
 			try {
-				falesdriver.falseInterface(driver,error);
+				falesdriver.falseInterface(driver, error);
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 			}
@@ -783,7 +791,6 @@ public class AutoSignIn {
 		s_tuichu("淘宝");
 		driver.quit();
 	}
-
 
 	static void chiji() throws MalformedURLException, InterruptedException {
 		String packageName = "com.tencent.wegame.mangod";
@@ -808,7 +815,7 @@ public class AutoSignIn {
 			String error = e.toString();
 			FalseInterface falesdriver = new FalseInterface();
 			try {
-				falesdriver.falseInterface(driver,error);
+				falesdriver.falseInterface(driver, error);
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 			}
@@ -848,30 +855,32 @@ public class AutoSignIn {
 			Thread.sleep(8000);
 			touch(driver, 880, 355);
 			Thread.sleep(2000);
-			while(1<2) 
-			{	
+			while (1 < 2) {
 				Thread.sleep(200);
 				try {
 					Thread.sleep(1500);
-					WebElement fanhui = driver.findElement(By.xpath("//android.widget.TextView[@resource-id='com.alipay.mobile.nebula:id/h5_tv_nav_back']"));
+					WebElement fanhui = driver.findElement(By.xpath(
+							"//android.widget.TextView[@resource-id='com.alipay.mobile.nebula:id/h5_tv_nav_back']"));
 					fanhui.click();
-				}catch (Exception e) {
+				} catch (Exception e) {
 					break;
 				}
 			}
-			stepX(driver, "//android.widget.TextView[@resource-id='com.alipay.android.phone.wealth.home:id/tab_description']");//我的
+			stepX(driver,
+					"//android.widget.TextView[@resource-id='com.alipay.android.phone.wealth.home:id/tab_description']");// 我的
 			stepX(driver, "//android.widget.TextView[@text='蚂蚁会员']");
 			untilX(driver, "//android.widget.TextView[@resource-id='com.alipay.mobile.nebula:id/h5_tv_title']");
-			WebElement locatedele = driver.findElement(By.xpath("//android.widget.TextView[@resource-id='com.alipay.mobile.nebula:id/h5_tv_title']"));
-			int locX = locatedele.getLocation().x+10;
-			int locY = locatedele.getLocation().y+415;
+			WebElement locatedele = driver.findElement(
+					By.xpath("//android.widget.TextView[@resource-id='com.alipay.mobile.nebula:id/h5_tv_title']"));
+			int locX = locatedele.getLocation().x + 10;
+			int locY = locatedele.getLocation().y + 415;
 			touch(driver, locX, locY);
 			untilX(driver, "//android.view.View[@content-desc='规则说明']");
 			touch(driver, 530, 555);
 			try {
 				Thread.sleep(1500);
 				driver.findElement(By.xpath("//android.view.View[@content-desc='已签到']"));
-			}catch (Exception e) {
+			} catch (Exception e) {
 				System.out.println("签到界面出问题");
 			}
 		} catch (Exception e) {
@@ -879,7 +888,7 @@ public class AutoSignIn {
 			String error = e.toString();
 			FalseInterface falesdriver = new FalseInterface();
 			try {
-				falesdriver.falseInterface(driver,error);
+				falesdriver.falseInterface(driver, error);
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 			}
@@ -888,6 +897,7 @@ public class AutoSignIn {
 		Thread.sleep(2000);
 		driver.quit();
 	}
+
 	static void yitao() throws MalformedURLException, InterruptedException {
 		String packageName = "com.taobao.etao";
 		String ActivityName = "com.taobao.sns.activity.LaunchActivity";
@@ -895,27 +905,25 @@ public class AutoSignIn {
 		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),
 				appInffo(packageName, ActivityName));
 		try {
-			stepX(driver,"//android.widget.LinearLayout[@resource-id='com.taobao.etao:id/home_views_circle_nav_container']/android.widget.LinearLayout[1]/android.widget.LinearLayout[3]");
+			stepX(driver,
+					"//android.widget.LinearLayout[@resource-id='com.taobao.etao:id/home_views_circle_nav_container']/android.widget.LinearLayout[1]/android.widget.LinearLayout[3]");
 			untilX(driver, "//android.widget.TextView[@resource-id='com.taobao.etao:id/tv_title_bar_title']");
 			Thread.sleep(5000);
 			touch(driver, 540, 532);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			String error = e.toString();
 			FalseInterface falesdriver = new FalseInterface();
 			try {
-				falesdriver.falseInterface(driver,error);
+				falesdriver.falseInterface(driver, error);
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 			}
 		}
 		driver.quit();
-		
-		
-		
+
 	}
-	
-	
-/*=============================辅助方法=============================*/
+
+	/* =============================辅助方法============================= */
 	static String ifExist(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath) {
 		String eme = null;
 		try {
@@ -930,12 +938,12 @@ public class AutoSignIn {
 	}
 
 	static void touch(@SuppressWarnings("rawtypes") AndroidDriver driver, int x, int y) {
-		int b1 =driver.manage().window().getSize().width;
-		int b2 =driver.manage().window().getSize().height;
-		
-		int xfinal = (int)(x*b1/1080);
-		int yfinal = (int)(y*b1/1080);
-		
+		int b1 = driver.manage().window().getSize().width;
+		int b2 = driver.manage().window().getSize().height;
+
+		int xfinal = (int) (x * b1 / 1080);
+		int yfinal = (int) (y * b1 / 1080);
+
 		TouchAction action = new TouchAction(driver);
 		action.tap(xfinal, yfinal).perform();
 	}
