@@ -19,22 +19,28 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.By.ByXPath;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.primitives.Bytes;
 
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidKeyCode;
 
 public class App
 	{
     	public static void main( String[] args ) throws MalformedURLException, FileNotFoundException { 
-    		String packageName="com.android.settings";
-        	String ActivityName=".Settings";
+    		String packageName = "";
+    		String ActivityName = "";
         	@SuppressWarnings("rawtypes")
     		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),appInffo(packageName, ActivityName,"",""));//"810EBND57TB9","5.1"
 
         	try {
-        		driver.findElement(By.xpath("1"));
+        		
+        		
         	}catch (Exception e) {
         		String error = e.toString();
         		FalseInterface transfer = new FalseInterface();
@@ -118,5 +124,61 @@ public class App
     	      } catch (IOException e) {  
     	          e.printStackTrace();  
     	      }     
-    	  }  
+    	  } 
+    		static void touch(@SuppressWarnings("rawtypes") AndroidDriver driver, int x, int y) {
+    			int b1 = driver.manage().window().getSize().width;
+    			int b2 = driver.manage().window().getSize().height;
+
+    			int xfinal = (int) (x * b1 / 1080);
+    			int yfinal = (int) (y * b2 / 1080);
+
+    			TouchAction action = new TouchAction(driver);
+    			action.tap(xfinal, yfinal).perform();
+    		}
+
+    		static void untilX(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath) {
+    			WebDriverWait wait = new WebDriverWait(driver, 60);
+    			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(Xpath)));
+    		}
+
+    		static void untilTimeOut(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath, int timeout) {
+    			WebDriverWait wait = new WebDriverWait(driver, timeout);
+    			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(Xpath)));
+    		}
+
+    		static void clickx(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath) {
+    			driver.findElement(By.xpath(Xpath)).click();
+    		}
+
+    		static void stepX(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath) {
+    			untilX(driver, Xpath);
+    			clickx(driver, Xpath);
+    		}
+
+    		static void stepXTimeOut(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath, int timeout) {
+    			untilTimeOut(driver, Xpath, timeout);
+    			clickx(driver, Xpath);
+    		}
+
+    		static void stepID(@SuppressWarnings("rawtypes") AndroidDriver driver, String ID) {
+    			WebDriverWait wait = new WebDriverWait(driver, 60);
+    			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id(ID)));
+
+    			driver.findElement(By.id(ID));
+    		}
+
+    		static void swipTo(@SuppressWarnings("rawtypes") AndroidDriver driver, int X1, int Y1, int X2, int Y2) {
+    			TouchAction action1 = new TouchAction(driver);
+    			action1.longPress(X1, Y1).moveTo(X2, Y2).release().perform();
+    		}
+
+    		static void Mistake(String x, String e) {
+    			System.out.println(x + "出错" + e);
+    		}
+
+    		static void textX(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath, String x) {
+    			WebDriverWait wait = new WebDriverWait(driver, 60);
+    			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(Xpath)));
+    			driver.findElement(By.xpath(Xpath)).sendKeys(x);
+    		}
     }
