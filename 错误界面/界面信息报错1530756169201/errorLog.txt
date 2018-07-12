@@ -1,9 +1,0 @@
-org.openqa.selenium.NoSuchElementException: An element could not be located on the page using the given search parameters. (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 0 milliseconds
-For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
-Build info: version: '3.6.0', revision: '6fbf3ec767', time: '2017-09-27T15:28:36.4Z'
-System info: host: 'XB-201802241355', ip: '172.16.40.13', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_161'
-Driver info: io.appium.java_client.android.AndroidDriver
-Capabilities [{appPackage=com.cainiao.wireless, networkConnectionEnabled=true, noReset=true, warnings={}, databaseEnabled=false, platformNme=Android, deviceName=741AECR82S8DF, platform=LINUX, appActivity=.homepage.presentation.view.activity.HomepageActivity, desired={appPackage=com.cainiao.wireless, appActivity=.homepage.presentation.view.activity.HomepageActivity, noReset=true, platformVersion=6.0.1, automationName=Appium, platformNme=Android, platformName=Android, deviceName=741AECR82S8DF}, platformVersion=6.0.1, webStorageEnabled=false, locationContextEnabled=false, automationName=Appium, browserName=Android, takesScreenshot=true, javascriptEnabled=true, platformName=LINUX}]
-Session ID: f36ab528-beb8-48f9-8dd5-333202409d3b
-*** Element info: {Using=id, value=com.cainiao.wireless:id/txt_integral_count}
