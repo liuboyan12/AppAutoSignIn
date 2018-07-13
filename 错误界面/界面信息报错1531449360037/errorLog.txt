@@ -1,0 +1,6 @@
+org.openqa.selenium.TimeoutException: Expected condition failed: waiting for presence of any elements located by By.xpath: //android.widget.LinearLayout[@resource-id='com.taobao.etao:id/home_views_circle_nav_container']/android.widget.LinearLayout[1]/android.widget.LinearLayout[3] (tried for 60 second(s) with 500 MILLISECONDS interval)
+Build info: version: '3.6.0', revision: '6fbf3ec767', time: '2017-09-27T15:28:36.4Z'
+System info: host: 'XB-201802241355', ip: '192.168.23.1', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_161'
+Driver info: io.appium.java_client.android.AndroidDriver
+Capabilities [{appPackage=com.taobao.etao, networkConnectionEnabled=true, noReset=true, warnings={}, databaseEnabled=false, platformNme=Android, deviceName=741AECR82S8DF, platform=LINUX, appActivity=com.taobao.sns.activity.LaunchActivity, desired={appPackage=com.taobao.etao, appActivity=com.taobao.sns.activity.LaunchActivity, noReset=true, platformVersion=6.0.1, automationName=Appium, platformNme=Android, platformName=Android, deviceName=741AECR82S8DF}, platformVersion=6.0.1, webStorageEnabled=false, locationContextEnabled=false, automationName=Appium, browserName=Android, takesScreenshot=true, javascriptEnabled=true, platformName=LINUX}]
+Session ID: 713c6c8f-9dcc-47dd-9b48-a009107c1262
