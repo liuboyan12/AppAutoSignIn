@@ -1,7 +1,0 @@
-org.openqa.selenium.interactions.InvalidCoordinatesException: The coordinates provided to an interactions operation are invalid. (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 0 milliseconds
-Build info: version: '3.6.0', revision: '6fbf3ec767', time: '2017-09-27T15:28:36.4Z'
-System info: host: 'XB-201802241355', ip: '172.16.40.200', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_161'
-Driver info: io.appium.java_client.android.AndroidDriver
-Capabilities [{appPackage=com.cainiao.wireless, networkConnectionEnabled=true, noReset=true, warnings={}, databaseEnabled=false, platformNme=Android, deviceName=741AECR82S8DF, platform=LINUX, appActivity=.homepage.presentation.view.activity.HomepageActivity, desired={appPackage=com.cainiao.wireless, appActivity=.homepage.presentation.view.activity.HomepageActivity, noReset=true, platformVersion=6.0.1, automationName=Appium, platformNme=Android, platformName=Android, deviceName=741AECR82S8DF}, platformVersion=6.0.1, webStorageEnabled=false, locationContextEnabled=false, automationName=Appium, browserName=Android, takesScreenshot=true, javascriptEnabled=true, platformName=LINUX}]
-Session ID: 2ae4004f-ada4-4531-a61d-fce7bef95e52

@@ -30,11 +30,11 @@ import io.appium.java_client.android.AndroidKeyCode;
  */
 public class AutoSignIn {
 	public static void main(String[] args) throws MalformedURLException, InterruptedException, FileNotFoundException {
-		// SignEveryDayTryVersion();
-		yitao();
+		SignEveryDayTryVersion();
+		// yitao();
 		// taobao();
-		Cainiao();
-		zhifubao();
+		// Cainiao();
+		// zhifubao();
 	}
 
 	static void SignEveryDayTryVersion() throws MalformedURLException, InterruptedException, FileNotFoundException {
@@ -660,7 +660,12 @@ public class AutoSignIn {
 			stepX(driver, "//android.widget.TextView[@text='领金币']");
 			// [466,158][613,215]_[402,230][690,518]
 			Thread.sleep(5000);
-			touch(driver, 540, 400);
+			try {
+				stepX(driver,
+						"//android.widget.ImageView[@content-desc='\\u70B9\\u51FB\\u5F00\\u5B9D\\u7BB1\\u9886\\u91D1\\u5E01']");
+			} catch (Exception e) {
+				System.out.println("跳过点击宝箱");
+			}
 			Thread.sleep(3000);
 			int outWhilecode = 0;
 			while (1 < 2) {
@@ -702,63 +707,36 @@ public class AutoSignIn {
 			swipTo(driver, bx, by, 220, 220);
 			System.out.println("移动好店到 最上面");
 			Thread.sleep(2000);
-			s_deng(711);
+			// android.support.v7.widget.RecyclerView/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]
+			// android.support.v7.widget.RecyclerView/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]
 			while (1 < 2) {
-				String stringFirst = "//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[";
-				String stringSecond = "]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]";
-				int inNum = 0;
-				int controlNum = 0;
-				s_deng(718);
 				try {
-					driver.findElement(ByXPath.xpath(stringFirst + "4" + stringSecond));
-					controlNum = 3;
-				} catch (Exception e) {
-					try {
-						s_deng(4);
-						driver.findElement(ByXPath.xpath(stringFirst + "3" + stringSecond));
-						controlNum = 2;
-					} catch (Exception e1) {
-						try {
-							driver.findElement(ByXPath.xpath(stringFirst + "2" + stringSecond));
-							controlNum = 1;
-						} catch (Exception e11) {
-							controlNum = 0;
-						}
-					}
-
-				}
-				s_deng(736);
-				String finalStrings = "";
-				for (inNum = 0; inNum < controlNum; inNum++) {
-					finalStrings = stringFirst + (inNum + 2) + stringSecond;
-					stepX(driver, finalStrings);
-					Thread.sleep(2000);
-
-					try {
-						untilX(driver, "//android.view.View[@content-desc='店铺热卖']");
-					} catch (Exception e) {
-					}
-					Thread.sleep(2000);
+					Thread.sleep(1000);
+					WebElement sign5 = driver.findElement(By.xpath(
+							"//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]"));
+					Thread.sleep(1000);
+					sign5.click();
+					untilTimeOut(driver, "//android.view.View[@content-desc='店铺热卖']", 10);
 					driver.pressKeyCode(AndroidKeyCode.BACK);
 					Thread.sleep(2000);
-				}
-				try {
-					untilTimeOut(driver, "//android.view.View[@content-desc='猜你喜欢']", 5);
-					Thread.sleep(2000);
-					break;
+					int x1 = sign5.getLocation().x;
+					int y1 = sign5.getLocation().y;
+					swipTo(driver, x1, y1, x1, 75);
 				} catch (Exception e) {
+					try {
+						untilTimeOut(driver, "//android.view.View[@content-desc='猜你喜欢']", 5);
+					} catch (Exception e1) {
+						FalseInterface falesdriver1 = new FalseInterface();
+						falesdriver1.falseInterface(driver, e1.toString());
+						driver.quit();
+						System.out.println("淘宝界面出错，请查看");
+					}
+
 				}
 
-				int yLocation;
-				s_deng(753);
-				try {
-					Thread.sleep(2000);
-					String XpathString = stringFirst + (controlNum + 1) + stringSecond;
-					yLocation = driver.findElement(ByXPath.xpath(XpathString)).getLocation().y + 58;
-					swipTo(driver, 20, yLocation, 20, 20);
-				} catch (Exception e) {
-				}
 			}
+
+			
 			// 店铺领金币结束
 		} catch (Exception e) {
 			System.out.println("淘宝报错" + e.toString());
@@ -822,7 +800,8 @@ public class AutoSignIn {
 					untilTimeOut(driver,
 							"//android.webkit.WebView[@content-desc='我的行走']/android.view.View[2]/android.view.View[3]",
 							5);
-				} catch (Exception e) {}
+				} catch (Exception e) {
+				}
 				// android.webkit.WebView[@content-desc='我的行走']/android.view.View[2]/android.view.View[3]
 				touch(driver, 555, 1332);
 				System.out.println("确定");
