@@ -9,10 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import org.apache.commons.io.FileUtils;
-import org.apache.tools.ant.ProjectComponent;
-import org.apache.tools.ant.types.resources.Last;
 import org.openqa.selenium.By;
-import org.openqa.selenium.By.ByXPath;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -43,10 +40,10 @@ public class AutoSignIn {
 		Cainiao();
 		Youdao();
 		JingdongStock();
-		taobao();
+		yitao();
 		Yunyinyue();
 		zhifubao();
-		yitao();
+		taobao();
 	}
 
 	static void Youdao() throws InterruptedException, MalformedURLException {
@@ -716,7 +713,12 @@ public class AutoSignIn {
 							"//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]"));
 					Thread.sleep(1000);
 					sign5.click();
-					untilTimeOut(driver, "//android.view.View[@content-desc='店铺热卖']", 10);
+					try {
+						untilTimeOut(driver, "//android.view.View[@content-desc='店铺热卖']", 15);
+					}catch (Exception e) {
+						System.out.println("店铺热卖没有找到");
+					}
+					
 					driver.pressKeyCode(AndroidKeyCode.BACK);
 					Thread.sleep(2000);
 					int x1 = sign5.getLocation().x;
@@ -725,6 +727,7 @@ public class AutoSignIn {
 				} catch (Exception e) {
 					try {
 						untilTimeOut(driver, "//android.view.View[@content-desc='猜你喜欢']", 5);
+						driver.quit();
 					} catch (Exception e1) {
 						FalseInterface falesdriver1 = new FalseInterface();
 						falesdriver1.falseInterface(driver, e1.toString());
@@ -735,8 +738,6 @@ public class AutoSignIn {
 				}
 
 			}
-
-			
 			// 店铺领金币结束
 		} catch (Exception e) {
 			System.out.println("淘宝报错" + e.toString());
@@ -795,22 +796,18 @@ public class AutoSignIn {
 				Thread.sleep(2000);
 				stepX(driver, "//android.widget.TextView[@text='运动']");
 				Thread.sleep(2000);
-				System.out.println("立即捐布");
 				try {
 					untilTimeOut(driver,
 							"//android.webkit.WebView[@content-desc='我的行走']/android.view.View[2]/android.view.View[3]",
 							5);
 				} catch (Exception e) {
 				}
-				// android.webkit.WebView[@content-desc='我的行走']/android.view.View[2]/android.view.View[3]
-				touch(driver, 555, 1332);
-				System.out.println("确定");
+				Thread.sleep(5000);
+				touch(driver, 736,1336);
 				Thread.sleep(2000);
-				// android.view.View[@resource-id='J-confirmExchangeBtn']
-				stepX(driver, "//android.view.View[@resource-id='J-confirmExchangeBtn']");
-				// touch(driver, 751, 1546);
+				stepX(driver, "//android.view.View[@resource-id='J-confirmExchangeBtn']");//J-confirmExchangeBtn+++++++
+				System.out.println("确定");
 				Thread.sleep(3000);
-				// touch(driver, 33, 175);// [0,66][132,210]
 				driver.pressKeyCode(AndroidKeyCode.BACK);
 				Thread.sleep(1000);
 			} catch (Exception e1) {
@@ -853,12 +850,7 @@ public class AutoSignIn {
 			stepX(driver,
 					"//android.widget.TextView[@resource-id='com.alipay.android.phone.wealth.home:id/tab_description']");// 我的
 			stepX(driver, "//android.widget.TextView[@text='蚂蚁会员']");
-			untilX(driver, "//android.widget.TextView[@resource-id='com.alipay.mobile.nebula:id/h5_tv_title']");
-			WebElement locatedele = driver.findElement(
-					By.xpath("//android.widget.TextView[@resource-id='com.alipay.mobile.nebula:id/h5_tv_title']"));
-			int locX = locatedele.getLocation().x + 10;
-			int locY = locatedele.getLocation().y + 415;
-			touch(driver, locX, locY);
+			stepX(driver, "//android.view.View[@content-desc='赚积分']");
 			untilX(driver, "//android.view.View[@content-desc='规则说明']");
 			touch(driver, 530, 555);
 			try {
@@ -890,9 +882,15 @@ public class AutoSignIn {
 				appInffo(packageName, ActivityName));
 		try {
 			try {
-				// untilTimeOut(driver,
-				// "//android.widget.TextView[@resource-id='com.taobao.etao:id/fav_tip_cancel']",
-				// 10);
+				untilTimeOut(driver, "//android.widget.ImageView[@resource-id='com.taobao.etao:id/launch_imageview']", 5);
+				while(1<2) {
+					swipTo(driver,900,400,100,400);
+					untilTimeOut(driver, "//android.widget.ImageView[@resource-id='com.taobao.etao:id/launch_imageview']", 2);
+				}
+			}catch (Exception e) {
+				System.out.println("无滑动界面");
+			}
+			try {
 				stepXTimeOut(driver, "//android.widget.TextView[@resource-id='com.taobao.etao:id/fav_tip_cancel']", 10);
 			} catch (Exception e) {
 				System.out.println("无收藏，进入点击界面");
@@ -940,7 +938,7 @@ public class AutoSignIn {
 		int b2 = driver.manage().window().getSize().height;
 
 		int xfinal = (int) (x * b1 / 1080);
-		int yfinal = (int) (y * b2 / 1080);
+		int yfinal = (int) (y * b2 / 1920);
 
 		TouchAction action = new TouchAction(driver);
 		action.tap(xfinal, yfinal).perform();

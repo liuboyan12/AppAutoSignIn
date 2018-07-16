@@ -33,93 +33,40 @@ import io.appium.java_client.android.AndroidKeyCode;
 
 public class App {
 	public static void main(String[] args) throws MalformedURLException, FileNotFoundException {
-		String packageName = "com.taobao.taobao";
-		String ActivityName = "com.taobao.tao.welcome.Welcome";
+//		++++++++++++++++++++包
+		String packageName = "com.eg.android.AlipayGphone";
+		String ActivityName = ".AlipayLogin";
+//		++++++++++++++++++++
 		@SuppressWarnings("rawtypes")
 		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),
 				appInffo(packageName, ActivityName, "", ""));// "810EBND57TB9","5.1"
-
+		FalseInterface transfer = new FalseInterface();
 		try {
 			// ++++++++++++++++++++++测试代码段
-			Thread.sleep(5000);
-			System.out.println("开始判断是否弹出淘宝界面");
-			int inScreenIcon = 0;
-			while (1 < 2) {
-				try {
-					driver.findElement(By.xpath(
-							"//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[3]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[5]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]"));
-					inScreenIcon = 1;
-				} catch (Exception e) {
-					try {
-						driver.findElement(By.xpath("//android.widget.TextView[@text='天猫国际']"));
-						inScreenIcon = 1;
-					} catch (Exception e1) {
-						try {
-							driver.findElement(By.xpath("//android.widget.TextView[@text='分类']"));
-							inScreenIcon = 1;
-						} catch (Exception e2) {
-							try {
-								driver.findElement(By.xpath("//android.widget.TextView[@text='充值中心']"));
-								inScreenIcon = 1;
-							} catch (Exception e3) {
-								System.out.println("未判断到在淘宝界面内");
-							}
-						}
-					}
-				}
-				if (inScreenIcon == 1) {
-					break;
-				} else {
-					stepX(driver, "//android.widget.TextView[@text='手机淘宝']");
-				}
-			}
-			Thread.sleep(2000);
 			stepX(driver,
-					"//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[3]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[5]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]");
-			Thread.sleep(2000);
-
-			stepX(driver, "//android.widget.TextView[@text='查看全部工具']");
-			Thread.sleep(2000);
-			TouchAction action1 = new TouchAction(driver);
-			action1.longPress(100, 1730).moveTo(100, 100).release().perform();
-			Thread.sleep(1000);
-			stepX(driver, "//android.widget.TextView[@text='领金币']");
-//			stepX(driver, "//android.widget.ImageView[@content-desc='\\u70B9\\u51FB\\u5F00\\u5B9D\\u7BB1\\u9886\\u91D1\\u5E01']");;
-			stepXTimeOut(driver, "//android.view.View[@content-desc='今日任务']", 10);
-			Thread.sleep(2000);
-			WebElement dianele = null;
+					"//android.widget.TextView[@resource-id='com.alipay.android.phone.wealth.home:id/tab_description']");// 我的
+			stepX(driver, "//android.widget.TextView[@text='蚂蚁会员']");
+			stepX(driver, "//android.view.View[@content-desc='赚积分']");
+//			WebElement locatedele = driver.findElement(
+//					By.xpath("//android.widget.TextView[@resource-id='com.alipay.mobile.nebula:id/h5_tv_title']"));
+//			int locX = locatedele.getLocation().x + 10;
+//			int locY = locatedele.getLocation().y + 415;
+//			touch(driver, locX, locY);
+			untilX(driver, "//android.view.View[@content-desc='规则说明']");
+			touch(driver, 530, 555);
 			try {
-				dianele = driver.findElement(By.xpath("//android.view.View[@content-desc='好店签到']"));
-			} catch (Exception e1) {
-				dianele = driver.findElement(By.xpath("//android.view.View[@content-desc='币有好店']"));
-			}
-			int bx = dianele.getLocation().x;
-			int by = dianele.getLocation().y;
-			swipTo(driver, bx, by, 220, 220);
-			System.out.println("移动好店到 最上面");
-			while(1<2) {
-//				stepX(driver, "//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]");
-				Thread.sleep(1000);
-				WebElement sign5 = driver.findElement(By.xpath("//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]"));
-				Thread.sleep(1000);
-				sign5.click();
-				untilTimeOut(driver, "//android.view.View[@content-desc='店铺热卖']", 10);
-				driver.pressKeyCode(AndroidKeyCode.BACK);
-				Thread.sleep(2000);
-				int x1 = sign5.getLocation().x;
-				int y1 = sign5.getLocation().y;
-				swipTo(driver, x1, y1, x1, 75);
-				
+				Thread.sleep(1500);
+				driver.findElement(By.xpath("//android.view.View[@content-desc='已签到']"));
+			} catch (Exception e) {
+				System.out.println("签到界面出问题");
 			}
 
 			// +++++++++++++++++结束测试端、
 		} catch (Exception e) {
 			String error = e.toString();
-			FalseInterface transfer = new FalseInterface();
 			transfer.falseInterface(driver, error);
 		}
 
-		driver.quit();
 	}
 
 	public static void txtIO(String lujing, String neirong) throws FileNotFoundException {
@@ -194,7 +141,7 @@ public class App {
 		int b2 = driver.manage().window().getSize().height;
 
 		int xfinal = (int) (x * b1 / 1080);
-		int yfinal = (int) (y * b2 / 1080);
+		int yfinal = (int) (y * b2 / 1920);
 
 		TouchAction action = new TouchAction(driver);
 		action.tap(xfinal, yfinal).perform();
