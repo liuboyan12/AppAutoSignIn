@@ -220,7 +220,7 @@ public class AutoSignIn {
 				System.out.println("沒有跳过");
 			}
 			Thread.sleep(3000);
-			stepXTimeOut(driver, "//android.widget.TextView[@text='我']", 10);
+			stepX(driver, "//android.widget.TextView[@text='我']");
 			stepXTimeOut(driver,
 					"//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.ScrollView[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[2]/android.widget.LinearLayout[1]",
 					5);
@@ -633,8 +633,7 @@ public class AutoSignIn {
 			}
 			Thread.sleep(2000);
 			s_deng(2);
-			stepX(driver,
-					"//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[3]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[5]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]");
+			touch(driver, 950, 1800);
 			s_dianji("我的");
 			Thread.sleep(2000);
 			s_deng(2);
@@ -676,23 +675,9 @@ public class AutoSignIn {
 					}
 				}
 			}
-			// 临时任务存放
-			// try {
-			// driver.pressKeyCode(AndroidKeyCode.BACK);
-			// s_dianji("返回");
-			// Thread.sleep(2000);
-			// } catch (Exception e) {
-			// System.out.print("未找到临时任务");
-			// }
+//			=========================
 			untilTimeOut(driver, "//android.widget.TextView[@text='任务中心']", 20);
 			Thread.sleep(2000);
-			// try {
-			// driver.findElement(By.xpath("//android.view.View[@content-desc='(浏览<=?).+*(?=送金币)']")).click();
-			// driver.pressKeyCode(AndroidKeyCode.BACK);
-			// } catch (Exception e) {
-			// System.out.println("浏览任务未生效");
-			// }
-			// 店铺领金币
 			WebElement dianele = null;
 			try {
 				dianele = driver.findElement(By.xpath("//android.view.View[@content-desc='好店签到']"));
@@ -704,15 +689,14 @@ public class AutoSignIn {
 			swipTo(driver, bx, by, 220, 220);
 			System.out.println("移动好店到 最上面");
 			Thread.sleep(2000);
-			// android.support.v7.widget.RecyclerView/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]
-			// android.support.v7.widget.RecyclerView/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]
 			while (1 < 2) {
 				try {
 					Thread.sleep(1000);
+					untilTimeOut(driver, "//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]", 10);
 					WebElement sign5 = driver.findElement(By.xpath(
 							"//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]"));
-					Thread.sleep(1000);
-					sign5.click();
+					stepX(driver, "//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]");
+					Thread.sleep(2000);
 					try {
 						untilTimeOut(driver, "//android.view.View[@content-desc='店铺热卖']", 15);
 					}catch (Exception e) {
@@ -850,7 +834,17 @@ public class AutoSignIn {
 			stepX(driver,
 					"//android.widget.TextView[@resource-id='com.alipay.android.phone.wealth.home:id/tab_description']");// 我的
 			stepX(driver, "//android.widget.TextView[@text='蚂蚁会员']");
-			stepX(driver, "//android.view.View[@content-desc='赚积分']");
+			try {
+				untilTimeOut(driver, "//android.view.View[@content-desc='赚积分']", 5);
+				driver.findElement(By.xpath("//android.view.View[@content-desc='赚积分']")).click();
+			}catch (Exception e) {
+				try {
+					untilTimeOut(driver, "//android.view.View[@content-desc='领积分']", 5);
+					driver.findElement(By.xpath("//android.view.View[@content-desc='领积分']")).click();
+				}catch (Exception e1) {
+					System.out.println("未找到领取积分界面");
+				}
+			}
 			untilX(driver, "//android.view.View[@content-desc='规则说明']");
 			touch(driver, 530, 555);
 			try {
