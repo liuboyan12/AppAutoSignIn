@@ -212,8 +212,7 @@ public class AutoSignIn {
 				appInffo(packageName, ActivityName));
 		s_jinru("菜鸟裹裹");
 		try {
-			Thread.sleep(3000);
-			;
+			Thread.sleep(6000);
 			try {
 				driver.findElement(By.linkText("跳过")).click();
 			} catch (Exception e) {
@@ -221,19 +220,26 @@ public class AutoSignIn {
 			}
 			Thread.sleep(3000);
 			stepX(driver, "//android.widget.TextView[@text='我']");
+			Thread.sleep(500);
+			stepX(driver, "//android.widget.TextView[@text='我']");
 			stepXTimeOut(driver,
-					"//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.ScrollView[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[2]/android.widget.LinearLayout[1]",
+					"//android.widget.TextView[@resource-id='com.cainiao.wireless:id/integal_textview']",
 					5);
 			Thread.sleep(2000);
 			driver.pressKeyCode(AndroidKeyCode.BACK);
-			untilTimeOut(driver, "//android.widget.TextView[@resource-id='com.cainiao.wireless:id/txt_integral_count']",
-					5);
-			String guojiang = driver
-					.findElement(By.xpath(
-							"//android.widget.TextView[@resource-id='com.cainiao.wireless:id/txt_integral_count']"))
-					.getText().toString();
+			try {
+				untilTimeOut(driver, "//android.widget.TextView[@resource-id='com.cainiao.wireless:id/txt_integral_count']",
+						5);
+				String guojiang = driver
+						.findElement(By.xpath(
+								"//android.widget.TextView[@resource-id='com.cainiao.wireless:id/txt_integral_count']"))
+						.getText().toString();
 
-			System.out.println("果酱数为" + guojiang + "。");
+				System.out.println("果酱数为" + guojiang + "。");
+				}catch (Exception e) {
+					System.out.println("未找到计数空间无法显示果酱数量");			
+				}
+			
 
 		} catch (Exception e) {
 			System.out.println("菜鸟出错" + e.toString());
@@ -709,18 +715,8 @@ public class AutoSignIn {
 					int y1 = sign5.getLocation().y;
 					swipTo(driver, x1, y1, x1, 75);
 				} catch (Exception e) {
-					try {
 						untilTimeOut(driver, "//android.view.View[@content-desc='猜你喜欢']", 5);
-						driver.quit();
-					} catch (Exception e1) {
-						FalseInterface falesdriver1 = new FalseInterface();
-						falesdriver1.falseInterface(driver, e1.toString());
-						driver.quit();
-						System.out.println("淘宝界面出错，请查看");
-					}
-
 				}
-
 			}
 			// 店铺领金币结束
 		} catch (Exception e) {
@@ -835,12 +831,10 @@ public class AutoSignIn {
 					"//android.widget.TextView[@resource-id='com.alipay.android.phone.wealth.home:id/tab_description']");// 我的
 			stepX(driver, "//android.widget.TextView[@text='蚂蚁会员']");
 			try {
-				untilTimeOut(driver, "//android.view.View[@content-desc='赚积分']", 5);
-				driver.findElement(By.xpath("//android.view.View[@content-desc='赚积分']")).click();
+				stepXTimeOut(driver, "//android.view.View[@content-desc='赚积分']", 10);
 			}catch (Exception e) {
 				try {
-					untilTimeOut(driver, "//android.view.View[@content-desc='领积分']", 5);
-					driver.findElement(By.xpath("//android.view.View[@content-desc='领积分']")).click();
+					stepXTimeOut(driver, "//android.view.View[@content-desc='领积分']", 10);
 				}catch (Exception e1) {
 					System.out.println("未找到领取积分界面");
 				}
@@ -850,6 +844,15 @@ public class AutoSignIn {
 			try {
 				Thread.sleep(1500);
 				driver.findElement(By.xpath("//android.view.View[@content-desc='已签到']"));
+				try {
+					Thread.sleep(1000);
+					String outputString = driver.findElement(By.xpath(
+							"//android.widget.FrameLayout[1]/com.uc.webview.export.WebView[1]/com.uc.webkit.bd[1]/android.webkit.WebView[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]"))
+							.getText().toString();
+					System.out.println(outputString);
+				} catch (Exception ep) {
+					System.out.println("未能找到积分的数据");
+				}
 			} catch (Exception e) {
 				System.out.println("签到界面出问题");
 			}
