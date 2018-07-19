@@ -227,6 +227,7 @@ public class AutoSignIn {
 					5);
 			Thread.sleep(2000);
 			driver.pressKeyCode(AndroidKeyCode.BACK);
+			Thread.sleep(2000);
 			try {
 				untilTimeOut(driver, "//android.widget.TextView[@resource-id='com.cainiao.wireless:id/txt_integral_count']",
 						5);
@@ -698,7 +699,7 @@ public class AutoSignIn {
 			while (1 < 2) {
 				try {
 					Thread.sleep(1000);
-					untilTimeOut(driver, "//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]", 10);
+					untilTimeOut(driver, "//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]", 5);
 					WebElement sign5 = driver.findElement(By.xpath(
 							"//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]"));
 					stepX(driver, "//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]");
@@ -716,6 +717,7 @@ public class AutoSignIn {
 					swipTo(driver, x1, y1, x1, 75);
 				} catch (Exception e) {
 						untilTimeOut(driver, "//android.view.View[@content-desc='猜你喜欢']", 5);
+						break;
 				}
 			}
 			// 店铺领金币结束
@@ -809,13 +811,7 @@ public class AutoSignIn {
 			stepX(driver,
 					"//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/com.uc.webview.export.WebView[1]/com.uc.webkit.bd[1]/android.webkit.WebView[1]/android.view.View[1]/android.view.View[3]");
 			stepX(driver, "//android.widget.Button[@content-desc='马上签到']");
-			try {
-				String syo = driver.findElement(By.xpath(
-						"//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/com.uc.webview.export.WebView[1]/com.uc.webkit.bd[1]/android.webkit.WebView[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]"))
-						.getText().toString();
-				System.out.println("积分为：" + syo);
-			} catch (Exception e) {
-			}
+
 			while (1 < 2) {
 				Thread.sleep(200);
 				try {
