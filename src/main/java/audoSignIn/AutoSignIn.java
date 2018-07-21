@@ -669,11 +669,18 @@ public class AutoSignIn {
 			} catch (Exception e) {
 				System.out.println("跳过点击宝箱");
 			}
+			try {
+				untilTimeOut(driver, "//android.view.View[@content-desc='七日连续签到成功']", 5);
+				touch(driver, 550, 1600);
+			}catch (Exception e) {
+				System.out.println("签到未满7日");
+			}
 			Thread.sleep(3000);
 			int outWhilecode = 0;
 			while (1 < 2) {
 				try {
 					stepXTimeOut(driver, "//android.view.View[@content-desc='今日任务']", 10);
+					
 					break;
 				} catch (Exception e) {
 					outWhilecode = outWhilecode + 1;
