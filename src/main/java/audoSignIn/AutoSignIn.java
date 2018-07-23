@@ -222,25 +222,23 @@ public class AutoSignIn {
 			stepX(driver, "//android.widget.TextView[@text='我']");
 			Thread.sleep(500);
 			stepX(driver, "//android.widget.TextView[@text='我']");
-			stepXTimeOut(driver,
-					"//android.widget.TextView[@resource-id='com.cainiao.wireless:id/integal_textview']",
+			stepXTimeOut(driver, "//android.widget.TextView[@resource-id='com.cainiao.wireless:id/integal_textview']",
 					5);
 			Thread.sleep(2000);
 			driver.pressKeyCode(AndroidKeyCode.BACK);
 			Thread.sleep(2000);
 			try {
-				untilTimeOut(driver, "//android.widget.TextView[@resource-id='com.cainiao.wireless:id/txt_integral_count']",
-						5);
+				untilTimeOut(driver,
+						"//android.widget.TextView[@resource-id='com.cainiao.wireless:id/txt_integral_count']", 5);
 				String guojiang = driver
 						.findElement(By.xpath(
 								"//android.widget.TextView[@resource-id='com.cainiao.wireless:id/txt_integral_count']"))
 						.getText().toString();
 
 				System.out.println("果酱数为" + guojiang + "。");
-				}catch (Exception e) {
-					System.out.println("未找到计数空间无法显示果酱数量");			
-				}
-			
+			} catch (Exception e) {
+				System.out.println("未找到计数空间无法显示果酱数量");
+			}
 
 		} catch (Exception e) {
 			System.out.println("菜鸟出错" + e.toString());
@@ -672,7 +670,7 @@ public class AutoSignIn {
 			try {
 				untilTimeOut(driver, "//android.view.View[@content-desc='七日连续签到成功']", 5);
 				touch(driver, 550, 1600);
-			}catch (Exception e) {
+			} catch (Exception e) {
 				System.out.println("签到未满7日");
 			}
 			Thread.sleep(3000);
@@ -680,7 +678,7 @@ public class AutoSignIn {
 			while (1 < 2) {
 				try {
 					stepXTimeOut(driver, "//android.view.View[@content-desc='今日任务']", 10);
-					
+
 					break;
 				} catch (Exception e) {
 					outWhilecode = outWhilecode + 1;
@@ -689,7 +687,7 @@ public class AutoSignIn {
 					}
 				}
 			}
-//			=========================
+			// =========================
 			untilTimeOut(driver, "//android.widget.TextView[@text='任务中心']", 20);
 			Thread.sleep(2000);
 			WebElement dianele = null;
@@ -706,25 +704,28 @@ public class AutoSignIn {
 			while (1 < 2) {
 				try {
 					Thread.sleep(1000);
-					untilTimeOut(driver, "//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]", 5);
+					untilTimeOut(driver,
+							"//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]",
+							5);
 					WebElement sign5 = driver.findElement(By.xpath(
 							"//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]"));
-					stepX(driver, "//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]");
+					stepX(driver,
+							"//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]");
 					Thread.sleep(2000);
 					try {
 						untilTimeOut(driver, "//android.view.View[@content-desc='店铺热卖']", 15);
-					}catch (Exception e) {
+					} catch (Exception e) {
 						System.out.println("店铺热卖没有找到");
 					}
-					
+
 					driver.pressKeyCode(AndroidKeyCode.BACK);
 					Thread.sleep(2000);
 					int x1 = sign5.getLocation().x;
 					int y1 = sign5.getLocation().y;
 					swipTo(driver, x1, y1, x1, 75);
 				} catch (Exception e) {
-						untilTimeOut(driver, "//android.view.View[@content-desc='猜你喜欢']", 5);
-						break;
+					untilTimeOut(driver, "//android.view.View[@content-desc='猜你喜欢']", 5);
+					break;
 				}
 			}
 			// 店铺领金币结束
@@ -778,6 +779,7 @@ public class AutoSignIn {
 		String packageName = "com.eg.android.AlipayGphone";
 		String ActivityName = ".AlipayLogin";
 		@SuppressWarnings("rawtypes")
+		FalseInterface falesdriver = new FalseInterface();
 		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),
 				appInffo(packageName, ActivityName));
 		try {
@@ -792,9 +794,9 @@ public class AutoSignIn {
 				} catch (Exception e) {
 				}
 				Thread.sleep(5000);
-				touch(driver, 736,1336);
+				touch(driver, 736, 1336);
 				Thread.sleep(2000);
-				stepX(driver, "//android.view.View[@resource-id='J-confirmExchangeBtn']");//J-confirmExchangeBtn+++++++
+				stepX(driver, "//android.view.View[@resource-id='J-confirmExchangeBtn']");// J-confirmExchangeBtn+++++++
 				System.out.println("确定");
 				Thread.sleep(3000);
 				driver.pressKeyCode(AndroidKeyCode.BACK);
@@ -833,16 +835,30 @@ public class AutoSignIn {
 			stepX(driver,
 					"//android.widget.TextView[@resource-id='com.alipay.android.phone.wealth.home:id/tab_description']");// 我的
 			stepX(driver, "//android.widget.TextView[@text='蚂蚁会员']");
-			try {
-				stepXTimeOut(driver, "//android.view.View[@content-desc='赚积分']", 10);
-			}catch (Exception e) {
+			Thread.sleep(3000);
+			int outwhile = 0;
+			while (1 < 2) {
 				try {
-					stepXTimeOut(driver, "//android.view.View[@content-desc='领积分']", 10);
-				}catch (Exception e1) {
-					System.out.println("未找到领取积分界面");
+					stepXTimeOut(driver, "//android.view.View[@content-desc='赚积分']", 2);
+				} catch (Exception e) {
+					try {
+						stepXTimeOut(driver, "//android.view.View[@content-desc='领积分']", 2);
+					} catch (Exception e1) {
+						System.out.println("未找到领取积分界面,等待点击");
+					}
 				}
+				try {
+					untilTimeOut(driver, "//android.view.View[@content-desc='规则说明']",3);
+					break;
+				}catch (Exception e) {
+					outwhile++;
+				}
+				if(outwhile>=2) {
+					falesdriver.falseInterface(driver, "界面有问题啊，自己看吧");
+					break;
+				}
+				
 			}
-			untilX(driver, "//android.view.View[@content-desc='规则说明']");
 			touch(driver, 530, 555);
 			try {
 				Thread.sleep(1500);
@@ -862,7 +878,7 @@ public class AutoSignIn {
 		} catch (Exception e) {
 			System.out.println("支付宝出错");
 			String error = e.toString();
-			FalseInterface falesdriver = new FalseInterface();
+	
 			try {
 				falesdriver.falseInterface(driver, error);
 			} catch (FileNotFoundException e1) {
@@ -882,12 +898,22 @@ public class AutoSignIn {
 				appInffo(packageName, ActivityName));
 		try {
 			try {
-				untilTimeOut(driver, "//android.widget.ImageView[@resource-id='com.taobao.etao:id/launch_imageview']", 5);
-				while(1<2) {
-					swipTo(driver,900,400,100,400);
-					untilTimeOut(driver, "//android.widget.ImageView[@resource-id='com.taobao.etao:id/launch_imageview']", 2);
+				try {
+					untilTimeOut(driver,
+							"//android.widget.ImageView[@resource-id='com.taobao.etao:id/home_market_close']", 5);
+					stepXTimeOut(driver,
+							"//android.widget.ImageView[@resource-id='com.taobao.etao:id/home_market_close']", 3);
+				} catch (Exception e) {
+					System.out.println("无广告直接进入");
 				}
-			}catch (Exception e) {
+				untilTimeOut(driver, "//android.widget.ImageView[@resource-id='com.taobao.etao:id/launch_imageview']",
+						5);
+				while (1 < 2) {
+					swipTo(driver, 900, 400, 100, 400);
+					untilTimeOut(driver,
+							"//android.widget.ImageView[@resource-id='com.taobao.etao:id/launch_imageview']", 2);
+				}
+			} catch (Exception e) {
 				System.out.println("无滑动界面");
 			}
 			try {
