@@ -35,14 +35,14 @@ public class AutoSignIn {
 	}
 
 	static void SignEveryDayTryVersion() throws MalformedURLException, InterruptedException, FileNotFoundException {
-		Feizhu();
-		Xianyu();
-		Cainiao();
-		Youdao();
-		JingdongStock();
-		yitao();
-		Yunyinyue();
-		zhifubao();
+//		Feizhu();
+//		Xianyu();
+//		Cainiao();
+//		Youdao();
+//		JingdongStock();
+//		yitao();
+//		Yunyinyue();
+//		zhifubao();
 		taobao();
 	}
 
@@ -218,6 +218,12 @@ public class AutoSignIn {
 			} catch (Exception e) {
 				System.out.println("沒有跳过");
 			}
+			try {
+				untilTimeOut(driver, "com.cainiao.wireless:id/appver_update_cancel", 3);
+				stepX(driver, "com.cainiao.wireless:id/appver_update_cancel");
+			}catch (Exception e) {
+				System.out.println("点击取消");
+			}
 			Thread.sleep(3000);
 			stepX(driver, "//android.widget.TextView[@text='我']");
 			Thread.sleep(500);
@@ -250,8 +256,6 @@ public class AutoSignIn {
 		}
 		s_tuichu("菜鸟");
 		driver.quit();
-		;
-
 	}
 
 	static void JingdongFinace() throws MalformedURLException, InterruptedException {
@@ -565,7 +569,7 @@ public class AutoSignIn {
 
 		try {
 			Thread.sleep(5000);
-			stepX(driver, "//android.widget.TextView[@text='我的']");
+			stepX(driver, "//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[2]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[4]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.ImageView[1]");
 			s_dianji("我的");
 			stepX(driver, "//android.widget.TextView[@text='我的鱼塘']");
 			Thread.sleep(2000);
@@ -609,28 +613,34 @@ public class AutoSignIn {
 			Thread.sleep(5000);
 			System.out.println("开始判断是否弹出淘宝界面");
 			int inScreenIcon = 0;
+			int outwhilecode = 0;
 			while (1 < 2) {
 				try {
 					driver.findElement(By.xpath(
-							"//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[3]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[5]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]"));
+							"//android.widget.TextView[@resource-id='com.taobao.taobao:id/pai_li_tao_icon']"));
 					inScreenIcon = 1;
 				} catch (Exception e) {
 					try {
-						driver.findElement(By.xpath("//android.widget.TextView[@text='天猫国际']"));
+						driver.findElement(By.xpath("//android.widget.TextView[@resource-id='com.taobao.taobao:id/tv_scan_text']"));
 						inScreenIcon = 1;
 					} catch (Exception e1) {
 						try {
-							driver.findElement(By.xpath("//android.widget.TextView[@text='分类']"));
+							driver.findElement(By.xpath("//android.widget.TextView[@resource-id='com.taobao.taobao:id/tv_member_code_text']"));
 							inScreenIcon = 1;
 						} catch (Exception e2) {
-							try {
-								driver.findElement(By.xpath("//android.widget.TextView[@text='充值中心']"));
-								inScreenIcon = 1;
-							} catch (Exception e3) {
+//							try {
+//								driver.findElement(By.xpath("//android.widget.TextView[@text='充值中心']"));
+//								inScreenIcon = 1;
+//							} catch (Exception e3) {
 								System.out.println("未判断到在淘宝界面内");
-							}
+//							}
 						}
 					}
+				}
+				outwhilecode++;
+				if(outwhilecode>2) {
+					System.out.println("淘宝进入界面判断代码段出错");
+					break;
 				}
 				if (inScreenIcon == 1) {
 					break;
@@ -825,15 +835,19 @@ public class AutoSignIn {
 			}
 			stepX(driver,
 					"//android.widget.TextView[@resource-id='com.alipay.android.phone.wealth.home:id/tab_description']");// 我的
-			stepX(driver, "//android.widget.TextView[@text='蚂蚁会员']");
+			stepX(driver, "//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.TabHost[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.ListView[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[2]/android.widget.LinearLayout[1]/android.widget.LinearLayout[2]/android.widget.TextView[1]");
+
+			try {
+				stepXTimeOut(driver, "//android.view.View[@content-desc='领积分']", 10);
+
+			}catch (Exception e) {
+				
+			}
 			try {
 				stepXTimeOut(driver, "//android.view.View[@content-desc='赚积分']", 10);
-			}catch (Exception e) {
-				try {
-					stepXTimeOut(driver, "//android.view.View[@content-desc='领积分']", 10);
-				}catch (Exception e1) {
-					System.out.println("未找到领取积分界面");
-				}
+
+			}catch (Exception e1) {
+				System.out.println("未找到领取积分界面");
 			}
 			untilX(driver, "//android.view.View[@content-desc='规则说明']");
 			touch(driver, 530, 555);

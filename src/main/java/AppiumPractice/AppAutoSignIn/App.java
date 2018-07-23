@@ -129,12 +129,13 @@ public class App {
 //			
 			stepX(driver,
 					"//android.widget.TextView[@resource-id='com.alipay.android.phone.wealth.home:id/tab_description']");// 我的
-			stepX(driver, "//android.widget.TextView[@text='蚂蚁会员']");
+			stepX(driver, "//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.TabHost[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.ListView[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[2]/android.widget.LinearLayout[1]/android.widget.LinearLayout[2]/android.widget.TextView[1]");
 			try {
-				stepXTimeOut(driver, "//android.view.View[@content-desc='赚积分']", 10);
+				stepXTimeOut(driver, "//android.view.View[@content-desc='领积分']", 10);
+				
 			}catch (Exception e) {
 				try {
-					stepXTimeOut(driver, "//android.view.View[@content-desc='领积分']", 10);
+					stepXTimeOut(driver, "//android.view.View[@content-desc='赚积分']", 10);
 				}catch (Exception e1) {
 					System.out.println("未找到领取积分界面");
 				}
