@@ -1,0 +1,6 @@
+org.openqa.selenium.TimeoutException: Expected condition failed: waiting for presence of any elements located by By.xpath: //android.view.View[@content-desc='规则说明'] (tried for 60 second(s) with 500 MILLISECONDS interval)
+Build info: version: '3.6.0', revision: '6fbf3ec767', time: '2017-09-27T15:28:36.4Z'
+System info: host: 'XB-201802241355', ip: '172.16.40.42', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_161'
+Driver info: io.appium.java_client.android.AndroidDriver
+Capabilities [{appPackage=com.eg.android.AlipayGphone, networkConnectionEnabled=true, noReset=true, warnings={}, databaseEnabled=false, platformNme=Android, deviceName=741AECR82S8DF, platform=LINUX, appActivity=.AlipayLogin, desired={appPackage=com.eg.android.AlipayGphone, appActivity=.AlipayLogin, noReset=true, platformVersion=6.0.1, automationName=Appium, platformNme=Android, platformName=Android, deviceName=741AECR82S8DF}, platformVersion=6.0.1, webStorageEnabled=false, locationContextEnabled=false, automationName=Appium, browserName=Android, takesScreenshot=true, javascriptEnabled=true, platformName=LINUX}]
+Session ID: aeb1564c-71fa-4b66-82e5-edc773fa9f83
