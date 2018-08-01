@@ -31,7 +31,7 @@ import io.appium.java_client.android.AndroidKeyCode;
 public class AutoSignIn {
 	public static void main(String[] args) throws MalformedURLException, InterruptedException, FileNotFoundException {
 //		SignEveryDayTryVersion();
-		liantong();
+		Xianyu();
 	}
 
 	static void SignEveryDayTryVersion() throws MalformedURLException, InterruptedException, FileNotFoundException {
@@ -569,9 +569,22 @@ public class AutoSignIn {
 
 		try {
 			Thread.sleep(5000);
-			stepX(driver, "//android.widget.TextView[@text='我的']");
+			int outwhile=0;
+			while(1<2) {
+				if(outwhile>2) {break;}
+				outwhile++;
+				try {stepXTimeOut(driver, "//android.widget.TextView[@text='我的']",5);
+				break;}catch (Exception e) {
+					try{untilTimeOut(driver, "//android.widget.TextView[@text='发布闲置']", 5);
+					driver.pressKeyCode(AndroidKeyCode.BACK);
+					}catch (Exception e1) {
+						Thread.sleep(2000);
+					}
+				}
+			}
+			Thread.sleep(2000);
 			s_dianji("我的");
-			stepX(driver, "//android.widget.TextView[@text='我的鱼塘']");
+			stepXTimeOut(driver, "//android.widget.TextView[@text='我的鱼塘']",5);
 			Thread.sleep(2000);
 			int picNum = 0;
 			for (picNum = 0; picNum < 3; picNum++) {
@@ -863,6 +876,7 @@ public class AutoSignIn {
 			stepX(driver,"//android.widget.TextView[@text='蚂蚁会员']");
 			int whileout = 0;
 			while(1<2) {
+				if(whileout>=3) {break;}
 				whileout++;
 				try {
 			stepXTimeOut(driver, "//android.view.View[@content-desc='赚积分']", 10);
@@ -874,7 +888,13 @@ public class AutoSignIn {
 			} catch (Exception e) {
 				System.out.println("未找到领积分按钮");
 			}
-			if(whileout>=3) {break;}
+			
+			try {
+				untilTimeOut(driver, "//android.view.View[@content-desc='规则说明']",3);
+				whileout=9999;
+			}catch (Exception e) {
+				
+			}
 		}
 			try {
 			
@@ -947,6 +967,7 @@ public class AutoSignIn {
 				e1.printStackTrace();
 			}
 		}
+		driver.quit();
 
 	}
 

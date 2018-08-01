@@ -17,9 +17,9 @@ public static void main(String[] args) {
 		C=Integer.parseInt(str3);
 		D=Integer.parseInt(str4);
 			
-		int x = (int)(C-A)/2+A;
+		int 啊 = (int)(C-A)/2+A;
 		int y = (int)(D-B)/2+B;
-		System.out.println(x);
+		System.out.println(啊);
 		System.out.println(y);
 
 	
