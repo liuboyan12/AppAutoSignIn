@@ -31,7 +31,8 @@ import io.appium.java_client.android.AndroidKeyCode;
 public class AutoSignIn {
 	public static void main(String[] args) throws MalformedURLException, InterruptedException, FileNotFoundException {
 //		SignEveryDayTryVersion();
-		Xianyu();
+//		Xianyu();
+		taobao();
 	}
 
 	static void SignEveryDayTryVersion() throws MalformedURLException, InterruptedException, FileNotFoundException {
@@ -724,11 +725,21 @@ public class AutoSignIn {
 			// =========================
 			untilTimeOut(driver, "//android.widget.TextView[@text='任务中心']", 20);
 			Thread.sleep(2000);
+			int whileoutcode=0;
 			WebElement dianele = null;
+			while(1<2){
 			try {
+				Thread.sleep(2000);
 				dianele = driver.findElement(By.xpath("//android.view.View[@content-desc='好店签到']"));
 			} catch (Exception e1) {
-				dianele = driver.findElement(By.xpath("//android.view.View[@content-desc='币有好店']"));
+				try{
+					dianele = driver.findElement(By.xpath("//android.view.View[@content-desc='币有好店']"));
+				}catch (Exception e) {
+					whileoutcode++;
+				}
+			}
+			if(dianele!=null) {break;}
+			if(whileoutcode>2) {break;}
 			}
 			int bx = dianele.getLocation().x;
 			int by = dianele.getLocation().y;
@@ -957,17 +968,17 @@ public class AutoSignIn {
 				Thread.sleep(2000);
 			} catch (Exception e) {
 				Thread.sleep(2000);
-				falesdriver.falseInterface(driver, "捕捉宝箱界面");
+				falesdriver.falseInterface(driver1, "捕捉宝箱界面");
 			}
 		}catch (Exception e) {
 			try {
 				String error = e.toString();
-				falesdriver.falseInterface(driver, error);
+				falesdriver.falseInterface(driver1, error);
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 			}
 		}
-		driver.quit();
+		driver1.quit();
 
 	}
 
