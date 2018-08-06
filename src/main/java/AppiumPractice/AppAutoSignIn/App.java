@@ -34,8 +34,8 @@ import io.appium.java_client.android.AndroidKeyCode;
 public class App {
 	public static void main(String[] args) throws MalformedURLException, FileNotFoundException {
 //++++++++++++++++++++++++++++++++++++++++++++包+++++++++++++++++++++++++++++++++++++++
-		String packageName = "com.eg.android.AlipayGphone";
-		String ActivityName = ".AlipayLogin";
+		String packageName = "com.tencent.tgclub";
+		String ActivityName = ".ui.WelcomeActivity";
 //++++++++++++++++++++++++++++++++++++++++++++包+++++++++++++++++++++++++++++++++++++++
 		@SuppressWarnings("rawtypes")
 		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),
@@ -43,112 +43,45 @@ public class App {
 		FalseInterface transfer = new FalseInterface();
 		try {
 //++++++++++++++++++++++测试代码段+++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//			int inScreenIcon = 0;
-//			while (1 < 2) {
-//				try {
-//					driver.findElement(By.xpath(
-//							"//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[3]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[5]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]"));
-//					inScreenIcon = 1;
-//				} catch (Exception e) {
-//					try {
-//						driver.findElement(By.xpath("//android.widget.TextView[@text='天猫国际']"));
-//						inScreenIcon = 1;
-//					} catch (Exception e1) {
-//						try {
-//							driver.findElement(By.xpath("//android.widget.TextView[@text='分类']"));
-//							inScreenIcon = 1;
-//						} catch (Exception e2) {
-//							try {
-//								driver.findElement(By.xpath("//android.widget.TextView[@text='充值中心']"));
-//								inScreenIcon = 1;
-//							} catch (Exception e3) {
-//								System.out.println("未判断到在淘宝界面内");
-//							}
-//						}
-//					}
-//				}
-//				if (inScreenIcon == 1) {
-//					break;
-//				} else {
-//					stepX(driver, "//android.widget.TextView[@text='手机淘宝']");
-//				}
-//			}
-//			Thread.sleep(2000);
-//			touch(driver, 950, 1800);
-//			swipTo(driver, 50, 1108, 50, 280);
-//			stepX(driver, "//android.widget.TextView[@text='查看全部工具']");
-//			TouchAction action1 = new TouchAction(driver);
-//			action1.longPress(100, 1730).moveTo(100, 100).release().perform();
-//			System.out.println("滑动");
-//			Thread.sleep(1000);
-//			stepX(driver, "//android.widget.TextView[@text='领金币']");
-////			transfer.falseInterface(driver, "");
-//			stepXTimeOut(driver, "//android.view.View[@content-desc='今日任务']", 10);
-//			Thread.sleep(5000);
-//			WebElement dianele = null;
-//			try {
-//				dianele = driver.findElement(By.xpath("//android.view.View[@content-desc='好店签到']"));
-//			} catch (Exception e1) {
-//				dianele = driver.findElement(By.xpath("//android.view.View[@content-desc='币有好店']"));
-//			}
-//			int bx = dianele.getLocation().x;
-//			int by = dianele.getLocation().y;
-//			swipTo(driver, bx, by, 220, 220);
-//			System.out.println("移动好店到 最上面");
-//			Thread.sleep(2000);
-//			transfer.falseInterface(driver, "");
-//			while (1 < 2) {
-//				try {
-//					Thread.sleep(1000);
-//					untilTimeOut(driver, "//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]", 10);
-//					WebElement sign5 = driver.findElement(By.xpath(
-//							"//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]"));
-//					stepX(driver, "//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]");
-//					Thread.sleep(2000);
-//					try {
-//						untilTimeOut(driver, "//android.view.View[@content-desc='店铺热卖']", 15);
-//					}catch (Exception e) {
-//						System.out.println("店铺热卖没有找到");
-//					}
-//					
-//					driver.pressKeyCode(AndroidKeyCode.BACK);
-//					Thread.sleep(2000);
-//					int x1 = sign5.getLocation().x;
-//					int y1 = sign5.getLocation().y;
-//					swipTo(driver, x1, y1, x1, 75);
-//				} catch (Exception e) {
-//					try {
-//						untilTimeOut(driver, "//android.view.View[@content-desc='猜你喜欢']", 5);
-//						driver.quit();
-//					} catch (Exception e1) {
-//						FalseInterface falesdriver1 = new FalseInterface();
-//						falesdriver1.falseInterface(driver, e1.toString());
-//						driver.quit();
-//						System.out.println("淘宝界面出错，请查看");
-//					}}}
-//			
-			stepX(driver,
-					"//android.widget.TextView[@resource-id='com.alipay.android.phone.wealth.home:id/tab_description']");// 我的
-			stepX(driver, "//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.TabHost[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.ListView[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[2]/android.widget.LinearLayout[1]/android.widget.LinearLayout[2]/android.widget.TextView[1]");
-			try {
-				stepXTimeOut(driver, "//android.view.View[@content-desc='领积分']", 10);
-				
-			}catch (Exception e) {
+			stepXTimeOut(driver,
+					"//android.widget.TextView[@resource-id='com.tencent.tgclub:id/top_tab_text' and @text='三国群英传']",
+					5);
+			System.out.println("点击三国群英传");
+			while (1 < 2) {
+				Thread.sleep(1000);
 				try {
-					stepXTimeOut(driver, "//android.view.View[@content-desc='赚积分']", 10);
-				}catch (Exception e1) {
-					System.out.println("未找到领取积分界面");
+					stepXTimeOut(driver,
+							"//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.support.v4.view.ViewPager[1]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.widget.ScrollView[1]/android.widget.LinearLayout[1]/android.support.v7.widget.RecyclerView[1]/android.widget.RelativeLayout[1]/android.widget.Button[1]",
+							5);
+					stepXTimeOut(driver,
+							"//android.widget.Button[@resource-id='com.tencent.tgclub:id/choice_role_action_confirm']",
+							5);
+					Thread.sleep(2000);
+					stepXTimeOut(driver, "//android.widget.Button[@resource-id='com.tencent.tgclub:id/tgvdialog_bt']", 5);
+				} catch (Exception e) {
+					System.out.println("界面內无签到按钮");
+					break;
 				}
-			}
-			untilX(driver, "//android.view.View[@content-desc='规则说明']");
-			touch(driver, 530, 555);
-			try {
-				Thread.sleep(1500);
-				driver.findElement(By.xpath("//android.view.View[@content-desc='已签到']"));
-			} catch (Exception e) {
-				System.out.println("签到界面出问题");
-			}
+				
+				Thread.sleep(5000);
+				try {
+					stepXTimeOut(driver, "//android.widget.Button[@resource-id='com.tencent.tgclub:id/get_gift3_btn']", 5);
+					stepXTimeOut(driver,
+							"//android.widget.Button[@resource-id='com.tencent.tgclub:id/choice_role_action_confirm']",
+							5);
+					stepXTimeOut(driver, "//android.widget.Button[@resource-id='com.tencent.tgclub:id/tgvdialog_bt']",5);
+				}catch (Exception e) {
+				}
+				stepXTimeOut(driver,
+						"//android.widget.LinearLayout[@resource-id='com.tencent.tgclub:id/lottery_start_text_ll']/android.widget.ImageView[1]",
+						5);
+				System.out.println("点击抽奖");
+				stepXTimeOut(driver,
+						"//android.widget.Button[@resource-id='com.tencent.tgclub:id/choice_role_action_confirm']", 5);
+				Thread.sleep(5000);}
 
+		
+			
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++结束测试端+++++
 		} catch (Exception e) {
 			String error = e.toString();
@@ -279,5 +212,26 @@ public class App {
 		WebDriverWait wait = new WebDriverWait(driver, 60);
 		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(Xpath)));
 		driver.findElement(By.xpath(Xpath)).sendKeys(x);
+	}
+	static  void touchmiddle(@SuppressWarnings("rawtypes") AndroidDriver driver,String strings) {
+//		[864,1867][1080,1908]
+		int A,B,C,D=0;
+		String str1 = strings.substring(strings.indexOf("[")+1, strings.indexOf(","));
+		String str2 = strings.substring(strings.indexOf(",")+1, strings.indexOf("]"));
+		StringBuilder sb = new StringBuilder(strings);
+		sb.replace(strings.indexOf("["), strings.indexOf("]")+1, "*");
+		strings = sb.toString();
+		String str3 = strings.substring(strings.indexOf("[")+1, strings.indexOf(","));
+		String str4 = strings.substring(strings.indexOf(",")+1, strings.indexOf("]"));
+		A=Integer.parseInt(str1);
+		B=Integer.parseInt(str2);
+		C=Integer.parseInt(str3);
+		D=Integer.parseInt(str4);
+			
+		int x = (int)(C-A)/2+A;
+		int y = (int)(D-B)/2+B;
+		System.out.println(" "+x+" "+y);
+		touch(driver, x, y);
+		
 	}
 }
