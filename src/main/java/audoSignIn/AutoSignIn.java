@@ -1036,8 +1036,12 @@ public class AutoSignIn {
 						"//android.widget.LinearLayout[@resource-id='com.tencent.tgclub:id/lottery_start_text_ll']/android.widget.ImageView[1]",
 						5);
 				System.out.println("点击抽奖");
-				stepXTimeOut(driver,
-						"//android.widget.Button[@resource-id='com.tencent.tgclub:id/choice_role_action_confirm']", 5);
+				try {
+					stepXTimeOut(driver,
+							"//android.widget.Button[@resource-id='com.tencent.tgclub:id/choice_role_action_confirm']", 5);
+				}catch (Exception e) {
+					stepX(driver, "//android.widget.Button[@resource-id='com.tencent.tgclub:id/tgvdialog_bt']");
+				}
 				Thread.sleep(5000);
 			}
 		} catch (Exception e) {
