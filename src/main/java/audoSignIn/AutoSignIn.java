@@ -46,6 +46,7 @@ public class AutoSignIn {
 		zhifubao();
 		Xinyue();
 		liantong();
+		KFC();
 		taobao();
 	}
 
@@ -185,8 +186,9 @@ public class AutoSignIn {
 			s_dianji("我的（再次）");
 			s_deng(2);
 			Thread.sleep(2000);
-
-			stepX(driver, "//android.widget.ImageView[@index='3']");
+//			touchmiddle(driver, "[854,86][940,172]");
+//			stepX(driver, "//android.widget.ImageView[@index='3']");
+			stepX(driver,"//android.view.View[@content-desc='签到领里程']");
 			s_dianji("签到");
 			s_deng(2);
 			Thread.sleep(2000);
@@ -1095,6 +1097,63 @@ public class AutoSignIn {
 		driver.quit();
 
 	}
+	
+	static void KFC() throws MalformedURLException {
+		// /
+		String packageName = "com.yum.brandkfc.SplashAct";
+		String ActivityName = "com.yek.android.kfc.activitys";
+		@SuppressWarnings("rawtypes")
+		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),
+				appInffo(packageName, ActivityName));
+
+		try {
+			Thread.sleep(2000);
+			try {
+				untilTimeOut(driver, "//android.widget.TextView[@text='请评价餐厅服务']", 5);
+				Thread.sleep(1000);
+				touchmiddle(driver, "[885,643][966,733]");
+				Thread.sleep(1000);
+				stepX(driver, "//android.widget.Button[@text='提交']");
+			}catch (Exception e) {
+			}
+			try {
+				stepXTimeOut(driver, "//android.widget.Button[@text='马上去抽']", 5);
+				Thread.sleep(2000);
+				int finalY =driver.manage().window().getSize().height;
+				int finalX =driver.manage().window().getSize().width;
+				TouchAction touch = new TouchAction(driver);
+				touch.longPress(finalX/2, finalY/2).perform();
+				Thread.sleep(2000);
+				driver.pressKeyCode(AndroidKeyCode.BACK);
+				Thread.sleep(1000);
+				driver.pressKeyCode(AndroidKeyCode.BACK);
+				Thread.sleep(1000);
+			}catch (Exception e) {
+			}
+			
+			try {
+				Thread.sleep(2000);
+				touchmiddle(driver,"[918,204][1050,279]");
+				Thread.sleep(2000);
+				stepXTimeOut(driver, "//android.widget.TextView[@text='签到']", 5);
+				Thread.sleep(1000);
+				touchmiddle(driver,"[444,99][636,164]");
+				
+			}catch (Exception e) {
+			}
+			
+		} catch (Exception e) {
+			String error = e.toString();
+			FalseInterface falesdriver = new FalseInterface();
+			try {
+				falesdriver.falseInterface(driver, error);
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
+		}
+		driver.quit();
+
+	}
 
 	/* =============================辅助方法============================= */
 	static void touchmiddle(@SuppressWarnings("rawtypes") AndroidDriver driver, String strings) {
@@ -1114,7 +1173,14 @@ public class AutoSignIn {
 
 		int x = (int) (C - A) / 2 + A;
 		int y = (int) (D - B) / 2 + B;
-		touch(driver, x, y);
+		
+		int b1 = driver.manage().window().getSize().width;
+		int b2 = driver.manage().window().getSize().height;
+
+		int xfinal = (int) (x * b1 / 1080);
+		int yfinal = (int) (y * b2 / 1920);
+		
+		touch(driver, xfinal, yfinal);
 
 	}
 
