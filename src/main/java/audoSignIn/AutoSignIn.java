@@ -47,7 +47,9 @@ public class AutoSignIn {
 		Xinyue();
 		liantong();
 		KFC();
+		quanjia();
 		taobao();
+		koudai();
 	}
 
 	static void Youdao() throws InterruptedException, MalformedURLException {
@@ -186,14 +188,18 @@ public class AutoSignIn {
 			s_dianji("我的（再次）");
 			s_deng(2);
 			Thread.sleep(2000);
-//			touchmiddle(driver, "[854,86][940,172]");
-//			stepX(driver, "//android.widget.ImageView[@index='3']");
-			stepX(driver,"//android.view.View[@content-desc='签到领里程']");
+
+			// stepX(driver, "//android.widget.ImageView[@index='3']");
+			// stepX(driver,"//android.view.View[@content-desc='签到领里程']");
+			stepX(driver,
+					"//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.ScrollView[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.ImageView[2]");
+			touchmiddle(driver, "[722,210][1080,411]");// 签到备选点击框
 			s_dianji("签到");
 			s_deng(2);
 			Thread.sleep(2000);
 
-			stepX(driver, "//android.view.View[@content-desc='立即签到']");
+			// stepX(driver, "//android.view.View[@content-desc='立即签到']");
+			stepX(driver, "//android.view.View[@content-desc='签到领里程']");
 			s_dianji("立即签到");
 
 			s_deng(1);
@@ -362,6 +368,10 @@ public class AutoSignIn {
 				appInffo(packageName, ActivityName));
 		s_jinru("云音乐");
 		try {
+			try {
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 			untilX(driver, "//android.widget.TextView[@text='私人FM']");
 			s_dengdao("私人FM");
 			stepX(driver, "//android.widget.ImageView[@content-desc='抽屉菜单']");
@@ -629,48 +639,12 @@ public class AutoSignIn {
 		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),
 				appInffo(packageName, ActivityName));
 		s_jinru("淘宝");
+
 		try {
+
 			s_deng(5);
 			Thread.sleep(5000);
-			System.out.println("开始判断是否弹出淘宝界面");
-			int inScreenIcon = 0;
-			int outwhilecode = 0;
-			while (1 < 2) {
-				try {
-					driver.findElement(
-							By.xpath("//android.widget.TextView[@resource-id='com.taobao.taobao:id/pai_li_tao_icon']"));
-					inScreenIcon = 1;
-				} catch (Exception e) {
-					try {
-						driver.findElement(By
-								.xpath("//android.widget.TextView[@resource-id='com.taobao.taobao:id/tv_scan_text']"));
-						inScreenIcon = 1;
-					} catch (Exception e1) {
-						try {
-							driver.findElement(By.xpath(
-									"//android.widget.TextView[@resource-id='com.taobao.taobao:id/tv_member_code_text']"));
-							inScreenIcon = 1;
-						} catch (Exception e2) {
-							// try {
-							// driver.findElement(By.xpath("//android.widget.TextView[@text='充值中心']"));
-							// inScreenIcon = 1;
-							// } catch (Exception e3) {
-							System.out.println("未判断到在淘宝界面内");
-							// }
-						}
-					}
-				}
-				outwhilecode++;
-				if (outwhilecode > 2) {
-					System.out.println("淘宝进入界面判断代码段出错");
-					break;
-				}
-				if (inScreenIcon == 1) {
-					break;
-				} else {
-					stepX(driver, "//android.widget.TextView[@text='手机淘宝']");
-				}
-			}
+			judgeTaobaoScreen(driver);
 			try {
 				stepXTimeOut(driver, "//android.widget.TextView[@text='取消']", 3);
 			} catch (Exception e) {
@@ -683,8 +657,10 @@ public class AutoSignIn {
 			Thread.sleep(2000);
 			s_deng(2);
 			swipTo(driver, 50, 1108, 50, 280);
+			Thread.sleep(2000);
 			stepX(driver, "//android.widget.TextView[@text='查看全部工具']");
 			s_dianji("查看全部工具");
+			Thread.sleep(2000);
 			stepX(driver, "//android.widget.TextView[@text='每日打卡']");
 			s_dianji("每日打卡");
 			s_deng(2);
@@ -857,6 +833,9 @@ public class AutoSignIn {
 				driver.pressKeyCode(AndroidKeyCode.BACK);
 				Thread.sleep(1000);
 			} catch (Exception e1) {
+				Thread.sleep(1000);
+				driver.pressKeyCode(AndroidKeyCode.BACK);
+				Thread.sleep(1000);
 			}
 			try {
 				untilTimeOut(driver, "//android.widget.TextView[@text='大学生活']", 5);
@@ -913,31 +892,22 @@ public class AutoSignIn {
 				}
 
 				try {
-					untilTimeOut(driver, "//android.view.View[@content-desc='规则说明']", 3);
+					untilTimeOut(driver, "//android.view.View[@content-desc='可用积分']", 3);
 					whileout = 9999;
 				} catch (Exception e) {
 
 				}
 			}
 			try {
+				untilTimeOut(driver, "//android.view.View[@content-desc='可用积分']", 5);
+				Thread.sleep(2000);
+				whileXpath(driver, "//android.view.View[@content-desc='门店买单']");
+				Thread.sleep(2000);
+				whileXpath(driver, "//android.view.View[@content-desc='签到']");
+				Thread.sleep(2000);
+				whileXpath(driver, "//android.view.View[@content-desc='花呗支付']");
+				Thread.sleep(2000);
 
-				untilTimeOut(driver, "//android.view.View[@content-desc='规则说明']", 5);
-				touch(driver, 530, 555);
-				try {
-					Thread.sleep(1500);
-					driver.findElement(By.xpath("//android.view.View[@content-desc='已签到']"));
-					try {
-						Thread.sleep(1000);
-						String outputString = driver.findElement(By.xpath(
-								"//android.widget.FrameLayout[1]/com.uc.webview.export.WebView[1]/com.uc.webkit.bd[1]/android.webkit.WebView[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]"))
-								.getText().toString();
-						System.out.println(outputString);
-					} catch (Exception ep) {
-						System.out.println("未能找到积分的数据");
-					}
-				} catch (Exception e) {
-					System.out.println("签到界面出问题");
-				}
 			} catch (Exception e) {
 			}
 		} catch (Exception e) {
@@ -970,7 +940,7 @@ public class AutoSignIn {
 		AndroidDriver driver1 = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),
 				appInffo(packageName, ActivityName));
 		try {
-			stepXTimeOut(driver1, "//android.widget.TextView[@text='签到送豪礼']", 5);
+			stepXTimeOut(driver1, "//android.widget.TextView[@text='签到送豪礼']", 10);
 			s_dianji("签到送豪礼");
 			Thread.sleep(5000);
 			stepXTimeOut(driver1, "//android.view.View[@content-desc='点我签到领钱']", 5);
@@ -1002,9 +972,7 @@ public class AutoSignIn {
 		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),
 				appInffo(packageName, ActivityName));
 		try {
-			stepXTimeOut(driver,
-					"//android.widget.TextView[@resource-id='com.tencent.tgclub:id/top_tab_text' and @text='三国群英传']",
-					5);
+			stepXTimeOut(driver, "//android.widget.TextView[@text='三国群英传']", 5);
 			System.out.println("点击三国群英传");
 			while (1 < 2) {
 				Thread.sleep(1000);
@@ -1040,8 +1008,9 @@ public class AutoSignIn {
 				System.out.println("点击抽奖");
 				try {
 					stepXTimeOut(driver,
-							"//android.widget.Button[@resource-id='com.tencent.tgclub:id/choice_role_action_confirm']", 5);
-				}catch (Exception e) {
+							"//android.widget.Button[@resource-id='com.tencent.tgclub:id/choice_role_action_confirm']",
+							5);
+				} catch (Exception e) {
 					stepX(driver, "//android.widget.Button[@resource-id='com.tencent.tgclub:id/tgvdialog_bt']");
 				}
 				Thread.sleep(5000);
@@ -1097,11 +1066,12 @@ public class AutoSignIn {
 		driver.quit();
 
 	}
-	
+
 	static void KFC() throws MalformedURLException {
 		// /
-		String packageName = "com.yum.brandkfc.SplashAct";
-		String ActivityName = "com.yek.android.kfc.activitys";
+		String packageName = "com.yek.android.kfc.activitys";
+		String ActivityName = "com.yum.brandkfc.SplashAct";
+		FalseInterface falesdriver = new FalseInterface();
 		@SuppressWarnings("rawtypes")
 		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),
 				appInffo(packageName, ActivityName));
@@ -1111,40 +1081,45 @@ public class AutoSignIn {
 			try {
 				untilTimeOut(driver, "//android.widget.TextView[@text='请评价餐厅服务']", 5);
 				Thread.sleep(1000);
+				try {
+					falesdriver.falseInterface(driver, "//android.widget.TextView[@text='请评价餐厅服务']界面截图");
+				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				}
 				touchmiddle(driver, "[885,643][966,733]");
 				Thread.sleep(1000);
 				stepX(driver, "//android.widget.Button[@text='提交']");
-			}catch (Exception e) {
+			} catch (Exception e) {
 			}
 			try {
 				stepXTimeOut(driver, "//android.widget.Button[@text='马上去抽']", 5);
 				Thread.sleep(2000);
-				int finalY =driver.manage().window().getSize().height;
-				int finalX =driver.manage().window().getSize().width;
+				int finalY = driver.manage().window().getSize().height;
+				int finalX = driver.manage().window().getSize().width;
 				TouchAction touch = new TouchAction(driver);
-				touch.longPress(finalX/2, finalY/2).perform();
+				touch.longPress(finalX / 2, finalY / 2).perform();
 				Thread.sleep(2000);
 				driver.pressKeyCode(AndroidKeyCode.BACK);
 				Thread.sleep(1000);
 				driver.pressKeyCode(AndroidKeyCode.BACK);
 				Thread.sleep(1000);
-			}catch (Exception e) {
+			} catch (Exception e) {
 			}
-			
+
 			try {
 				Thread.sleep(2000);
-				touchmiddle(driver,"[918,204][1050,279]");
+				touchmiddle(driver, "[918,204][1050,279]");
 				Thread.sleep(2000);
 				stepXTimeOut(driver, "//android.widget.TextView[@text='签到']", 5);
 				Thread.sleep(1000);
-				touchmiddle(driver,"[444,99][636,164]");
-				
-			}catch (Exception e) {
+				touchmiddle(driver, "[444,99][636,164]");
+
+			} catch (Exception e) {
 			}
-			
+
 		} catch (Exception e) {
 			String error = e.toString();
-			FalseInterface falesdriver = new FalseInterface();
+
 			try {
 				falesdriver.falseInterface(driver, error);
 			} catch (FileNotFoundException e1) {
@@ -1155,7 +1130,152 @@ public class AutoSignIn {
 
 	}
 
+	static void quanjia() throws MalformedURLException {
+		// /
+		String packageName = "com.maxxipoint.android";
+		String ActivityName = ".shopping.activity.WelcomeActivity";
+		FalseInterface falesdriver = new FalseInterface();
+		@SuppressWarnings("rawtypes")
+		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),
+				appInffo(packageName, ActivityName));
+		System.out.println("进入享集联盟");
+		try {
+			Thread.sleep(5000);
+			try {
+				stepXTimeOut(driver, "//android.widget.RadioButton[@text='我的']", 5);
+			} catch (Exception e) {
+				int whileout = 0;
+				while (1 < 2) {
+					if (whileout > 3) {
+						break;
+					}
+					try {
+						stepXTimeOut(driver, "//android.widget.TextView[@text='温馨提示']", 3);
+
+					} catch (Exception e1) {
+						whileout++;
+					}
+				}
+			}
+			Thread.sleep(2000);
+			stepXTimeOut(driver, "//android.widget.TextView[@text='签到']", 5);
+			Thread.sleep(2000);
+			stepXTimeOut(driver,
+					"//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.ListView[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[4]/android.widget.ImageView[1]",
+					5);
+			Thread.sleep(2000);
+
+		} catch (Exception e) {
+			String error = e.toString();
+
+			try {
+				falesdriver.falseInterface(driver, error);
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
+		}
+		driver.quit();
+
+	}
+
+	static void koudai() throws MalformedURLException, InterruptedException {
+		String packageName = "com.qeeniao.mobile.kdjz";
+		String ActivityName = ".BlankActivity";
+		@SuppressWarnings("rawtypes")
+		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),
+				appInffo(packageName, ActivityName));
+		Thread.sleep(3000);
+		TouchAction action = new TouchAction(driver);
+
+		stepX(driver, "//android.widget.TextView[@text='理财']");
+		Thread.sleep(3000);
+		int q = 0;
+		while (1 < 2) {
+			try {
+				List xpathList = driver.findElements(By.xpath("//android.widget.TextView[@text='领取']"));
+				int e = xpathList.size();
+
+				for (int i = 0; i < e; i++) {
+					driver.findElement(By.xpath("//android.widget.TextView[@text='领取']")).click();
+					q++;
+					try {
+						Thread.sleep(2000);
+						driver.findElement(By.xpath("//android.widget.TextView[@text='立即收取']")).click();
+						Thread.sleep(1000);
+
+					} catch (Exception p) {
+						Thread.sleep(1000);
+						driver.findElement(By.xpath("//android.widget.ImageView[@index='0']")).click();
+					}
+				}
+				System.out.println("领取次数：" + q);
+			} catch (Exception e) {
+			}
+			Thread.sleep(20000);
+		}
+
+	}
+
 	/* =============================辅助方法============================= */
+	static private void whileXpath(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath)
+			throws InterruptedException {
+		int whileCode = 0;
+		while (1 < 2) {
+			if (whileCode >= 3) {
+				break;
+			}
+			try {
+				stepXTimeOut(driver, Xpath, 3);
+			} catch (Exception e) {
+				whileCode++;
+			}
+			Thread.sleep(1000);
+
+		}
+	}
+
+	static private void judgeTaobaoScreen(@SuppressWarnings("rawtypes") AndroidDriver driver) {
+		System.out.println("开始判断是否弹出淘宝界面");
+		int inScreenIcon = 0;
+		int outwhilecode = 0;
+		while (1 < 2) {
+			try {
+				driver.findElement(
+						By.xpath("//android.widget.TextView[@resource-id='com.taobao.taobao:id/pai_li_tao_icon']"));
+				inScreenIcon = 1;
+			} catch (Exception e) {
+				try {
+					driver.findElement(
+							By.xpath("//android.widget.TextView[@resource-id='com.taobao.taobao:id/tv_scan_text']"));
+					inScreenIcon = 1;
+				} catch (Exception e1) {
+					try {
+						driver.findElement(By.xpath(
+								"//android.widget.TextView[@resource-id='com.taobao.taobao:id/tv_member_code_text']"));
+						inScreenIcon = 1;
+					} catch (Exception e2) {
+						// try {
+						// driver.findElement(By.xpath("//android.widget.TextView[@text='充值中心']"));
+						// inScreenIcon = 1;
+						// } catch (Exception e3) {
+						System.out.println("未判断到在淘宝界面内");
+						// }
+					}
+				}
+			}
+			outwhilecode++;
+			if (outwhilecode > 2) {
+				System.out.println("淘宝进入界面判断代码段出错");
+				break;
+			}
+			if (inScreenIcon == 1) {
+				break;
+			} else {
+				stepX(driver, "//android.widget.TextView[@text='手机淘宝']");
+			}
+		}
+	};
+
 	static void touchmiddle(@SuppressWarnings("rawtypes") AndroidDriver driver, String strings) {
 		// [864,1867][1080,1908]
 		int A, B, C, D = 0;
@@ -1173,13 +1293,13 @@ public class AutoSignIn {
 
 		int x = (int) (C - A) / 2 + A;
 		int y = (int) (D - B) / 2 + B;
-		
+
 		int b1 = driver.manage().window().getSize().width;
 		int b2 = driver.manage().window().getSize().height;
 
 		int xfinal = (int) (x * b1 / 1080);
 		int yfinal = (int) (y * b2 / 1920);
-		
+
 		touch(driver, xfinal, yfinal);
 
 	}
