@@ -8,9 +8,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import javax.xml.transform.Result;
-
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
@@ -18,7 +15,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import AppiumPractice.AppAutoSignIn.FalseInterface;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
@@ -36,13 +32,13 @@ public class AutoSignIn {
 	}
 
 	static void SignEveryDayTryVersion() throws MalformedURLException, InterruptedException, FileNotFoundException {
-		Feizhu();
-		Xianyu();
-		Cainiao();
-		Youdao();
-		JingdongStock();
-		yitao();
-		Yunyinyue();
+		// Feizhu();
+		// Xianyu();
+		// Cainiao();
+		// Youdao();
+		// JingdongStock();
+		// yitao();
+		// Yunyinyue();
 		zhifubao();
 		Xinyue();
 		liantong();
@@ -814,56 +810,57 @@ public class AutoSignIn {
 		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),
 				appInffo(packageName, ActivityName));
 		try {
-			try {
-				Thread.sleep(2000);
-				stepX(driver, "//android.widget.TextView[@text='运动']");
-				Thread.sleep(2000);
-				try {
-					untilTimeOut(driver,
-							"//android.webkit.WebView[@content-desc='我的行走']/android.view.View[2]/android.view.View[3]",
-							5);
-				} catch (Exception e) {
-				}
-				Thread.sleep(5000);
-				touch(driver, 736, 1336);
-				Thread.sleep(2000);
-				stepX(driver, "//android.view.View[@resource-id='J-confirmExchangeBtn']");// J-confirmExchangeBtn+++++++
-				System.out.println("确定");
-				Thread.sleep(3000);
-				driver.pressKeyCode(AndroidKeyCode.BACK);
-				Thread.sleep(1000);
-			} catch (Exception e1) {
-				Thread.sleep(1000);
-				driver.pressKeyCode(AndroidKeyCode.BACK);
-				Thread.sleep(1000);
-			}
-			try {
-				untilTimeOut(driver, "//android.widget.TextView[@text='大学生活']", 5);
-			} catch (Exception e) {
-				driver.pressKeyCode(AndroidKeyCode.BACK);
-			}
-			// touch(driver, 33, 175);// [0,66][132,210]
-			stepX(driver, "//android.widget.TextView[@text='大学生活']");
-			untilX(driver, "//android.widget.TextView[@text='湘潭大学']");
-			driver.pressKeyCode(AndroidKeyCode.BACK);
-			Thread.sleep(3000);
-			stepX(driver, "//android.widget.TextView[@text='大学生活']");
-			untilX(driver, "//android.widget.TextView[@text='湘潭大学']");
-			Thread.sleep(2000);
-			stepX(driver, "//android.view.View[@content-desc='签到']");
-			stepX(driver, "//android.widget.Button[@content-desc='马上签到']");
-
-			while (1 < 2) {
-				Thread.sleep(200);
-				try {
-					Thread.sleep(1500);
-					WebElement fanhui = driver.findElement(By.xpath(
-							"//android.widget.TextView[@resource-id='com.alipay.mobile.nebula:id/h5_tv_nav_back']"));
-					fanhui.click();
-				} catch (Exception e) {
-					break;
-				}
-			}
+			// try {
+			// Thread.sleep(2000);
+			// stepX(driver, "//android.widget.TextView[@text='运动']");
+			// Thread.sleep(2000);
+			// try {
+			// untilTimeOut(driver,
+			// "//android.webkit.WebView[@content-desc='我的行走']/android.view.View[2]/android.view.View[3]",
+			// 5);
+			// } catch (Exception e) {
+			// }
+			// Thread.sleep(5000);
+			// touch(driver, 736, 1336);
+			// Thread.sleep(2000);
+			// stepX(driver, "//android.view.View[@resource-id='J-confirmExchangeBtn']");//
+			// J-confirmExchangeBtn+++++++
+			// System.out.println("确定");
+			// Thread.sleep(3000);
+			// driver.pressKeyCode(AndroidKeyCode.BACK);
+			// Thread.sleep(1000);
+			// } catch (Exception e1) {
+			// Thread.sleep(1000);
+			// driver.pressKeyCode(AndroidKeyCode.BACK);
+			// Thread.sleep(1000);
+			// }
+			// try {
+			// untilTimeOut(driver, "//android.widget.TextView[@text='大学生活']", 5);
+			// } catch (Exception e) {
+			// driver.pressKeyCode(AndroidKeyCode.BACK);
+			// }
+			// // touch(driver, 33, 175);// [0,66][132,210]
+			// stepX(driver, "//android.widget.TextView[@text='大学生活']");
+			// untilX(driver, "//android.widget.TextView[@text='湘潭大学']");
+			// driver.pressKeyCode(AndroidKeyCode.BACK);
+			// Thread.sleep(3000);
+			// stepX(driver, "//android.widget.TextView[@text='大学生活']");
+			// untilX(driver, "//android.widget.TextView[@text='湘潭大学']");
+			// Thread.sleep(2000);
+			// stepX(driver, "//android.view.View[@content-desc='签到']");
+			// stepX(driver, "//android.widget.Button[@content-desc='马上签到']");
+			//
+			// while (1 < 2) {
+			// Thread.sleep(200);
+			// try {
+			// Thread.sleep(1500);
+			// WebElement fanhui = driver.findElement(By.xpath(
+			// "//android.widget.TextView[@resource-id='com.alipay.mobile.nebula:id/h5_tv_nav_back']"));
+			// fanhui.click();
+			// } catch (Exception e) {
+			// break;
+			// }
+			// }
 
 			// ++++++++++++++++蚂蚁会员签到——++++++++++
 			stepX(driver,
@@ -936,9 +933,28 @@ public class AutoSignIn {
 		Thread.sleep(5000);
 		driver.quit();
 		Thread.sleep(2000);
+
 		@SuppressWarnings("rawtypes")
 		AndroidDriver driver1 = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),
 				appInffo(packageName, ActivityName));
+		int outwhilecode = 0;
+		try {
+			while (1 < 2) {
+				if (outwhilecode >= 2) {
+					break;
+				}
+				Thread.sleep(1000);
+				try {
+					stepXTimeOut(driver1, "//android.widget.TextView[@text='更新提示']", 3);
+					stepXTimeOut(driver1, "//android.widget.Button[@text='取消']", 2);
+				} catch (Exception e) {
+					outwhilecode++;
+				}
+				System.out.println("检查是否需要更新" + outwhilecode);
+			}
+
+		} catch (Exception e) {
+		}
 		try {
 			stepXTimeOut(driver1, "//android.widget.TextView[@text='签到送豪礼']", 10);
 			s_dianji("签到送豪礼");
