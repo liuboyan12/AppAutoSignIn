@@ -32,13 +32,13 @@ public class AutoSignIn {
 	}
 
 	static void SignEveryDayTryVersion() throws MalformedURLException, InterruptedException, FileNotFoundException {
-		// Feizhu();
-		// Xianyu();
-		// Cainiao();
-		// Youdao();
-		// JingdongStock();
-		// yitao();
-		// Yunyinyue();
+		Feizhu();
+		Xianyu();
+		Cainiao();
+		Youdao();
+		JingdongStock();
+		yitao();
+		Yunyinyue();
 		zhifubao();
 		Xinyue();
 		liantong();
@@ -1053,23 +1053,23 @@ public class AutoSignIn {
 				appInffo(packageName, ActivityName));
 
 		try {
+			Thread.sleep(8000);
 			try {
-				stepXTimeOut(driver, "//android.widget.TextView[@resource-id='com.sinovatech.unicom.ui:id/close']", 3);
-			} catch (Exception e) {
-				Thread.sleep(6000);
+				stepXTimeOut(driver, "//android.widget.Image[@content-desc='oFr5vJX3UQPSC9zxHDaogEvWoQcnnqMLcSRw18J6ZKGBYq3rYYwU+bFUeVgLHba6x4zbn8bzKjtu8Nnnc5p8AAwDgFJ01yE0rBgAAAABJRU5ErkJggg==']", 5);
+			}catch (Exception e) {
+				System.out.println("无广告");
 			}
-			Thread.sleep(2000);
-			touchmiddle(driver, "[864,1867][1080,1908]");
-			Thread.sleep(1000);
-			touchmiddle(driver, "[864,1867][1080,1908]");
-			Thread.sleep(2000);
-			System.out.println("点击我的");
-			stepXTimeOut(driver,
-					"//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.TabHost[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.ScrollView[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.ImageView[2]",
-					5);
-			System.out.println("点击我的签到");
-			Thread.sleep(10000);
+			try {stepXTimeOut(driver, "//android.widget.TextView[@text='我的']", 5);
+			Thread.sleep(5000);
+			touchmiddle(driver,"[876,200][1080,278]");
+			Thread.sleep(80000);
 			touch(driver, 763, 457);
+			
+			}catch (Exception e) {
+			}
+			
+			
+			
 		} catch (Exception e) {
 			String error = e.toString();
 			FalseInterface falesdriver = new FalseInterface();
