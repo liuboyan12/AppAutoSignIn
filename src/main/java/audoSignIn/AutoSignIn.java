@@ -27,8 +27,6 @@ import io.appium.java_client.android.AndroidKeyCode;
 public class AutoSignIn {
 	public static void main(String[] args) throws MalformedURLException, InterruptedException, FileNotFoundException {
 		SignEveryDayTryVersion();
-		// Xianyu();
-		// taobao();
 	}
 
 	static void SignEveryDayTryVersion() throws MalformedURLException, InterruptedException, FileNotFoundException {
@@ -585,11 +583,13 @@ public class AutoSignIn {
 				}
 				outwhile++;
 				try {
+					Thread.sleep(2000);
 					stepXTimeOut(driver, "//android.widget.TextView[@text='我的']", 5);
 					break;
 				} catch (Exception e) {
 					try {
-						untilTimeOut(driver, "//android.widget.TextView[@text='发布闲置']", 5);
+						Thread.sleep(2000);
+//						untilTimeOut(driver, "//android.widget.TextView[@text='发布闲置']", 5);
 						driver.pressKeyCode(AndroidKeyCode.BACK);
 					} catch (Exception e1) {
 						Thread.sleep(2000);
@@ -613,6 +613,16 @@ public class AutoSignIn {
 				driver.pressKeyCode(AndroidKeyCode.BACK);
 			}
 			Thread.sleep(2000);
+			driver.pressKeyCode(AndroidKeyCode.BACK);
+			Thread.sleep(2000);
+			int ywdyt = driver.findElement(By.xpath("//android.widget.TextView[@text='我的鱼塘']")).getLocation().y;
+			swipTo(driver, 500, ywdyt, 500, 200);
+			Thread.sleep(2000);
+			stepXTimeOut(driver, "//android.widget.TextView[@text='我的闲鱼币']", 3);
+			Thread.sleep(8000);
+			stepXTimeOut(driver, "//android.view.View[@content-desc='马上签到']", 5);
+			Thread.sleep(5000);
+			
 		} catch (Exception e) {
 			System.out.println("咸鱼出错" + e.toString());
 			String error = e.toString();
@@ -810,57 +820,58 @@ public class AutoSignIn {
 		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),
 				appInffo(packageName, ActivityName));
 		try {
-			// try {
-			// Thread.sleep(2000);
-			// stepX(driver, "//android.widget.TextView[@text='运动']");
-			// Thread.sleep(2000);
-			// try {
-			// untilTimeOut(driver,
-			// "//android.webkit.WebView[@content-desc='我的行走']/android.view.View[2]/android.view.View[3]",
-			// 5);
-			// } catch (Exception e) {
-			// }
-			// Thread.sleep(5000);
-			// touch(driver, 736, 1336);
-			// Thread.sleep(2000);
-			// stepX(driver, "//android.view.View[@resource-id='J-confirmExchangeBtn']");//
-			// J-confirmExchangeBtn+++++++
-			// System.out.println("确定");
-			// Thread.sleep(3000);
-			// driver.pressKeyCode(AndroidKeyCode.BACK);
-			// Thread.sleep(1000);
-			// } catch (Exception e1) {
-			// Thread.sleep(1000);
-			// driver.pressKeyCode(AndroidKeyCode.BACK);
-			// Thread.sleep(1000);
-			// }
-			// try {
-			// untilTimeOut(driver, "//android.widget.TextView[@text='大学生活']", 5);
-			// } catch (Exception e) {
-			// driver.pressKeyCode(AndroidKeyCode.BACK);
-			// }
-			// // touch(driver, 33, 175);// [0,66][132,210]
-			// stepX(driver, "//android.widget.TextView[@text='大学生活']");
-			// untilX(driver, "//android.widget.TextView[@text='湘潭大学']");
-			// driver.pressKeyCode(AndroidKeyCode.BACK);
-			// Thread.sleep(3000);
-			// stepX(driver, "//android.widget.TextView[@text='大学生活']");
-			// untilX(driver, "//android.widget.TextView[@text='湘潭大学']");
-			// Thread.sleep(2000);
-			// stepX(driver, "//android.view.View[@content-desc='签到']");
-			// stepX(driver, "//android.widget.Button[@content-desc='马上签到']");
-			//
-			// while (1 < 2) {
-			// Thread.sleep(200);
-			// try {
-			// Thread.sleep(1500);
-			// WebElement fanhui = driver.findElement(By.xpath(
-			// "//android.widget.TextView[@resource-id='com.alipay.mobile.nebula:id/h5_tv_nav_back']"));
-			// fanhui.click();
-			// } catch (Exception e) {
-			// break;
-			// }
-			// }
+			 try {
+			 Thread.sleep(2000);
+			 stepX(driver, "//android.widget.TextView[@text='运动']");
+			 Thread.sleep(2000);
+			 try {
+			 untilTimeOut(driver,
+			 "//android.webkit.WebView[@content-desc='我的行走']/android.view.View[2]/android.view.View[3]",
+			 5);
+			 } catch (Exception e) {
+			 }
+			 Thread.sleep(5000);
+			 touch(driver, 736, 1336);
+			 Thread.sleep(2000);
+			 stepX(driver, "//android.view.View[@resource-id='J-confirmExchangeBtn']");
+			 System.out.println("确定");
+			 Thread.sleep(3000);
+			 driver.pressKeyCode(AndroidKeyCode.BACK);
+			 Thread.sleep(1000);
+			 } catch (Exception e1) {
+			 Thread.sleep(1000);
+			 driver.pressKeyCode(AndroidKeyCode.BACK);
+			 Thread.sleep(1000);
+			 }
+			 try {
+			 untilTimeOut(driver, "//android.widget.TextView[@text='大学生活']", 5);
+			 } catch (Exception e) {
+			 driver.pressKeyCode(AndroidKeyCode.BACK);
+			 }
+			 // touch(driver, 33, 175);// [0,66][132,210]
+			 stepX(driver, "//android.widget.TextView[@text='大学生活']");
+			 untilX(driver, "//android.widget.TextView[@text='湘潭大学']");
+			 driver.pressKeyCode(AndroidKeyCode.BACK);
+			 Thread.sleep(3000);
+			 stepX(driver, "//android.widget.TextView[@text='大学生活']");
+			 untilX(driver, "//android.widget.TextView[@text='湘潭大学']");
+			 Thread.sleep(2000);
+			 stepXTimeOut(driver, "//android.view.View[@content-desc='我的']", 5);
+			 Thread.sleep(5000);
+			 touchmiddle(driver, "[0,780][540,1071]");
+			 stepX(driver, "//android.widget.Button[@content-desc='马上签到']");
+			
+			 while (1 < 2) {
+			 Thread.sleep(200);
+			 try {
+			 Thread.sleep(1500);
+			 WebElement fanhui = driver.findElement(By.xpath(
+			 "//android.widget.TextView[@resource-id='com.alipay.mobile.nebula:id/h5_tv_nav_back']"));
+			 fanhui.click();
+			 } catch (Exception e) {
+			 break;
+			 }
+			 }
 
 			// ++++++++++++++++蚂蚁会员签到——++++++++++
 			stepX(driver,
@@ -871,6 +882,11 @@ public class AutoSignIn {
 			driver.pressKeyCode(AndroidKeyCode.BACK);
 			Thread.sleep(2000);
 			stepX(driver, "//android.widget.TextView[@text='蚂蚁会员']");
+//			try {
+//				Thread.sleep(2000);
+//				List list1 = (List) driver.findElement(By.xpath("//android.view.View[@content-desc='赚积分']"));
+//			}catch (Exception e) {
+//			}
 			int whileout = 0;
 			while (1 < 2) {
 				if (whileout >= 3) {
@@ -895,18 +911,7 @@ public class AutoSignIn {
 
 				}
 			}
-			try {
-				untilTimeOut(driver, "//android.view.View[@content-desc='可用积分']", 5);
-				Thread.sleep(2000);
-				whileXpath(driver, "//android.view.View[@content-desc='门店买单']");
-				Thread.sleep(2000);
-				whileXpath(driver, "//android.view.View[@content-desc='签到']");
-				Thread.sleep(2000);
-				whileXpath(driver, "//android.view.View[@content-desc='花呗支付']");
-				Thread.sleep(2000);
-
-			} catch (Exception e) {
-			}
+			
 		} catch (Exception e) {
 			System.out.println("支付宝出错");
 			String error = e.toString();
@@ -988,6 +993,7 @@ public class AutoSignIn {
 		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),
 				appInffo(packageName, ActivityName));
 		try {
+			Thread.sleep(8000);
 			stepXTimeOut(driver, "//android.widget.TextView[@text='三国群英传']", 5);
 			System.out.println("点击三国群英传");
 			while (1 < 2) {
@@ -1059,10 +1065,12 @@ public class AutoSignIn {
 			}catch (Exception e) {
 				System.out.println("无广告");
 			}
-			try {stepXTimeOut(driver, "//android.widget.TextView[@text='我的']", 5);
+			try {
+			Thread.sleep(5000);
+			stepXTimeOut(driver, "//android.widget.TextView[@text='我的']", 5);
 			Thread.sleep(5000);
 			touchmiddle(driver,"[876,200][1080,278]");
-			Thread.sleep(80000);
+			Thread.sleep(8000);
 			touch(driver, 763, 457);
 			
 			}catch (Exception e) {
@@ -1158,20 +1166,23 @@ public class AutoSignIn {
 		try {
 			Thread.sleep(5000);
 			try {
-				stepXTimeOut(driver, "//android.widget.RadioButton[@text='我的']", 5);
+				Thread.sleep(5000);
+				stepXTimeOut(driver, "//android.widget.RadioButton[@text='我的']", 3);
 			} catch (Exception e) {
 				int whileout = 0;
 				while (1 < 2) {
-					if (whileout > 3) {
+					if (whileout > 2) {
 						break;
 					}
 					try {
-						stepXTimeOut(driver, "//android.widget.TextView[@text='温馨提示']", 3);
-
+						untilTimeOut(driver, "//android.widget.TextView[@text='温馨提示']", 3);
+						driver.pressKeyCode(AndroidKeyCode.BACK);
 					} catch (Exception e1) {
 						whileout++;
 					}
+					
 				}
+				stepXTimeOut(driver, "//android.widget.RadioButton[@text='我的']", 5);
 			}
 			Thread.sleep(2000);
 			stepXTimeOut(driver, "//android.widget.TextView[@text='签到']", 5);
