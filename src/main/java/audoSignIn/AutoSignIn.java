@@ -816,18 +816,17 @@ public class AutoSignIn {
 	static void zhifubao() throws MalformedURLException, InterruptedException {
 		String packageName = "com.eg.android.AlipayGphone";
 		String ActivityName = ".AlipayLogin";
+		FalseInterface falesdriver = new FalseInterface();
 		@SuppressWarnings("rawtypes")
 		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),
 				appInffo(packageName, ActivityName));
 		try {
 			 try {
-			 Thread.sleep(2000);
-			 stepX(driver, "//android.widget.TextView[@text='运动']");
+			 Thread.sleep(5000);
+			 stepXTimeOut(driver, "//android.widget.TextView[@text='运动']",5);
 			 Thread.sleep(2000);
 			 try {
-			 untilTimeOut(driver,
-			 "//android.webkit.WebView[@content-desc='我的行走']/android.view.View[2]/android.view.View[3]",
-			 5);
+			 untilTimeOut(driver,"//android.view.View[@content-desc='今日步数']",5);
 			 } catch (Exception e) {
 			 }
 			 Thread.sleep(5000);
@@ -839,6 +838,11 @@ public class AutoSignIn {
 			 driver.pressKeyCode(AndroidKeyCode.BACK);
 			 Thread.sleep(1000);
 			 } catch (Exception e1) {
+				 try {
+						falesdriver.falseInterface(driver, "运动界面报错");
+					} catch (FileNotFoundException e2) {
+						e1.printStackTrace();
+					}
 			 Thread.sleep(1000);
 			 driver.pressKeyCode(AndroidKeyCode.BACK);
 			 Thread.sleep(1000);
@@ -874,48 +878,69 @@ public class AutoSignIn {
 			 }
 
 			// ++++++++++++++++蚂蚁会员签到——++++++++++
-			stepX(driver,
-					"//android.widget.TextView[@resource-id='com.alipay.android.phone.wealth.home:id/tab_description']");// 我的
+			Thread.sleep(4000);
+			 stepX(driver,"//android.widget.TextView[@resource-id='com.alipay.android.phone.wealth.home:id/tab_description']");// 我的
 			Thread.sleep(3000);
 			stepX(driver, "//android.widget.TextView[@text='蚂蚁会员']");
 			Thread.sleep(5000);
 			driver.pressKeyCode(AndroidKeyCode.BACK);
 			Thread.sleep(2000);
 			stepX(driver, "//android.widget.TextView[@text='蚂蚁会员']");
-//			try {
-//				Thread.sleep(2000);
-//				List list1 = (List) driver.findElement(By.xpath("//android.view.View[@content-desc='赚积分']"));
-//			}catch (Exception e) {
-//			}
+
+//			//android.view.View[@content-desc='花呗支付']
 			int whileout = 0;
 			while (1 < 2) {
 				if (whileout >= 3) {
+					try {
+						falesdriver.falseInterface(driver, "循环进入积分签到界面检查超过3次");
+					} catch (FileNotFoundException e1) {
+						e1.printStackTrace();
+					}
 					break;
 				}
 				whileout++;
 				try {
-					stepXTimeOut(driver, "//android.view.View[@content-desc='赚积分']", 10);
+					Thread.sleep(2000);
+					stepXTimeOut(driver, "//android.view.View[@content-desc='赚积分']", 2);
 				} catch (Exception e1) {
 					System.out.println("未找到赚积分按钮");
 				}
 				try {
-					stepXTimeOut(driver, "//android.view.View[@content-desc='领积分']", 10);
+					Thread.sleep(2000);
+					stepXTimeOut(driver, "//android.view.View[@content-desc='领积分']", 2);
 				} catch (Exception e) {
 					System.out.println("未找到领积分按钮");
 				}
+			
 
 				try {
 					untilTimeOut(driver, "//android.view.View[@content-desc='可用积分']", 3);
 					whileout = 9999;
+					System.out.println("进入积分签到界面");
 				} catch (Exception e) {
-
 				}
 			}
-			
+//			=====================签到+积分========================
+			try {
+				XpathListClick(driver,"//android.view.View[@content-desc='花呗支付']");
+				Thread.sleep(2000);
+				XpathListClick(driver, "//android.view.View[@content-desc='门店买单']");
+				Thread.sleep(2000);
+				XpathListClick(driver, "//android.view.View[@content-desc='签到']");
+				Thread.sleep(2000);
+				try {
+					falesdriver.falseInterface(driver, "第一次跑标记下，931-936行记得删除");
+				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				}
+				
+			}catch (Exception e) {
+				
+			}
 		} catch (Exception e) {
 			System.out.println("支付宝出错");
 			String error = e.toString();
-			FalseInterface falesdriver = new FalseInterface();
+			
 			try {
 				falesdriver.falseInterface(driver, error);
 			} catch (FileNotFoundException e1) {
@@ -926,6 +951,21 @@ public class AutoSignIn {
 		Thread.sleep(2000);
 		driver.quit();
 
+	}
+
+	private static void XpathListClick(AndroidDriver driver,String Xpath) throws InterruptedException {
+		Thread.sleep(500);
+		@SuppressWarnings("rawtypes")
+		List XpathList = driver.findElements(By.xpath(Xpath));
+		int XpathListNum = XpathList.size(),i=0;
+		for(i=0;i<XpathListNum;i++) 
+		{
+			int x = ((WebElement) XpathList.get(i)).getLocation().x;
+			int y =	((WebElement) XpathList.get(i)).getLocation().y;
+			Thread.sleep(1000);
+			touch(driver, x, y+50);
+			
+		}
 	}
 
 	static void yitao() throws MalformedURLException, InterruptedException {
@@ -1057,30 +1097,44 @@ public class AutoSignIn {
 		@SuppressWarnings("rawtypes")
 		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),
 				appInffo(packageName, ActivityName));
-
+		FalseInterface falesdriver = new FalseInterface();
 		try {
-			Thread.sleep(8000);
 			try {
-				stepXTimeOut(driver, "//android.widget.Image[@content-desc='oFr5vJX3UQPSC9zxHDaogEvWoQcnnqMLcSRw18J6ZKGBYq3rYYwU+bFUeVgLHba6x4zbn8bzKjtu8Nnnc5p8AAwDgFJ01yE0rBgAAAABJRU5ErkJggg==']", 5);
-			}catch (Exception e) {
-				System.out.println("无广告");
-			}
-			try {
-			Thread.sleep(5000);
-			stepXTimeOut(driver, "//android.widget.TextView[@text='我的']", 5);
+				Thread.sleep(5000);
+				int whileoutcode = 0;
+				while(1<2) {
+					if(whileoutcode>2) {break;}
+				try {
+					stepXTimeOut(driver, "//android.widget.TextView[@text='我的']", 5);
+					untilTimeOut(driver, "//android.widget.TextView[@text='17621680259']", 5);
+					break;
+				}catch (Exception e) {
+					Thread.sleep(1000);
+					driver.pressKeyCode(AndroidKeyCode.BACK);
+					
+				}whileoutcode++;
+				}
+			
 			Thread.sleep(5000);
 			touchmiddle(driver,"[876,200][1080,278]");
 			Thread.sleep(8000);
 			touch(driver, 763, 457);
 			
 			}catch (Exception e) {
+				try {
+					String error = e.toString();
+					falesdriver.falseInterface(driver, error);
+				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				}
+				
 			}
 			
 			
 			
 		} catch (Exception e) {
 			String error = e.toString();
-			FalseInterface falesdriver = new FalseInterface();
+			
 			try {
 				falesdriver.falseInterface(driver, error);
 			} catch (FileNotFoundException e1) {
