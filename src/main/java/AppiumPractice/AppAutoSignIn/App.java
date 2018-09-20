@@ -34,8 +34,8 @@ import io.appium.java_client.android.AndroidKeyCode;
 public class App {
 	public static void main(String[] args) throws MalformedURLException, FileNotFoundException {
 //++++++++++++++++++++++++++++++++++++++++++++包+++++++++++++++++++++++++++++++++++++++
-		String packageName = "com.tencent.tgclub";
-		String ActivityName = ".ui.WelcomeActivity";
+		String packageName = "com.eg.android.AlipayGphone";
+		String ActivityName = ".AlipayLogin";
 //++++++++++++++++++++++++++++++++++++++++++++包+++++++++++++++++++++++++++++++++++++++
 		@SuppressWarnings("rawtypes")
 		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),
@@ -43,44 +43,8 @@ public class App {
 		FalseInterface transfer = new FalseInterface();
 		try {
 //++++++++++++++++++++++测试代码段+++++++++++++++++++++++++++++++++++++++++++++++++++++++
-			stepXTimeOut(driver,
-					"//android.widget.TextView[@resource-id='com.tencent.tgclub:id/top_tab_text' and @text='三国群英传']",
-					5);
-			System.out.println("点击三国群英传");
-			while (1 < 2) {
-				Thread.sleep(1000);
-				try {
-					stepXTimeOut(driver,
-							"//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.support.v4.view.ViewPager[1]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.widget.ScrollView[1]/android.widget.LinearLayout[1]/android.support.v7.widget.RecyclerView[1]/android.widget.RelativeLayout[1]/android.widget.Button[1]",
-							5);
-					stepXTimeOut(driver,
-							"//android.widget.Button[@resource-id='com.tencent.tgclub:id/choice_role_action_confirm']",
-							5);
-					Thread.sleep(2000);
-					stepXTimeOut(driver, "//android.widget.Button[@resource-id='com.tencent.tgclub:id/tgvdialog_bt']", 5);
-				} catch (Exception e) {
-					System.out.println("界面內无签到按钮");
-					break;
-				}
-				
-				Thread.sleep(5000);
-				try {
-					stepXTimeOut(driver, "//android.widget.Button[@resource-id='com.tencent.tgclub:id/get_gift3_btn']", 5);
-					stepXTimeOut(driver,
-							"//android.widget.Button[@resource-id='com.tencent.tgclub:id/choice_role_action_confirm']",
-							5);
-					stepXTimeOut(driver, "//android.widget.Button[@resource-id='com.tencent.tgclub:id/tgvdialog_bt']",5);
-				}catch (Exception e) {
-				}
-				stepXTimeOut(driver,
-						"//android.widget.LinearLayout[@resource-id='com.tencent.tgclub:id/lottery_start_text_ll']/android.widget.ImageView[1]",
-						5);
-				System.out.println("点击抽奖");
-				stepXTimeOut(driver,
-						"//android.widget.Button[@resource-id='com.tencent.tgclub:id/choice_role_action_confirm']", 5);
-				Thread.sleep(5000);}
-
-		
+			Thread.sleep(30000);
+			transfer.falseInterface(driver, "1");
 			
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++结束测试端+++++
 		} catch (Exception e) {

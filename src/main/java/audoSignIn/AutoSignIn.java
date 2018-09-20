@@ -38,8 +38,6 @@ public class AutoSignIn {
 		yitao();
 		Yunyinyue();
 		zhifubao();
-		Xinyue();
-		liantong();
 		KFC();
 		quanjia();
 		taobao();
@@ -181,21 +179,64 @@ public class AutoSignIn {
 			stepX(driver, "//android.widget.TextView[@text='我的']");
 			s_dianji("我的（再次）");
 			s_deng(2);
-			Thread.sleep(2000);
-
-			// stepX(driver, "//android.widget.ImageView[@index='3']");
-			// stepX(driver,"//android.view.View[@content-desc='签到领里程']");
-			stepX(driver,
-					"//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.ScrollView[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.ImageView[2]");
-			touchmiddle(driver, "[722,210][1080,411]");// 签到备选点击框
+			Thread.sleep(5000);
+			touchmiddle(driver, "[722,210][1080,411]");// 签到备选点击框[722,210][1080,411]
 			s_dianji("签到");
 			s_deng(2);
-			Thread.sleep(2000);
+			Thread.sleep(8000);
 
 			// stepX(driver, "//android.view.View[@content-desc='立即签到']");
-			stepX(driver, "//android.view.View[@content-desc='签到领里程']");
+//			stepX(driver, "//android.view.View[@content-desc='签到领里程']");
+			stepXTimeOut(driver, "//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[4]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]/android.view.View[1]", 5);
 			s_dianji("立即签到");
-
+			Thread.sleep(5000);
+			while(1<2) {
+				try {
+					stepXTimeOut(driver, "//android.view.View[@content-desc='升级成为F2']", 3);
+					break;
+				}catch (Exception e) {
+					try {
+						stepXTimeOut(driver, "//android.view.View[@content-desc='升级成为F3']", 3);
+						break;
+					}catch (Exception e1) {
+						try {
+							stepXTimeOut(driver, "//android.view.View[@content-desc='升级成为F4']", 3);
+							break;
+						}catch (Exception e2) {
+							String error = e2.toString();
+							FalseInterface falesdriver = new FalseInterface();
+							falesdriver.falseInterface(driver, error);
+						}
+					}
+				}
+				break;
+			}
+			Thread.sleep(5000);
+			stepXTimeOut(driver, "//android.view.View[@content-desc='去点赞']", 3);
+			Thread.sleep(3000);
+			int whileout = 0;
+			while(1<2) {
+				whileout++;
+				try {
+					Thread.sleep(2000);
+					untilTimeOut(driver, "//android.view.View[@content-desc='旅行笔记']", 3);
+					WebElement webelement = driver.findElement(By.xpath("//android.view.View[@content-desc='旅行笔记']"));
+					int x = webelement.getLocation().x;
+					int y = webelement.getLocation().y;
+					Thread.sleep(500);
+					touch(driver, x+828, y);
+					Thread.sleep(2000);
+					break;
+				}catch (Exception e) {
+					swipTo(driver, 500, 1000, 500, 20);
+				}
+				if(whileout>3) {
+					FalseInterface falesdriver = new FalseInterface();
+					falesdriver.falseInterface(driver, "//android.view.View[@content-desc='旅行笔记']-部分出错");
+						break;
+					}
+			}
+			driver.pressKeyCode(AndroidKeyCode.BACK);
 			s_deng(1);
 			Thread.sleep(1000);
 		} catch (Exception e) {
@@ -211,7 +252,7 @@ public class AutoSignIn {
 
 	static void Cainiao() throws MalformedURLException, InterruptedException, FileNotFoundException {
 		String packageName = "com.cainiao.wireless";
-		String ActivityName = ".homepage.presentation.view.activity.HomepageActivity";
+		String ActivityName = ".homepage.presentation.view.activity.NewHomepageActivity";
 		@SuppressWarnings("rawtypes")
 		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),
 				appInffo(packageName, ActivityName));
@@ -362,9 +403,11 @@ public class AutoSignIn {
 				appInffo(packageName, ActivityName));
 		s_jinru("云音乐");
 		try {
+			Thread.sleep(7000);
 			try {
+				untilTimeOut(driver, "//android.widget.TextView[@text='重新购买']", 8);
+				driver.pressKeyCode(AndroidKeyCode.BACK);
 			} catch (Exception e) {
-				// TODO: handle exception
 			}
 			untilX(driver, "//android.widget.TextView[@text='私人FM']");
 			s_dengdao("私人FM");
@@ -663,10 +706,10 @@ public class AutoSignIn {
 			Thread.sleep(2000);
 			s_deng(2);
 			swipTo(driver, 50, 1108, 50, 280);
-			Thread.sleep(2000);
+			Thread.sleep(10000);
 			stepX(driver, "//android.widget.TextView[@text='查看全部工具']");
 			s_dianji("查看全部工具");
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 			stepX(driver, "//android.widget.TextView[@text='每日打卡']");
 			s_dianji("每日打卡");
 			s_deng(2);
@@ -744,12 +787,17 @@ public class AutoSignIn {
 					Thread.sleep(1000);
 
 					// android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[3]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.support.v7.widget.RecyclerView[1]/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]/android.view.View[1]
-					String signCoin = "//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[3]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.support.v7.widget.RecyclerView[1]/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]/android.view.View[1]";
+					String signCoin = "//android.view.View[@content-desc='签到+']";
 
 					untilTimeOut(driver, signCoin, 5);
 					WebElement sign5 = driver.findElement(By.xpath(signCoin));
 					stepXTimeOut(driver, signCoin, 3);
 					Thread.sleep(2000);
+					try {
+						driver.findElement(By.xpath(signCoin));
+					}catch (Exception e) {
+						continue;
+					}
 					try {
 						untilTimeOut(driver, "//android.view.View[@content-desc='店铺热卖']", 15);
 					} catch (Exception e) {
@@ -825,24 +873,33 @@ public class AutoSignIn {
 			 Thread.sleep(5000);
 			 stepXTimeOut(driver, "//android.widget.TextView[@text='运动']",5);
 			 Thread.sleep(2000);
+//			 stepXTimeOut(driver, "//android.view.View[@content-desc='行走捐']", 3);
+//			 Thread.sleep(2000);
 			 try {
-			 untilTimeOut(driver,"//android.view.View[@content-desc='今日步数']",5);
-			 } catch (Exception e) {
-			 }
-			 Thread.sleep(5000);
-			 touch(driver, 736, 1336);
-			 Thread.sleep(2000);
-			 stepX(driver, "//android.view.View[@resource-id='J-confirmExchangeBtn']");
-			 System.out.println("确定");
-			 Thread.sleep(3000);
-			 driver.pressKeyCode(AndroidKeyCode.BACK);
-			 Thread.sleep(1000);
-			 } catch (Exception e1) {
+				 Thread.sleep(2000);
+				 untilTimeOut(driver, "//android.view.View[@content-desc='今天公益金额度已兑完，明天早点来哦！']", 3);
+				 System.out.println("公益金额度已兑完");
+			 }catch (Exception e) {
+				 try {
+					 untilTimeOut(driver,"//android.view.View[@content-desc='今日步数']",5);
+					 } catch (Exception e11) {
+					 }
+					 Thread.sleep(5000);
+					 touch(driver, 736, 1336);
+					 Thread.sleep(2000);
+					 stepX(driver, "//android.view.View[@resource-id='J-confirmExchangeBtn']");
+					 System.out.println("确定");
+					 Thread.sleep(3000);
+					 driver.pressKeyCode(AndroidKeyCode.BACK);
+					 Thread.sleep(1000);
+					 
+			 }} catch (Exception e1) {
 				 try {
 						falesdriver.falseInterface(driver, "运动界面报错");
 					} catch (FileNotFoundException e2) {
 						e1.printStackTrace();
 					}
+			
 			 Thread.sleep(1000);
 			 driver.pressKeyCode(AndroidKeyCode.BACK);
 			 Thread.sleep(1000);
@@ -915,28 +972,41 @@ public class AutoSignIn {
 
 				try {
 					untilTimeOut(driver, "//android.view.View[@content-desc='可用积分']", 3);
-					whileout = 9999;
 					System.out.println("进入积分签到界面");
+					break;
 				} catch (Exception e) {
 				}
 			}
-//			=====================签到+积分========================
+			for(int i= 0;i<10;i++) {
+				System.out.println(i);
+			Thread.sleep(2000);
 			try {
-				XpathListClick(driver,"//android.view.View[@content-desc='花呗支付']");
-				Thread.sleep(2000);
-				XpathListClick(driver, "//android.view.View[@content-desc='门店买单']");
-				Thread.sleep(2000);
-				XpathListClick(driver, "//android.view.View[@content-desc='签到']");
-				Thread.sleep(2000);
-				try {
-					falesdriver.falseInterface(driver, "第一次跑标记下，931-936行记得删除");
-				} catch (FileNotFoundException e1) {
-					e1.printStackTrace();
-				}
-				
+			stepXTimeOut(driver, "//android.view.View[@content-desc='点击领取']", 4);
+			
 			}catch (Exception e) {
-				
+			break;
+				}
 			}
+//			===============================明日赛==================================
+				driver.pressKeyCode(AndroidKeyCode.BACK);
+				Thread.sleep(1000);
+				stepXTimeOut(driver, "//android.view.View[@content-desc='行走赛']", 5);
+				Thread.sleep(3000);
+				try {
+					untilTimeOut(driver, "//android.view.View[@content-desc='恭喜你']", 5);
+					stepXTimeOut(driver, "//android.widget.Button[@content-desc='报名明日比赛']", 5);
+				}catch (Exception e) {
+					stepXTimeOut(driver, "//android.view.View[@content-desc='报名明日比赛']", 5);
+				}
+				Thread.sleep(2000);
+				stepXTimeOut(driver, "//android.view.View[@content-desc='立即使用积分报名']", 5);
+				Thread.sleep(1000);
+				stepXTimeOut(driver, "//android.widget.Button[@text='确认报名']", 5);
+				
+				
+//			======================================================================		
+				
+		
 		} catch (Exception e) {
 			System.out.println("支付宝出错");
 			String error = e.toString();
@@ -1004,7 +1074,13 @@ public class AutoSignIn {
 			stepXTimeOut(driver1, "//android.widget.TextView[@text='签到送豪礼']", 10);
 			s_dianji("签到送豪礼");
 			Thread.sleep(5000);
-			stepXTimeOut(driver1, "//android.view.View[@content-desc='点我签到领钱']", 5);
+			try {	stepXTimeOut(driver1, "//android.view.View[@content-desc='点我签到领钱']", 5);}catch (Exception e) {
+				driver.pressKeyCode(AndroidKeyCode.BACK);
+				Thread.sleep(2000);
+				stepXTimeOut(driver1, "//android.widget.TextView[@text='签到送豪礼']", 5);
+				stepXTimeOut(driver1, "//android.view.View[@content-desc='点我签到领钱']", 5);
+			}
+		
 			Thread.sleep(2000);
 			try {
 				untilTimeOut(driver1, "//android.view.View[@content-desc='提醒规则']", 3);
@@ -1104,8 +1180,8 @@ public class AutoSignIn {
 				int whileoutcode = 0;
 				while(1<2) {
 					if(whileoutcode>2) {break;}
-				try {
 					stepXTimeOut(driver, "//android.widget.TextView[@text='我的']", 5);
+				try {
 					untilTimeOut(driver, "//android.widget.TextView[@text='17621680259']", 5);
 					break;
 				}catch (Exception e) {
