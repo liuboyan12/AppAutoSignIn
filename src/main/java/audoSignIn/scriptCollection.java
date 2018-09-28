@@ -1,49 +1,23 @@
 package audoSignIn;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import org.apache.commons.io.FileUtils;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
 import AppiumPractice.AppAutoSignIn.FalseInterface;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidKeyCode;
 
-/**
- * APPIUM手机自动化签到脚本
- *
- */
-public class AutoSignIn {
-	public static void main(String[] args) throws MalformedURLException, InterruptedException, FileNotFoundException {
-		SignEveryDayTryVersion();
-	}
-
-	static void SignEveryDayTryVersion() throws MalformedURLException, InterruptedException, FileNotFoundException {
-		Feizhu();
-		Xianyu();
-		Cainiao();
-		Youdao();
-		JingdongStock();
-		yitao();
-		Yunyinyue();
-		zhifubao();
-		KFC();
-		quanjia();
-//		taobao();
-		koudai();
-	}
-
+public class scriptCollection {
+	
 	static void Youdao() throws InterruptedException, MalformedURLException {
 		String packageName = "com.youdao.note";
 		String ActivityName = ".activity2.MainActivity";
@@ -224,7 +198,7 @@ public class AutoSignIn {
 					int x = webelement.getLocation().x;
 					int y = webelement.getLocation().y;
 					Thread.sleep(500);
-					touch(driver, x+860, y);
+					touch(driver, x+828, y);
 					Thread.sleep(2000);
 					break;
 				}catch (Exception e) {
@@ -896,16 +870,14 @@ public class AutoSignIn {
 			 }catch (Exception e) {
 				 try {
 					 untilTimeOut(driver,"//android.view.View[@content-desc='今日步数']",5);
-					 } catch (Exception e11) {}
+					 } catch (Exception e11) {
+					 }
 					 Thread.sleep(5000);
 					 touch(driver, 736, 1336);
 					 Thread.sleep(2000);
-					 try{stepXTimeOut(driver, "//android.view.View[@resource-id='J-confirmExchangeBtn']",5);
-					 }catch (Exception e22) {
-						 touch(driver, 760, 1500);
-					 }
+					 stepX(driver, "//android.view.View[@resource-id='J-confirmExchangeBtn']");
 					 System.out.println("确定");
-					 Thread.sleep(8000);
+					 Thread.sleep(3000);
 					 driver.pressKeyCode(AndroidKeyCode.BACK);
 					 Thread.sleep(1000);
 					 
@@ -915,6 +887,28 @@ public class AutoSignIn {
 					} catch (FileNotFoundException e2) {
 						e1.printStackTrace();
 					}
+			
+			 Thread.sleep(1000);
+			 driver.pressKeyCode(AndroidKeyCode.BACK);
+			 Thread.sleep(1000);
+			 }
+			 try {
+			 untilTimeOut(driver, "//android.widget.TextView[@text='大学生活']", 5);
+			 } catch (Exception e) {
+			 driver.pressKeyCode(AndroidKeyCode.BACK);
+			 }
+			 // touch(driver, 33, 175);// [0,66][132,210]
+			 stepX(driver, "//android.widget.TextView[@text='大学生活']");
+			 untilX(driver, "//android.widget.TextView[@text='湘潭大学']");
+			 driver.pressKeyCode(AndroidKeyCode.BACK);
+			 Thread.sleep(3000);
+			 stepX(driver, "//android.widget.TextView[@text='大学生活']");
+			 untilX(driver, "//android.widget.TextView[@text='湘潭大学']");
+			 Thread.sleep(2000);
+			 stepXTimeOut(driver, "//android.view.View[@content-desc='我的']", 5);
+			 Thread.sleep(5000);
+			 touchmiddle(driver, "[0,780][540,1071]");
+			 stepX(driver, "//android.widget.Button[@content-desc='马上签到']");
 			
 			 while (1 < 2) {
 			 Thread.sleep(200);
@@ -927,109 +921,79 @@ public class AutoSignIn {
 			 break;
 			 }
 			 }
-			 }
-//			 try {
-//			 untilTimeOut(driver, "//android.widget.TextView[@text='大学生活']", 5);
-//			 } catch (Exception e) {
-//			 driver.pressKeyCode(AndroidKeyCode.BACK);
-//			 }
-//			 // touch(driver, 33, 175);// [0,66][132,210]
-//			 stepX(driver, "//android.widget.TextView[@text='大学生活']");
-//			 untilX(driver, "//android.widget.TextView[@text='湘潭大学']");
-//			 driver.pressKeyCode(AndroidKeyCode.BACK);
-//			 Thread.sleep(3000);
-//			 stepX(driver, "//android.widget.TextView[@text='大学生活']");
-//			 untilX(driver, "//android.widget.TextView[@text='湘潭大学']");
-//			 Thread.sleep(2000);
-//			 stepXTimeOut(driver, "//android.view.View[@content-desc='我的']", 5);
-//			 Thread.sleep(5000);
-//			 touchmiddle(driver, "[0,780][540,1071]");
-//			 stepX(driver, "//android.widget.Button[@content-desc='马上签到']");
-//			
-////			 while (1 < 2) {
-//			 Thread.sleep(200);
-//			 try {
-//			 Thread.sleep(1500);
-//			 WebElement fanhui = driver.findElement(By.xpath(
-//			 "//android.widget.TextView[@resource-id='com.alipay.mobile.nebula:id/h5_tv_nav_back']"));
-//			 fanhui.click();
-//			 } catch (Exception e) {
-//			 break;
-//			 }
-//			 }
 
-//			// ++++++++++++++++蚂蚁会员签到——++++++++++
-//			Thread.sleep(4000);
-//			 stepX(driver,"//android.widget.TextView[@resource-id='com.alipay.android.phone.wealth.home:id/tab_description']");// 我的
-//			Thread.sleep(3000);
-//			stepX(driver, "//android.widget.TextView[@text='蚂蚁会员']");
-//			Thread.sleep(5000);
-//			driver.pressKeyCode(AndroidKeyCode.BACK);
-//			Thread.sleep(2000);
-//			stepX(driver, "//android.widget.TextView[@text='蚂蚁会员']");
-//
-////			//android.view.View[@content-desc='花呗支付']
-//			int whileout = 0;
-//			while (1 < 2) {
-//				if (whileout >= 3) {
-//					try {
-//						falesdriver.falseInterface(driver, "循环进入积分签到界面检查超过3次");
-//					} catch (FileNotFoundException e1) {
-//						e1.printStackTrace();
-//					}
-//					break;
-//				}
-//				whileout++;
-//				try {
-//					Thread.sleep(2000);
-//					stepXTimeOut(driver, "//android.view.View[@content-desc='赚积分']", 2);
-//				} catch (Exception e1) {
-//					System.out.println("未找到赚积分按钮");
-//				}
-//				try {
-//					Thread.sleep(2000);
-//					stepXTimeOut(driver, "//android.view.View[@content-desc='领积分']", 2);
-//				} catch (Exception e) {
-//					System.out.println("未找到领积分按钮");
-//				}
-//			
-//
-//				try {
-//					untilTimeOut(driver, "//android.view.View[@content-desc='可用积分']", 3);
-//					System.out.println("进入积分签到界面");
-//					break;
-//				} catch (Exception e) {
-//				}
-//			}
-//			for(int i= 0;i<10;i++) {
-//				System.out.println(i);
-//			Thread.sleep(2000);
-//			try {
-//			stepXTimeOut(driver, "//android.view.View[@content-desc='点击领取']", 4);
-//			
-//			}catch (Exception e) {
-//			break;
-//				}
-//			}
-////			===============================明日赛==================================
-//				driver.pressKeyCode(AndroidKeyCode.BACK);
-//				Thread.sleep(1000);
-//				stepXTimeOut(driver, "//android.view.View[@content-desc='行走赛']", 5);
-//				Thread.sleep(3000);
-//				try {
-//					untilTimeOut(driver, "//android.view.View[@content-desc='恭喜你']", 5);
-//					stepXTimeOut(driver, "//android.widget.Button[@content-desc='报名明日比赛']", 5);
-//				}catch (Exception e) {
-//					stepXTimeOut(driver, "//android.view.View[@content-desc='报名明日比赛']", 5);
-//				}
-//				Thread.sleep(2000);
-//				stepXTimeOut(driver, "//android.view.View[@content-desc='立即使用积分报名']", 5);
-//				Thread.sleep(1000);
-//				stepXTimeOut(driver, "//android.widget.Button[@text='确认报名']", 5);
-//				
-//				
-////			======================================================================		
-//				
+			// ++++++++++++++++蚂蚁会员签到——++++++++++
+			Thread.sleep(4000);
+			 stepX(driver,"//android.widget.TextView[@resource-id='com.alipay.android.phone.wealth.home:id/tab_description']");// 我的
+			Thread.sleep(3000);
+			stepX(driver, "//android.widget.TextView[@text='蚂蚁会员']");
+			Thread.sleep(5000);
+			driver.pressKeyCode(AndroidKeyCode.BACK);
+			Thread.sleep(2000);
+			stepX(driver, "//android.widget.TextView[@text='蚂蚁会员']");
+
+//			//android.view.View[@content-desc='花呗支付']
+			int whileout = 0;
+			while (1 < 2) {
+				if (whileout >= 3) {
+					try {
+						falesdriver.falseInterface(driver, "循环进入积分签到界面检查超过3次");
+					} catch (FileNotFoundException e1) {
+						e1.printStackTrace();
+					}
+					break;
+				}
+				whileout++;
+				try {
+					Thread.sleep(2000);
+					stepXTimeOut(driver, "//android.view.View[@content-desc='赚积分']", 2);
+				} catch (Exception e1) {
+					System.out.println("未找到赚积分按钮");
+				}
+				try {
+					Thread.sleep(2000);
+					stepXTimeOut(driver, "//android.view.View[@content-desc='领积分']", 2);
+				} catch (Exception e) {
+					System.out.println("未找到领积分按钮");
+				}
+			
+
+				try {
+					untilTimeOut(driver, "//android.view.View[@content-desc='可用积分']", 3);
+					System.out.println("进入积分签到界面");
+					break;
+				} catch (Exception e) {
+				}
+			}
+			for(int i= 0;i<10;i++) {
+				System.out.println(i);
+			Thread.sleep(2000);
+			try {
+			stepXTimeOut(driver, "//android.view.View[@content-desc='点击领取']", 4);
+			
+			}catch (Exception e) {
+			break;
+				}
+			}
+//			===============================明日赛==================================
+				driver.pressKeyCode(AndroidKeyCode.BACK);
+				Thread.sleep(1000);
+				stepXTimeOut(driver, "//android.view.View[@content-desc='行走赛']", 5);
+				Thread.sleep(3000);
+				try {
+					untilTimeOut(driver, "//android.view.View[@content-desc='恭喜你']", 5);
+					stepXTimeOut(driver, "//android.widget.Button[@content-desc='报名明日比赛']", 5);
+				}catch (Exception e) {
+					stepXTimeOut(driver, "//android.view.View[@content-desc='报名明日比赛']", 5);
+				}
+				Thread.sleep(2000);
+				stepXTimeOut(driver, "//android.view.View[@content-desc='立即使用积分报名']", 5);
+				Thread.sleep(1000);
+				stepXTimeOut(driver, "//android.widget.Button[@text='确认报名']", 5);
+				
+				
+//			======================================================================		
+				
 		
 		} catch (Exception e) {
 			System.out.println("支付宝出错");
@@ -1457,173 +1421,6 @@ public class AutoSignIn {
 			}
 		}
 	};
-
-	static void touchmiddle(@SuppressWarnings("rawtypes") AndroidDriver driver, String strings) {
-		// [864,1867][1080,1908]
-		int A, B, C, D = 0;
-		String str1 = strings.substring(strings.indexOf("[") + 1, strings.indexOf(","));
-		String str2 = strings.substring(strings.indexOf(",") + 1, strings.indexOf("]"));
-		StringBuilder sb = new StringBuilder(strings);
-		sb.replace(strings.indexOf("["), strings.indexOf("]") + 1, "*");
-		strings = sb.toString();
-		String str3 = strings.substring(strings.indexOf("[") + 1, strings.indexOf(","));
-		String str4 = strings.substring(strings.indexOf(",") + 1, strings.indexOf("]"));
-		A = Integer.parseInt(str1);
-		B = Integer.parseInt(str2);
-		C = Integer.parseInt(str3);
-		D = Integer.parseInt(str4);
-
-		int x = (int) (C - A) / 2 + A;
-		int y = (int) (D - B) / 2 + B;
-
-		int b1 = driver.manage().window().getSize().width;
-		int b2 = driver.manage().window().getSize().height;
-
-		int xfinal = (int) (x * b1 / 1080);
-		int yfinal = (int) (y * b2 / 1920);
-
-		touch(driver, xfinal, yfinal);
-
-	}
-
-	static String ifExist(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath) {
-		String eme = null;
-		try {
-			@SuppressWarnings("unused")
-			WebElement ele = driver.findElement(By.xpath(Xpath));
-
-		} catch (Exception e) {
-			eme = e.toString();
-		}
-		return eme;
-
-	}
-
-	static void touch(@SuppressWarnings("rawtypes") AndroidDriver driver, int x, int y) {
-		int b1 = driver.manage().window().getSize().width;
-		int b2 = driver.manage().window().getSize().height;
-
-		int xfinal = (int) (x * b1 / 1080);
-		int yfinal = (int) (y * b2 / 1920);
-
-		TouchAction action = new TouchAction(driver);
-		action.tap(xfinal, yfinal).perform();
-	}
-
-	static void untilX(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath) {
-		WebDriverWait wait = new WebDriverWait(driver, 60);
-		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(Xpath)));
-	}
-
-	static void untilTimeOut(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath, int timeout) {
-		WebDriverWait wait = new WebDriverWait(driver, timeout);
-		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(Xpath)));
-	}
-
-	static void clickx(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath) {
-		driver.findElement(By.xpath(Xpath)).click();
-	}
-
-	static void stepX(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath) {
-		untilX(driver, Xpath);
-		clickx(driver, Xpath);
-	}
-
-	static void stepXTimeOut(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath, int timeout) {
-		untilTimeOut(driver, Xpath, timeout);
-		clickx(driver, Xpath);
-	}
-
-	static void stepID(@SuppressWarnings("rawtypes") AndroidDriver driver, String ID) {
-		WebDriverWait wait = new WebDriverWait(driver, 60);
-		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id(ID)));
-
-		driver.findElement(By.id(ID));
-	}
-
-	static void swipTo(@SuppressWarnings("rawtypes") AndroidDriver driver, int X1, int Y1, int X2, int Y2) {
-		TouchAction action1 = new TouchAction(driver);
-		action1.longPress(X1, Y1).moveTo(X2, Y2).release().perform();
-	}
-
-	static void Mistake(String x, String e) {
-		System.out.println(x + "出错" + e);
-	}
-
-	static void textX(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath, String x) {
-		WebDriverWait wait = new WebDriverWait(driver, 60);
-		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(Xpath)));
-		driver.findElement(By.xpath(Xpath)).sendKeys(x);
-	}
-
-	// =========================appinfo=============================
-	static DesiredCapabilities appInffo(String packageName, String ActivityName) {
-		DesiredCapabilities capa = new DesiredCapabilities();
-		capa.setCapability("deviceName", "741AECR82S8DF");// 741AECR82S8DF
-		capa.setCapability("automationName", "Appium");
-		capa.setCapability("platformNme", "Android");
-		capa.setCapability("platformVersion", "6.0.1");
-		capa.setCapability("appPackage", packageName);
-		capa.setCapability("appActivity", ActivityName);
-		capa.setCapability("noReset", true);
-		return capa;
-	}
-
-	// ==============================文字输出========================
-	private static void s_dianji(String a) // 点击
-	{
-		System.out.println("点击" + a + "。");
-	}
-
-	private static void s_jinru(String a) {
-		System.out.println("进入" + a + "。");
-	}
-
-	private static void s_dengdao(String a) {
-		System.out.println("等到" + a + "出现。");
-	}
-
-	private static void s_tuichu(String a) {
-		System.out.println("退出" + a + "。");
-		System.out.println("=============================================================");
-	}
-
-	private static void s_deng(float a) {
-		System.out.println("等" + a + "秒。");
-	}
-
-	private static void s_panduan(String a) {
-		System.out.println("正在判断" + a + "。");
-	}
-
-	public static void screenShot(@SuppressWarnings("rawtypes") AndroidDriver driver, String sFilePath) {
-		File file = new File(sFilePath);
-		// 如果截图存在先删除
-		try {
-			if (file.exists()) {
-				file.delete();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		// 截图
-		File newFile = driver.getScreenshotAs(OutputType.FILE);
-		try {
-			FileUtils.copyFile(newFile, file);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static int exist(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath) { // 存在为1不存爱为0
-		int fund_icon = -1;
-		try {
-			driver.findElement(By.xpath(Xpath));
-			fund_icon = 1;
-		} catch (Exception e) {
-			fund_icon = 0;
-		}
-		return fund_icon;
-	}
-
+	
+	
 }
