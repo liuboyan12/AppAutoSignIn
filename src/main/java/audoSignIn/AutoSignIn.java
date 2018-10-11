@@ -37,7 +37,7 @@ public class AutoSignIn {
 		JingdongStock();
 		yitao();
 		Yunyinyue();
-		zhifubao();
+//		zhifubao();
 		KFC();
 		quanjia();
 //		taobao();
@@ -1318,7 +1318,7 @@ public class AutoSignIn {
 				appInffo(packageName, ActivityName));
 		System.out.println("进入享集联盟");
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 			try {
 				Thread.sleep(5000);
 				stepXTimeOut(driver, "//android.widget.RadioButton[@text='我的']", 3);
