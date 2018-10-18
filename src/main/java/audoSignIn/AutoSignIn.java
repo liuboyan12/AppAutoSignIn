@@ -37,11 +37,8 @@ public class AutoSignIn {
 		JingdongStock();
 		yitao();
 		Yunyinyue();
-//		zhifubao();
 		KFC();
 		quanjia();
-//		taobao();
-		koudai();
 	}
 
 	static void Youdao() throws InterruptedException, MalformedURLException {
@@ -1255,7 +1252,7 @@ public class AutoSignIn {
 				appInffo(packageName, ActivityName));
 		System.out.println("KFC");
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(8000);
 			try {
 				untilTimeOut(driver, "//android.widget.TextView[@text='请评价餐厅服务']", 5);
 				Thread.sleep(1000);
@@ -1336,6 +1333,15 @@ public class AutoSignIn {
 					}
 					
 				}
+				int outif=1;
+				while(1<2) {
+					outif++;
+					if(outif>=5) {break;}
+					Thread.sleep(2000);
+					untilTimeOut(driver, "//android.widget.TextView[@text='确定要退出软件吗？']", 2);
+					stepXTimeOut(driver, "//android.widget.TextView[@text='取消']", 2);
+				}
+				
 				stepXTimeOut(driver, "//android.widget.RadioButton[@text='我的']", 5);
 			}
 			Thread.sleep(2000);
@@ -1360,43 +1366,6 @@ public class AutoSignIn {
 
 	}
 
-	static void koudai() throws MalformedURLException, InterruptedException {
-		String packageName = "com.qeeniao.mobile.kdjz";
-		String ActivityName = ".BlankActivity";
-		@SuppressWarnings("rawtypes")
-		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),
-				appInffo(packageName, ActivityName));
-		Thread.sleep(3000);
-		TouchAction action = new TouchAction(driver);
-
-		stepX(driver, "//android.widget.TextView[@text='理财']");
-		Thread.sleep(3000);
-		int q = 0;
-		while (1 < 2) {
-			try {
-				List xpathList = driver.findElements(By.xpath("//android.widget.TextView[@text='领取']"));
-				int e = xpathList.size();
-
-				for (int i = 0; i < e; i++) {
-					driver.findElement(By.xpath("//android.widget.TextView[@text='领取']")).click();
-					q++;
-					try {
-						Thread.sleep(2000);
-						driver.findElement(By.xpath("//android.widget.TextView[@text='立即收取']")).click();
-						Thread.sleep(1000);
-
-					} catch (Exception p) {
-						Thread.sleep(1000);
-						driver.findElement(By.xpath("//android.widget.ImageView[@index='0']")).click();
-					}
-				}
-				System.out.println("领取次数：" + q);
-			} catch (Exception e) {
-			}
-			Thread.sleep(20000);
-		}
-
-	}
 
 	/* =============================辅助方法============================= */
 	static private void whileXpath(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath)

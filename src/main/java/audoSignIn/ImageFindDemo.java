@@ -39,12 +39,12 @@ public class ImageFindDemo {
     public ImageFindDemo(String keyImagePath) {
         screenShotImage = this.getFullScreenShot();//全屏截图
         keyImage = this.getBfImageFromPath(keyImagePath);//获取要查找的图片
-        screenShotImageRGBData = this.getImageGRB(screenShotImage);
-        keyImageRGBData = this.getImageGRB(keyImage);
-        scrShotImgWidth = screenShotImage.getWidth();
-        scrShotImgHeight = screenShotImage.getHeight();
-        keyImgWidth = keyImage.getWidth();
-        keyImgHeight = keyImage.getHeight();
+        screenShotImageRGBData = this.getImageGRB(screenShotImage);//获取【屏幕截图】的图片RGB数组
+        keyImageRGBData = this.getImageGRB(keyImage);//获取【要找】到的图片RGB数组
+        scrShotImgWidth = screenShotImage.getWidth();//截图的宽
+        scrShotImgHeight = screenShotImage.getHeight();//截图的高
+        keyImgWidth = keyImage.getWidth();//【要找】的图的宽
+        keyImgHeight = keyImage.getHeight();//【要找】的图的高
         
         //开始查找
         this.findImage();
