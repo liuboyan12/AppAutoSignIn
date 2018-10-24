@@ -25,23 +25,22 @@ import io.appium.java_client.android.AndroidKeyCode;
  *
  */
 public class AutoSignIn {
-	public static void main(String[] args) throws MalformedURLException, InterruptedException, FileNotFoundException {
-		SignEveryDayTryVersion();
+	public void main(String[] args) throws MalformedURLException, InterruptedException, FileNotFoundException {
+		this.Feizhu();
+		this.Xianyu();
+		this.Cainiao();
+		this.Youdao();
+		this.JingdongStock();
+		this.yitao();
+		this.Yunyinyue();
+		this.KFC();
+		this.quanjia();
+		
 	}
 
-	static void SignEveryDayTryVersion() throws MalformedURLException, InterruptedException, FileNotFoundException {
-		Feizhu();
-		Xianyu();
-		Cainiao();
-		Youdao();
-		JingdongStock();
-		yitao();
-		Yunyinyue();
-		KFC();
-		quanjia();
-	}
 
-	static void Youdao() throws InterruptedException, MalformedURLException {
+
+	 void Youdao() throws InterruptedException, MalformedURLException {
 		String packageName = "com.youdao.note";
 		String ActivityName = ".activity2.MainActivity";
 		@SuppressWarnings("rawtypes")
@@ -58,95 +57,34 @@ public class AutoSignIn {
 			s_deng(2);
 			stepX(driver, "//android.widget.TextView[@text='我的']");
 			s_dianji("我的（再次）");
-
-			int wozhidaoshu = 0;
+			Thread.sleep(2000);
+			s_deng(2);
+			stepX(driver, "//android.widget.TextView[@text='签到']");
+			s_dianji("签到");
+			Thread.sleep(3000);
+			s_deng(3);
+			stepXTimeOut(driver, "//android.widget.Button[@text='我知道了']", 2);
+			Thread.sleep(2000);
 
 			while (1 < 3) {
+			
+				stepXTimeOut(driver, "//android.widget.TextView[@text='观看短视频，领取随机奖励']", 3);
+				Thread.sleep(10000);
+				this.staticPicMonitor(driver,3);
 				Thread.sleep(2000);
-				s_deng(2);
-				stepX(driver, "//android.widget.TextView[@text='签到']");
-				s_dianji("签到");
-				Thread.sleep(3000);
-				s_deng(3);
-				int if_code_for_zhidao = exist(driver, "//android.widget.Button[@text='我知道了']");
-				if (wozhidaoshu == 2) {
+				untilTimeOut(driver, "//android.widget.TextView[@text='选择一个奖励礼包']", 5);
+				stepXTimeOut(driver, "//android.widget.ImageView[@index='0']", 3);
+				Thread.sleep(2000);
+				driver.pressKeyCode(AndroidKeyCode.BACK);
+				Thread.sleep(2000);
+				try {
+					untilTimeOut(driver, "//android.widget.TextView[@text='已领']", 3);
 					break;
-				}
-				if (if_code_for_zhidao == 1) {
-					wozhidaoshu++;
-					driver.pressKeyCode(AndroidKeyCode.BACK);
-					s_dianji("返回");
+				}catch (Exception e) {
 					continue;
 				}
-
-				if (if_code_for_zhidao == 0) {
-					int if_for_mashang = exist(driver, "//android.widget.Button[@text='马上观看']");
-					if (if_for_mashang == 0) {
-						System.out.println("既没有我知道了也没有马上观看");
-					}
-					if (if_for_mashang == 1) {
-						stepX(driver, "//android.widget.Button[@text='马上观看']");
-						Thread.sleep(500);
-						int overtimecode = 0;
-						@SuppressWarnings("unused")
-						int times = 0;
-						while (1 < 2) {
-							times++;
-
-							if (overtimecode > 49) {
-								break;
-							} else {
-								overtimecode = overtimecode + 1;
-							}
-							String as1 = driver.getScreenshotAs(OutputType.BASE64);
-							Thread.sleep(500);
-							String as2 = driver.getScreenshotAs(OutputType.BASE64);
-							Thread.sleep(500);
-							{
-								Random rand = new Random();
-								int as1length = as1.length();
-								int as2length = as2.length();
-								if (as1length == as2length) {
-									ArrayList<Integer> list = new ArrayList<Integer>();
-									String listout = "";
-									for (int foricode = 0; foricode < 5; foricode++) {
-										int randome_range = as1length - 11;
-										int random_num = rand.nextInt(randome_range);
-										String ras1 = as1.substring(random_num, random_num + 10);
-										String ras2 = as2.substring(random_num, random_num + 10);
-										if (ras1.equals(ras2)) {
-											list.add(1);
-											listout = listout + 1;
-										} else {
-											list.add(0);
-											listout = listout + 0;
-										}
-
-									}
-									System.out.println(listout);
-									int breakcode = 1;
-									for (int forcodei1 = 0; forcodei1 < list.size(); forcodei1++) {
-										int panduan = list.get(forcodei1);
-										if (panduan == 0) {
-											breakcode = 2;
-										} else {
-											continue;
-										}
-									}
-									if (breakcode == 2) {
-										continue;
-									} else {
-										break;
-									}
-								} else {
-									continue;
-								}
-							}
-						}
-						driver.pressKeyCode(AndroidKeyCode.BACK);
-						s_dianji("返回");
-					}
-				}
+				
+				
 			}
 
 		} catch (Exception e) {
@@ -157,7 +95,7 @@ public class AutoSignIn {
 		;
 	}
 
-	static void Feizhu() throws MalformedURLException, InterruptedException, FileNotFoundException {
+	void Feizhu() throws MalformedURLException, InterruptedException, FileNotFoundException {
 
 		String packageName = "com.taobao.trip";
 		String ActivityName = "com.alipay.mobile.quinox.LauncherActivity";
@@ -247,7 +185,7 @@ public class AutoSignIn {
 		;
 	}
 
-	static void Cainiao() throws MalformedURLException, InterruptedException, FileNotFoundException {
+	 void Cainiao() throws MalformedURLException, InterruptedException, FileNotFoundException {
 		String packageName = "com.cainiao.wireless";
 		String ActivityName = ".homepage.presentation.view.activity.NewHomepageActivity";
 		@SuppressWarnings("rawtypes")
@@ -299,7 +237,7 @@ public class AutoSignIn {
 		driver.quit();
 	}
 
-	static void JingdongFinace() throws MalformedURLException, InterruptedException {
+	 void JingdongFinace() throws MalformedURLException, InterruptedException {
 		String packageName = "com.jd.jrapp";
 		String ActivityName = ".WelcomeActivity";
 		@SuppressWarnings("rawtypes")
@@ -338,7 +276,7 @@ public class AutoSignIn {
 		;
 	}
 
-	static void JingdongStock() throws MalformedURLException, InterruptedException {
+	 void JingdongStock() throws MalformedURLException, InterruptedException {
 		String packageName = "com.jd.stock";
 		String ActivityName = "com.jdjr.stock.navigation.activity.LaunchActivity";
 		@SuppressWarnings("rawtypes")
@@ -392,7 +330,7 @@ public class AutoSignIn {
 		;
 	}
 
-	static void Yunyinyue() throws MalformedURLException, InterruptedException {
+	 void Yunyinyue() throws MalformedURLException, InterruptedException {
 		String packageName = "com.netease.cloudmusic";
 		String ActivityName = ".activity.LoadingActivity";
 		@SuppressWarnings("rawtypes")
@@ -430,7 +368,7 @@ public class AutoSignIn {
 		driver.quit();
 	}
 
-	static void Iyingdi() throws MalformedURLException, InterruptedException {
+	 void Iyingdi() throws MalformedURLException, InterruptedException {
 		String packageName = "com.gonlan.iplaymtg";
 		String ActivityName = ".common.StartActivity";
 		@SuppressWarnings("rawtypes")
@@ -523,7 +461,7 @@ public class AutoSignIn {
 
 	}
 
-	static void iqiyi() throws MalformedURLException, InterruptedException {
+	 void iqiyi() throws MalformedURLException, InterruptedException {
 		String packageName = "com.qiyi.video";
 		String ActivityName = ".WelcomeActivity";
 		@SuppressWarnings("rawtypes")
@@ -606,7 +544,7 @@ public class AutoSignIn {
 		;
 	}
 
-	static void Xianyu() throws MalformedURLException, InterruptedException {
+	 void Xianyu() throws MalformedURLException, InterruptedException {
 		String packageName = "com.taobao.idlefish";
 		String ActivityName = "com.taobao.fleamarket.home.activity.MainActivity";
 		@SuppressWarnings("rawtypes")
@@ -663,6 +601,7 @@ public class AutoSignIn {
 			stepXTimeOut(driver, "//android.view.View[@content-desc='马上签到']", 5);
 			Thread.sleep(5000);
 			
+			
 		} catch (Exception e) {
 			System.out.println("咸鱼出错" + e.toString());
 			String error = e.toString();
@@ -679,7 +618,7 @@ public class AutoSignIn {
 	}
 
 	@SuppressWarnings("rawtypes")
-	static void taobao() throws MalformedURLException, InterruptedException {
+	 void taobao() throws MalformedURLException, InterruptedException {
 		String packageName = "com.taobao.taobao";
 		String ActivityName = "com.taobao.tao.welcome.Welcome";
 		FalseInterface falesdriver = new FalseInterface();
@@ -841,7 +780,7 @@ public class AutoSignIn {
 		driver.quit();
 	}
 
-	static void chiji() throws MalformedURLException, InterruptedException {
+	 void chiji() throws MalformedURLException, InterruptedException {
 		String packageName = "com.tencent.wegame.mangod";
 		String ActivityName = "com.tencent.gamehelper.ui.main.WelcomeActivity";
 		@SuppressWarnings("rawtypes")
@@ -872,7 +811,7 @@ public class AutoSignIn {
 		driver.quit();
 	}
 
-	static void zhifubao() throws MalformedURLException, InterruptedException {
+	 void zhifubao() throws MalformedURLException, InterruptedException {
 		String packageName = "com.eg.android.AlipayGphone";
 		String ActivityName = ".AlipayLogin";
 		FalseInterface falesdriver = new FalseInterface();
@@ -1044,22 +983,7 @@ public class AutoSignIn {
 
 	}
 
-	private static void XpathListClick(AndroidDriver driver,String Xpath) throws InterruptedException {
-		Thread.sleep(500);
-		@SuppressWarnings("rawtypes")
-		List XpathList = driver.findElements(By.xpath(Xpath));
-		int XpathListNum = XpathList.size(),i=0;
-		for(i=0;i<XpathListNum;i++) 
-		{
-			int x = ((WebElement) XpathList.get(i)).getLocation().x;
-			int y =	((WebElement) XpathList.get(i)).getLocation().y;
-			Thread.sleep(1000);
-			touch(driver, x, y+50);
-			
-		}
-	}
-
-	static void yitao() throws MalformedURLException, InterruptedException {
+	void yitao() throws MalformedURLException, InterruptedException {
 		String packageName = "com.taobao.etao";
 		String ActivityName = "com.taobao.sns.activity.LaunchActivity";
 		@SuppressWarnings("rawtypes")
@@ -1122,7 +1046,7 @@ public class AutoSignIn {
 
 	}
 
-	static void Xinyue() throws MalformedURLException {
+	 void Xinyue() throws MalformedURLException {
 		// /
 		String packageName = "com.tencent.tgclub";
 		String ActivityName = ".ui.WelcomeActivity";
@@ -1187,7 +1111,7 @@ public class AutoSignIn {
 
 	}
 
-	static void liantong() throws MalformedURLException {
+	 void liantong() throws MalformedURLException {
 		// /
 		String packageName = "com.sinovatech.unicom.ui";
 		String ActivityName = ".WelcomeClient";
@@ -1242,7 +1166,7 @@ public class AutoSignIn {
 
 	}
 
-	static void KFC() throws MalformedURLException {
+	 void KFC() throws MalformedURLException {
 		// /
 		String packageName = "com.yek.android.kfc.activitys";
 		String ActivityName = "com.yum.brandkfc.SplashAct";
@@ -1305,7 +1229,7 @@ public class AutoSignIn {
 
 	}
 
-	static void quanjia() throws MalformedURLException {
+	 void quanjia() throws MalformedURLException {
 		// /
 		String packageName = "com.maxxipoint.android";
 		String ActivityName = ".shopping.activity.WelcomeActivity";
@@ -1338,8 +1262,11 @@ public class AutoSignIn {
 					outif++;
 					if(outif>=5) {break;}
 					Thread.sleep(2000);
-					untilTimeOut(driver, "//android.widget.TextView[@text='确定要退出软件吗？']", 2);
-					stepXTimeOut(driver, "//android.widget.TextView[@text='取消']", 2);
+					try {
+						untilTimeOut(driver, "//android.widget.TextView[@text='确定要退出软件吗？']", 5);
+						stepXTimeOut(driver, "//android.widget.TextView[@text='取消']", 2);
+					}catch (Exception ee) {
+					}
 				}
 				
 				stepXTimeOut(driver, "//android.widget.RadioButton[@text='我的']", 5);
@@ -1367,25 +1294,7 @@ public class AutoSignIn {
 	}
 
 
-	/* =============================辅助方法============================= */
-	static private void whileXpath(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath)
-			throws InterruptedException {
-		int whileCode = 0;
-		while (1 < 2) {
-			if (whileCode >= 3) {
-				break;
-			}
-			try {
-				stepXTimeOut(driver, Xpath, 3);
-			} catch (Exception e) {
-				whileCode++;
-			}
-			Thread.sleep(1000);
-
-		}
-	}
-
-	static private void judgeTaobaoScreen(@SuppressWarnings("rawtypes") AndroidDriver driver) {
+	private void judgeTaobaoScreen(@SuppressWarnings("rawtypes") AndroidDriver driver) {
 		System.out.println("开始判断是否弹出淘宝界面");
 		int inScreenIcon = 0;
 		int outwhilecode = 0;
@@ -1427,7 +1336,7 @@ public class AutoSignIn {
 		}
 	};
 
-	static void touchmiddle(@SuppressWarnings("rawtypes") AndroidDriver driver, String strings) {
+	 void touchmiddle(@SuppressWarnings("rawtypes") AndroidDriver driver, String strings) {
 		// [864,1867][1080,1908]
 		int A, B, C, D = 0;
 		String str1 = strings.substring(strings.indexOf("[") + 1, strings.indexOf(","));
@@ -1455,7 +1364,7 @@ public class AutoSignIn {
 
 	}
 
-	static String ifExist(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath) {
+	 String ifExist(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath) {
 		String eme = null;
 		try {
 			@SuppressWarnings("unused")
@@ -1468,7 +1377,7 @@ public class AutoSignIn {
 
 	}
 
-	static void touch(@SuppressWarnings("rawtypes") AndroidDriver driver, int x, int y) {
+	 void touch(@SuppressWarnings("rawtypes") AndroidDriver driver, int x, int y) {
 		int b1 = driver.manage().window().getSize().width;
 		int b2 = driver.manage().window().getSize().height;
 
@@ -1479,54 +1388,54 @@ public class AutoSignIn {
 		action.tap(xfinal, yfinal).perform();
 	}
 
-	static void untilX(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath) {
+	 void untilX(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath) {
 		WebDriverWait wait = new WebDriverWait(driver, 60);
 		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(Xpath)));
 	}
 
-	static void untilTimeOut(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath, int timeout) {
+	 void untilTimeOut(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath, int timeout) {
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
 		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(Xpath)));
 	}
 
-	static void clickx(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath) {
+	 void clickx(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath) {
 		driver.findElement(By.xpath(Xpath)).click();
 	}
 
-	static void stepX(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath) {
+	 void stepX(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath) {
 		untilX(driver, Xpath);
 		clickx(driver, Xpath);
 	}
 
-	static void stepXTimeOut(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath, int timeout) {
+	 void stepXTimeOut(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath, int timeout) {
 		untilTimeOut(driver, Xpath, timeout);
 		clickx(driver, Xpath);
 	}
 
-	static void stepID(@SuppressWarnings("rawtypes") AndroidDriver driver, String ID) {
+	 void stepID(@SuppressWarnings("rawtypes") AndroidDriver driver, String ID) {
 		WebDriverWait wait = new WebDriverWait(driver, 60);
 		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id(ID)));
 
 		driver.findElement(By.id(ID));
 	}
 
-	static void swipTo(@SuppressWarnings("rawtypes") AndroidDriver driver, int X1, int Y1, int X2, int Y2) {
+	 void swipTo(@SuppressWarnings("rawtypes") AndroidDriver driver, int X1, int Y1, int X2, int Y2) {
 		TouchAction action1 = new TouchAction(driver);
 		action1.longPress(X1, Y1).moveTo(X2, Y2).release().perform();
 	}
 
-	static void Mistake(String x, String e) {
+	 void Mistake(String x, String e) {
 		System.out.println(x + "出错" + e);
 	}
 
-	static void textX(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath, String x) {
+	 void textX(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath, String x) {
 		WebDriverWait wait = new WebDriverWait(driver, 60);
 		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(Xpath)));
 		driver.findElement(By.xpath(Xpath)).sendKeys(x);
 	}
 
 	// =========================appinfo=============================
-	static DesiredCapabilities appInffo(String packageName, String ActivityName) {
+	 DesiredCapabilities appInffo(String packageName, String ActivityName) {
 		DesiredCapabilities capa = new DesiredCapabilities();
 		capa.setCapability("deviceName", "741AECR82S8DF");// 741AECR82S8DF
 		capa.setCapability("automationName", "Appium");
@@ -1539,33 +1448,33 @@ public class AutoSignIn {
 	}
 
 	// ==============================文字输出========================
-	private static void s_dianji(String a) // 点击
+	private  void s_dianji(String a) // 点击
 	{
 		System.out.println("点击" + a + "。");
 	}
 
-	private static void s_jinru(String a) {
+	private  void s_jinru(String a) {
 		System.out.println("进入" + a + "。");
 	}
 
-	private static void s_dengdao(String a) {
+	private  void s_dengdao(String a) {
 		System.out.println("等到" + a + "出现。");
 	}
 
-	private static void s_tuichu(String a) {
+	private  void s_tuichu(String a) {
 		System.out.println("退出" + a + "。");
 		System.out.println("=============================================================");
 	}
 
-	private static void s_deng(float a) {
+	private  void s_deng(float a) {
 		System.out.println("等" + a + "秒。");
 	}
 
-	private static void s_panduan(String a) {
+	private  void s_panduan(String a) {
 		System.out.println("正在判断" + a + "。");
 	}
 
-	public static void screenShot(@SuppressWarnings("rawtypes") AndroidDriver driver, String sFilePath) {
+	public  void screenShot(@SuppressWarnings("rawtypes") AndroidDriver driver, String sFilePath) {
 		File file = new File(sFilePath);
 		// 如果截图存在先删除
 		try {
@@ -1584,7 +1493,7 @@ public class AutoSignIn {
 		}
 	}
 
-	public static int exist(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath) { // 存在为1不存爱为0
+	public  int exist(@SuppressWarnings("rawtypes") AndroidDriver driver, String Xpath) { // 存在为1不存爱为0
 		int fund_icon = -1;
 		try {
 			driver.findElement(By.xpath(Xpath));
@@ -1593,6 +1502,69 @@ public class AutoSignIn {
 			fund_icon = 0;
 		}
 		return fund_icon;
+	}
+	
+	void staticPicMonitor(@SuppressWarnings("rawtypes") AndroidDriver driver,int intervalSecond) throws InterruptedException {
+		/**
+		 * 监测两个界面是否一致，在intervalSecond的间隔后的图像如果跟当前图像一致，那么函数结束，否则
+		 * 该函数将持续不断进行间隔测试，直到进行50*intervalSecond时间后进行报错弹出继续下面的代码
+		 */
+		@SuppressWarnings("unused")
+		int times=0,overtimecode=0;
+		while(1<2) {
+			times++;
+
+			if (overtimecode > 49) {
+				System.out.println("监测超时，没有检测到相同的界面");
+				break;
+			} else {
+				overtimecode++;
+			}
+			String as1 = driver.getScreenshotAs(OutputType.BASE64);
+			Thread.sleep(intervalSecond*1000);
+			String as2 = driver.getScreenshotAs(OutputType.BASE64);
+			Thread.sleep(500);
+			{
+				Random rand = new Random();
+				int as1length = as1.length();
+				int as2length = as2.length();
+				if (as1length == as2length) {
+					ArrayList<Integer> list = new ArrayList<Integer>();
+					String listout = "";
+					for (int foricode = 0; foricode < 5; foricode++) {
+						int randome_range = as1length - 11;
+						int random_num = rand.nextInt(randome_range);
+						String ras1 = as1.substring(random_num, random_num + 10);
+						String ras2 = as2.substring(random_num, random_num + 10);
+						if (ras1.equals(ras2)) {
+							list.add(1);
+							listout = listout + 1;
+						} else {
+							list.add(0);
+							listout = listout + 0;
+						}
+					}
+					System.out.println(listout);
+					int breakcode = 1;
+					for (int forcodei1 = 0; forcodei1 < list.size(); forcodei1++) {
+						int panduan = list.get(forcodei1);
+						if (panduan == 0) {
+							breakcode = 2;
+						} else {
+							continue;
+						}
+					}
+					if (breakcode == 2) {
+						continue;
+					} else {
+						break;
+					}
+				} else {
+					continue;
+				}
+			}
+		}
+		
 	}
 
 }
