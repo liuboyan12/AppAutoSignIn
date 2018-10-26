@@ -1,6 +1,8 @@
 package rewriteAudoSignIn;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
 import java.util.Iterator;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -8,13 +10,22 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 public class test {
-	public static void main(String[] args) throws DocumentException {
+	public static void main(String[] args) throws DocumentException, MalformedURLException, FileNotFoundException, InterruptedException {
 
-		test d1 = new test();
-	        d1.parserXml("appData.xml"); //文件路径
-	 
+//		test d1 = new test();
+//	        d1.parserXml("appData.xml"); //文件路径
+		extendAutoSignDo extendAutoSignDo=new extendAutoSignDo();
+		extendAutoSignDo.youDao("com.youdao.note", ".activity2.SplashActivity", "741AECR82S8DF");
         
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 	   public void parserXml(String fileName) {
 	        File inputXml = new File(fileName);
 	        SAXReader saxReader = new SAXReader();

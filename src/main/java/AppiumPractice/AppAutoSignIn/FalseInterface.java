@@ -23,7 +23,7 @@ public class FalseInterface
 	
 	
 	
-	public  void falseInterface
+	public  String falseInterface
 		(@SuppressWarnings("rawtypes") AndroidDriver driver,String e) throws FileNotFoundException
 	{
 		/**
@@ -63,6 +63,7 @@ public class FalseInterface
 		screenShot(driver, pngpath);
 
 		renameFile(txtfilepath, uixfilepath);
+		return txtfilepath;
 	}
 	
 	/*辅助方法*/
@@ -88,10 +89,10 @@ public class FalseInterface
                     read.close();
                     
         }else{
-            System.out.println("找不到指定的文件");
+//            System.out.println("找不到指定的文件");
         }
         } catch (Exception e) {
-            System.out.println("读取文件内容出错");
+//            System.out.println("读取文件内容出错");
             e.printStackTrace();
         }
         
@@ -144,7 +145,7 @@ public class FalseInterface
 		 */
 		String path = System.getProperty("user.dir");
 		path = path+"\\"+fileNameOrPath;
-		System.out.println(path);
+//		System.out.println(path);
 		return path;
 	}
 	
@@ -155,7 +156,7 @@ public class FalseInterface
 		 * 
 		 */
 		FileOutputStream fs = new FileOutputStream(new File(lujing));
-		System.out.println(lujing);
+//		System.out.println(lujing);
 		PrintStream p = new PrintStream(fs);
 		p.println(neirong);
 		p.close();
@@ -213,11 +214,11 @@ public class FalseInterface
 		File file =new File(filepath);  
 		if  (!file .exists()  && !file .isDirectory())    
 		{     
-		    System.out.println("//不存在");
+//		    System.out.println("//不存在");
 		    file .mkdir();  
 		} else 
 		{
-		    System.out.println("//目录存在");
+//		    System.out.println("//目录存在");
 		}
 	}
 	
@@ -229,15 +230,15 @@ public class FalseInterface
         File toBeRenamed = new File(file);
         //检查要重命名的文件是否存在，是否是文件
         if (!toBeRenamed.exists() || toBeRenamed.isDirectory()) {
-            System.out.println("File does not exist: " + file);
+//            System.out.println("File does not exist: " + file);
             return;
         }
         File newFile = new File(toFile);
         //修改文件名
         if (toBeRenamed.renameTo(newFile)) {
-            System.out.println("File has been renamed.");
+//            System.out.println("File has been renamed.");
         } else {
-            System.out.println("Error renmaing file");
+//            System.out.println("Error renmaing file");
         }
 	} 
 } 
