@@ -69,12 +69,12 @@ public class autoSignDo {
 	 // 等待一定时间：如果超时报错
 	 void untilTimeOut(AndroidDriver driver, String Xpath, int timeout) {
 		 String kongjianming = Xpath.substring(Xpath.indexOf("=")+1, Xpath.indexOf("]"));
-		 System.out.println("等待Xpaht控件： "+kongjianming+" 等待极限： "+timeout+"秒");
+		 System.out.println("等待Xpath控件： "+kongjianming+" 等待极限： "+timeout+"秒");
 		 try {
 			 WebDriverWait wait = new WebDriverWait(driver, timeout);
 			 wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(Xpath)));
 		 }catch (Exception e) {
-			 System.out.println("界面内无Xpath控件，等待超时（"+timeout+"秒)");
+			 System.out.println("界面内无"+kongjianming+"等待超时（"+timeout+"秒)");
 			 System.out.println("控件Xpath： "+Xpath);
 			 driver.findElement(By.xpath(Xpath));
 		}
@@ -119,6 +119,7 @@ public class autoSignDo {
 		return fund_icon;
 	}
 	 
+	 //监测一个时间段后界面是否一致
 	 void staticPicMonitor(AndroidDriver driver,int intervalSecond) throws InterruptedException {
 			/**
 			 * 监测两个界面是否一致，在intervalSecond的间隔后的图像如果跟当前图像一致，那么函数结束，否则
@@ -189,6 +190,7 @@ public class autoSignDo {
 		 driver.pressKeyCode(AndroidKeyCode.BACK);
 	 }
 	 
+	 //退出
 	 void tuichu(AndroidDriver driver,String appName) {
 		 driver.quit();
 		 System.out.println("退出APP "+appName);
@@ -198,7 +200,7 @@ public class autoSignDo {
 	 //找到某个Xpath控件，输入Y的固定坐标，从Xpath的X位置移动到X
 	 void fromXpathMoveX(AndroidDriver driver,String Xpath,int Y,int X) {
 		 String kongjianming = Xpath.substring(Xpath.indexOf("=")+1, Xpath.indexOf("]"));
-		 System.out.println("获取Xpaht控件: "+kongjianming+" 位置");
+		 System.out.println("获取Xpath控件: "+kongjianming+" 位置");
 		 int xwdyt = driver.findElement(By.xpath(Xpath)).getLocation().x;
 		 System.out.println(kongjianming+" 横坐标为 "+xwdyt);
 			swipTo(driver,xwdyt, Y, X, Y );
@@ -207,20 +209,45 @@ public class autoSignDo {
 	//找到某个Xpath控件，输XY的固定坐标，从Xpath的Y位置移动到Y
 	 void fromXpathMoveY(AndroidDriver driver,String Xpath,int X,int Y) {
 		 String kongjianming = Xpath.substring(Xpath.indexOf("=")+1, Xpath.indexOf("]"));
-		 System.out.println("获取Xpaht控件: "+kongjianming+" 位置");
+		 System.out.println("获取Xpath控件: "+kongjianming+" 位置");
 		 int ywdyt = driver.findElement(By.xpath(Xpath)).getLocation().y;
 		 System.out.println(kongjianming+" 纵坐标为 "+ywdyt);
 			swipTo(driver, X, ywdyt, X, Y);
 	 }
 	 
-	 void mistakeShotScreen(AndroidDriver driver,String e) throws FileNotFoundException {
+	 //错误界面截图
+	 void mistakeShotScreen(AndroidDriver driver,Exception e) throws FileNotFoundException {
 		 FalseInterface falesdriver = new FalseInterface();
 		 System.out.println("xxxxxxxxxxxxx界面报错xxxxxxxxxxxxx");
-		 System.out.println();
 		 String error = e.toString();
 		String path = falesdriver.falseInterface(driver, error);
-		System.out.println("");
+		System.out.println("报错储存路径："+path);
 	 }
+	 
+	 //界面截圖
+	 void ShotScreen(AndroidDriver driver,String saveString) throws FileNotFoundException {
+		 FalseInterface falesdriver = new FalseInterface();
+		 System.out.println("xxxxxxxxxxxxx界面截图xxxxxxxxxxxxx");
+		 System.out.println();
+		String path = falesdriver.falseInterface(driver, saveString);
+		System.out.println("截图储存路径："+path);
+	 }
+	 
+	 //获取Xpath控件的y坐标
+	 int getXpathY(AndroidDriver driver,String Xpath) {
+		 String kongjianming = Xpath.substring(Xpath.indexOf("=")+1, Xpath.indexOf("]"));
+		 int y = driver.findElement(By.xpath(Xpath)).getLocation().y;
+		 System.out.println("获取Xpath控件: "+kongjianming+" 的Y坐标位置： "+y);
+		 return y;
+	 }
+	 
+	//获取Xpath控件的x坐标
+		 int getXpathX(AndroidDriver driver,String Xpath) {
+			 String kongjianming = Xpath.substring(Xpath.indexOf("=")+1, Xpath.indexOf("]"));
+			 int x = driver.findElement(By.xpath(Xpath)).getLocation().x;
+			 System.out.println("获取Xpath控件: "+kongjianming+" 的X坐标位置： "+x);
+			 return x;
+		 }
 //================================================Driver信息================================================
 	public AndroidDriver rundriver(String packageName, String ActivityName, String deviceName) throws MalformedURLException {
 		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),

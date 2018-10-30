@@ -28,8 +28,7 @@
 		<packageName>com.netease.cloudmusic</packageName>
 		<activityName>.activity.LoadingActivity</activityName>
 	</app>
-	
-	<app name="KFC">
+		<app name="KFC">
 		<packageName>com.yek.android.kfc.activitys</packageName>
 		<activityName>com.yum.brandkfc.SplashAct</activityName>
 	</app>
