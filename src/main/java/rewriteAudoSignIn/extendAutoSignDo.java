@@ -36,8 +36,29 @@ public class extendAutoSignDo extends autoSignDo  {
 			deng(5);
 			touchmiddle(driver, "[722,210][1080,411]");
 			deng(8);
-			// stepXTimeOut(driver, "//android.view.View[@content-desc='立即签到']", 3);
-			stepXTimeOut(driver, "//android.view.View[@content-desc='签到领里程']", 3);
+			try {
+				stepXTimeOut(driver, "//android.view.View[@content-desc='签到领里程']", 3);
+				}catch (Exception e) {
+					String firstPart = "//android.view.View[@content-desc='签到+";
+					String secondPart = "里程']";
+					int intI = 0;
+					while(1<2) {
+						intI++;
+						String allPart = (firstPart+intI+secondPart).toString();
+						try {
+							stepXTimeOut(driver, allPart, 3);
+							break;
+						}catch (Exception e1) {
+							if(intI>7) {
+								mistakeShotScreen(driver, e1);
+								break;
+							}
+							
+						}
+					}
+					
+			}
+			
 			stepXTimeOut(driver,
 					"//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[4]/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]/android.view.View[1]",
 					5);
@@ -147,9 +168,9 @@ public class extendAutoSignDo extends autoSignDo  {
 			deng(1);
 			stepXTimeOut(driver, "//android.widget.TextView[@text='我']",3);
 			stepXTimeOut(driver, "//android.widget.TextView[@resource-id='com.cainiao.wireless:id/integal_textview']",5);
-			deng(2);
+			deng(5);
 			back(driver);
-			deng(2);
+			deng(8);
 		}catch (Exception e) {
 			mistakeShotScreen(driver, e);
 		}
@@ -160,9 +181,16 @@ public class extendAutoSignDo extends autoSignDo  {
 			throws MalformedURLException, InterruptedException, FileNotFoundException {
 
 		AndroidDriver driver = this.rundriver(packageName, ActivityName, deviceName);
-
+		
+		
 		deng(2);
 		try {
+			try {
+				System.out.println("监测是否有广告控件");
+				stepXTimeOut(driver, "//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.ImageView[2]", 8);
+			}catch (Exception e) {
+				System.out.println("未找到广告控件");
+			}
 			stepXTimeOut(driver, "//android.widget.TextView[@text='我的']", 5);
 			deng(2);
 			stepXTimeOut(driver, "//android.widget.TextView[@text='我的']", 5);
@@ -180,6 +208,11 @@ public class extendAutoSignDo extends autoSignDo  {
 				mistakeCoin++;
 				try {
 					stepXTimeOut(driver, "//android.widget.TextView[@text='观看短视频，领取随机奖励']", 5);
+					try {
+						stepXTimeOut(driver, "//android.widget.Button[@text='继续观看']", 3);
+					}catch (Exception e) {
+						System.out.println("无流量播放阻止界面");
+					}
 				} catch (Exception e) {
 					if (mistakeCoin <= 3) {
 						continue;
@@ -194,8 +227,8 @@ public class extendAutoSignDo extends autoSignDo  {
 				back(driver);
 				deng(2);
 				untilTimeOut(driver, "//android.widget.TextView[@text='选择一个奖励礼包']", 5);
-				stepXTimeOut(driver, "//android.widget.ImageView[@index='0']", 3);
-				deng(2);
+				stepXTimeOut(driver, "//android.widget.ImageView[@resource-id='com.youdao.note:id/gift_1']", 3);
+				deng(5);
 				back(driver);
 				deng(2);
 				try {
@@ -242,7 +275,18 @@ public class extendAutoSignDo extends autoSignDo  {
 	void yiTao(String packageName, String ActivityName, String deviceName) 
 			throws MalformedURLException, FileNotFoundException, InterruptedException {
 		AndroidDriver driver1 = this.rundriver(packageName, ActivityName, deviceName);
-		deng(10);
+		deng(3);
+		while(1<2) {
+			try {
+				System.out.println("监测是否为更新界面");
+				untilTimeOut(driver1, "//android.widget.ImageView[@resource-id='com.taobao.etao:id/launch_imageview']", 10);
+				int width=driver1.manage().window().getSize().width;
+				swipTo(driver1, width-1, 500, width/3, 500);
+			}catch (Exception e) {
+				break;
+			}
+		}
+		
 		tuichu(driver1,"预启动一淘");
 		deng(3);
 		AndroidDriver driver = this.rundriver(packageName, ActivityName, deviceName);
@@ -264,16 +308,20 @@ public class extendAutoSignDo extends autoSignDo  {
 				}
 
 			} catch (Exception e) {
-			}
-		
-				stepXTimeOut(driver, "//android.widget.TextView[@text='签到送豪礼']", 10);
+			}	
+				deng(5);
+				touchmiddle(driver, "[855,1740][1035,1920]");
+				deng(5);
+				int y = getXpathY(driver, "//android.widget.TextView[@text='全部订单']");
+				swipTo(driver, 500, y, 500, 250);
+				stepXTimeOut(driver, "//android.widget.TextView[@resource-id='com.taobao.etao:id/views_uc_item_name' and @text='签到领集分宝']", 3);
 				deng(5);
 				try {
 					stepXTimeOut(driver, "//android.view.View[@content-desc='点我签到领钱']", 5);
 				} catch (Exception e) {
 					back(driver);
 					deng(2);
-					stepXTimeOut(driver, "//android.widget.TextView[@text='签到送豪礼']", 5);
+					stepXTimeOut(driver, "//android.widget.TextView[@resource-id='com.taobao.etao:id/views_uc_item_name' and @text='签到领集分宝']", 3);
 					stepXTimeOut(driver, "//android.view.View[@content-desc='点我签到领钱']", 5);
 				}
 				deng(2);
@@ -299,6 +347,11 @@ public class extendAutoSignDo extends autoSignDo  {
 				untilTimeOut(driver, "//android.widget.TextView[@text='重新购买']", 8);
 				back(driver);
 			} catch (Exception e) {
+			}
+			try {
+				untilTimeOut(driver, "//android.widget.TextView[@text='更新']", 5);
+				back(driver);
+			}catch (Exception e) {
 			}
 			untilTimeOut(driver, "//android.widget.TextView[@text='私人FM']",5);
 			stepXTimeOut(driver, "//android.widget.ImageView[@content-desc='抽屉菜单']",3);
@@ -332,7 +385,7 @@ public class extendAutoSignDo extends autoSignDo  {
 					try {
 						deng(2);
 						int y = getXpathY(driver,"//android.widget.TextView[@text='立即领取']");
-						swipTo(driver,300,y,300,200);
+						swipTo(driver,300,y,300,500);
 						deng(2);
 						stepXTimeOut(driver, "//android.widget.TextView[@text='立即领取']", 3);
 						deng(3);

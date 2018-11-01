@@ -220,8 +220,9 @@ public class autoSignDo {
 		 FalseInterface falesdriver = new FalseInterface();
 		 System.out.println("xxxxxxxxxxxxx界面报错xxxxxxxxxxxxx");
 		 String error = e.toString();
-		String path = falesdriver.falseInterface(driver, error);
-		System.out.println("报错储存路径："+path);
+		 String path = falesdriver.falseInterface(driver, error);
+		 System.out.println("报错储存路径："+path);
+		 Run.mistake++;
 	 }
 	 
 	 //界面截圖
@@ -229,8 +230,8 @@ public class autoSignDo {
 		 FalseInterface falesdriver = new FalseInterface();
 		 System.out.println("xxxxxxxxxxxxx界面截图xxxxxxxxxxxxx");
 		 System.out.println();
-		String path = falesdriver.falseInterface(driver, saveString);
-		System.out.println("截图储存路径："+path);
+		 String path = falesdriver.falseInterface(driver, saveString);
+		 System.out.println("截图储存路径："+path);
 	 }
 	 
 	 //获取Xpath控件的y坐标

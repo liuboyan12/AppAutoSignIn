@@ -12,7 +12,7 @@ import org.dom4j.io.SAXReader;
 
 public class Run {
 	String deviceName = "741AECR82S8DF";
-	
+	static int mistake = 0;
 	public static void main(String[] args) throws DocumentException, MalformedURLException, FileNotFoundException, InterruptedException {
 
 		Run d1 = new Run();
@@ -77,6 +77,12 @@ public class Run {
             	}
             judgeScript(judgement,list);
 		}
+        System.out.println();
+        System.out.println("========");
+        System.out.println("=脚本完成=");
+        System.out.println("========");
+        System.out.println();
+        System.out.println("共计报错"+mistake+"次数");
 	}
 
 	//Xml读取的demo
