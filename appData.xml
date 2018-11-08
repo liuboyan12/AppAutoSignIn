@@ -11,7 +11,7 @@
 	</app>
 	<app name="caiNiao">
 		<packageName>com.cainiao.wireless</packageName>
-		<activityName>.homepage.presentation.view.activity.NewHomepageActivity</activityName>
+		<activityName>.homepage.view.activity.HomePageActivity</activityName>
 	</app>
 	<app name="youDao">
 		<packageName>com.youdao.note</packageName>

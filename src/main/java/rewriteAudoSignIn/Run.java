@@ -4,6 +4,7 @@ import java.awt.List;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -12,11 +13,12 @@ import org.dom4j.io.SAXReader;
 
 public class Run {
 	String deviceName = "741AECR82S8DF";
+	static ArrayList list = new ArrayList();
 	static int mistake = 0;
 	public static void main(String[] args) throws DocumentException, MalformedURLException, FileNotFoundException, InterruptedException {
 
 		Run d1 = new Run();
-	    d1.run("appData.xml");
+	    d1.run("appData.xml"); 
 	}
 	
 	//进行判断，该执行那个APP的脚本
@@ -57,7 +59,6 @@ public class Run {
 	}
 	
 	//遍历xml文件，取出格式相应数据
-	@SuppressWarnings("rawtypes")
 	void run(String fileName) 
 			throws DocumentException, MalformedURLException, FileNotFoundException, InterruptedException
 		{
@@ -65,13 +66,13 @@ public class Run {
         SAXReader saxReader = new SAXReader();
 		Document document = saxReader.read(inputXml);
         Element users = document.getRootElement();
-        for (Iterator i = users.elementIterator(); i.hasNext();) {
+        for (Iterator<?> i = users.elementIterator(); i.hasNext();) {
             Element user = (Element) i.next();
             String judgement = user.attributeValue("name");
             System.out.println(judgement);
             System.out.println("查找到'"+judgement+"'APP信息");
             List list = new List();
-            for (Iterator j = user.elementIterator(); j.hasNext();){
+            for (Iterator<?> j = user.elementIterator(); j.hasNext();){
             		Element node = (Element) j.next();
             		list.add(node.getText());
             	}
@@ -82,7 +83,18 @@ public class Run {
         System.out.println("=脚本完成=");
         System.out.println("========");
         System.out.println();
-        System.out.println("共计报错"+mistake+"次数");
+        System.out.println("共计报错"+mistake+"次");
+        System.out.println();
+        System.out.println("========");
+        System.out.println("=需要升级=");
+        System.out.println("========");
+       	int baoshu = list.size();
+        System.out.println("共计升级APP"+baoshu+"次");
+        if(baoshu!=0) {
+        	for(int i=0;i<baoshu;i++) {
+        		System.out.println(list.get(i).toString());
+        	}
+        }
 	}
 
 	//Xml读取的demo
@@ -96,14 +108,14 @@ public class Run {
 	             * 使用Iterator 遍历xml文档
 	              * */
 	            for (@SuppressWarnings("rawtypes")
-				Iterator i = users.elementIterator(); i.hasNext();) {
+				Iterator<?> i = users.elementIterator(); i.hasNext();) {
 	                Element user = (Element) i.next();
 	                String judge = user.attributeValue("name");
 	                if(outConfig==judge) {
 	                	List list = new List();
 	                	System.out.println("查找到'"+judge+"'APP信息");
 	                	for (@SuppressWarnings("rawtypes")
-						Iterator j = user.elementIterator(); j.hasNext();) {
+						Iterator<?> j = user.elementIterator(); j.hasNext();) {
 		                	Element node = (Element) j.next();
 		                	list.add(node.getText());
 		                	return list;
@@ -121,3 +133,5 @@ public class Run {
 	    }
 
 }
+
+

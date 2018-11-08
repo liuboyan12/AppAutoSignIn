@@ -2,12 +2,6 @@ package rewriteAudoSignIn;
 
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
-import AppiumPractice.AppAutoSignIn.FalseInterface;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidKeyCode;
 
@@ -22,6 +16,7 @@ import io.appium.java_client.android.AndroidKeyCode;
  * AndroidDriver driver = this.rundriver(packageName, ActivityName, deviceName);
  */
 @SuppressWarnings("rawtypes")
+
 public class extendAutoSignDo extends autoSignDo  {
 
 	void feiZhu(String packageName, String ActivityName, String deviceName)
@@ -373,6 +368,13 @@ public class extendAutoSignDo extends autoSignDo  {
 		AndroidDriver driver = this.rundriver(packageName, ActivityName, deviceName);
 		try {
 				deng(2);
+				try{
+					untilTimeOut(driver, "//android.widget.TextView[@text='发现新版本']", 5);
+					Run.list.add("KFC需要升级");
+					stepXTimeOut(driver, "//android.widget.Button[@text='【取消】']", 3);
+				}catch (Exception e) {
+					
+				}
 				untilTimeOut(driver, "//android.widget.TextView[@text='我的余额']", 10);
 				deng(2);
 				touchmiddle(driver, "[918,204][1050,279]");
