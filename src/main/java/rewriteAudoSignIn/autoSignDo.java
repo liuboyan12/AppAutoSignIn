@@ -3,6 +3,8 @@ package rewriteAudoSignIn;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Random;
 import org.openqa.selenium.By;
@@ -89,10 +91,14 @@ public class autoSignDo {
 	}
 	 
 	 //  滑动从x1,y1滑动到x2,y2
-	 void swipTo(AndroidDriver driver, int X1, int Y1, int X2, int Y2) {
+	 void swipTo(AndroidDriver driver, int X1, int Y1, int X2, int Y2) throws InterruptedException {
 		System.out.println("从("+X1+","+Y1+")滑动到("+X2+","+Y2+")");
 		TouchAction action1 = new TouchAction(driver);
-		action1.longPress(X1, Y1).moveTo(X2, Y2).release().perform();
+		Instant first = Instant.now();
+		Thread.sleep(2000);
+		Instant second = Instant.now();
+		Duration duration = Duration.between(first, second);
+		action1.longPress(X1, Y1,duration).moveTo(X2, Y2).release().perform();
 	}
 
 	 //  往Xpath找到的控件里面输入字符
@@ -198,7 +204,7 @@ public class autoSignDo {
 	 }
 	 
 	 //找到某个Xpath控件，输入Y的固定坐标，从Xpath的X位置移动到X
-	 void fromXpathMoveX(AndroidDriver driver,String Xpath,int Y,int X) {
+	 void fromXpathMoveX(AndroidDriver driver,String Xpath,int Y,int X) throws InterruptedException {
 		 String kongjianming = Xpath.substring(Xpath.indexOf("=")+1, Xpath.indexOf("]"));
 		 System.out.println("获取Xpath控件: "+kongjianming+" 位置");
 		 int xwdyt = driver.findElement(By.xpath(Xpath)).getLocation().x;
@@ -207,7 +213,7 @@ public class autoSignDo {
 	 }
 	 
 	//找到某个Xpath控件，输XY的固定坐标，从Xpath的Y位置移动到Y
-	 void fromXpathMoveY(AndroidDriver driver,String Xpath,int X,int Y) {
+	 void fromXpathMoveY(AndroidDriver driver,String Xpath,int X,int Y) throws InterruptedException {
 		 String kongjianming = Xpath.substring(Xpath.indexOf("=")+1, Xpath.indexOf("]"));
 		 System.out.println("获取Xpath控件: "+kongjianming+" 位置");
 		 int ywdyt = driver.findElement(By.xpath(Xpath)).getLocation().y;
@@ -248,6 +254,16 @@ public class autoSignDo {
 			 int x = driver.findElement(By.xpath(Xpath)).getLocation().x;
 			 System.out.println("获取Xpath控件: "+kongjianming+" 的X坐标位置： "+x);
 			 return x;
+		 }
+	//升级记录并且跳过升级步骤
+		 @SuppressWarnings("unchecked")
+		void updateAndBack(AndroidDriver driver,String xpath,String Name) {
+			 try {
+						untilTimeOut(driver, xpath, 5);
+						Run.list.add(Name+"升级");
+						back(driver);
+			 }catch (Exception e) {
+			}
 		 }
 //================================================Driver信息================================================
 	public AndroidDriver rundriver(String packageName, String ActivityName, String deviceName) throws MalformedURLException {

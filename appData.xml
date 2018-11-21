@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <appData>
-
+<!--
 	<app name="feiZhu">
 		<packageName>com.taobao.trip</packageName>
 		<activityName>com.alipay.mobile.quinox.LauncherActivity</activityName>
-	</app>
+	</app>-->
 	<app name="xianYu">
 		<packageName>com.taobao.idlefish</packageName>
 		<activityName>com.taobao.fleamarket.home.activity.MainActivity</activityName>
@@ -17,6 +17,7 @@
 		<packageName>com.youdao.note</packageName>
 		<activityName>.activity2.MainActivity</activityName>
 	</app>
+
 	<app name="jingDongStock">
 		<packageName>com.jd.stock</packageName>
 		<activityName>com.jdjr.stock.navigation.activity.LaunchActivity</activityName>
@@ -25,6 +26,7 @@
 		<packageName>com.taobao.etao</packageName>
 		<activityName>com.taobao.sns.activity.LaunchActivity</activityName>
 	</app>
+
 		<app name="yunYinYue">
 		<packageName>com.netease.cloudmusic</packageName>
 		<activityName>.activity.LoadingActivity</activityName>

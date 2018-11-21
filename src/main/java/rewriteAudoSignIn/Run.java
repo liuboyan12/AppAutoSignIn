@@ -82,7 +82,6 @@ public class Run {
         System.out.println("========");
         System.out.println("=脚本完成=");
         System.out.println("========");
-        System.out.println();
         System.out.println("共计报错"+mistake+"次");
         System.out.println();
         System.out.println("========");

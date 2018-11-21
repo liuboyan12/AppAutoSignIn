@@ -94,6 +94,7 @@ public class extendAutoSignDo extends autoSignDo  {
 
 		try {
 			deng(5);
+			updateAndBack(driver, "//android.widget.TextView[@text='立即升级']", "咸鱼");
 			int outwhile = 0;
 			while (1 < 2) {
 				if (outwhile > 2) {
@@ -333,21 +334,20 @@ public class extendAutoSignDo extends autoSignDo  {
 		tuichu(driver, "一淘");
 	}
 
+	@SuppressWarnings("unchecked")
 	void yunYinYue(String packageName, String ActivityName, String deviceName) 
 			throws MalformedURLException, FileNotFoundException {
 		AndroidDriver driver = this.rundriver(packageName, ActivityName, deviceName);
 		try {
 			deng(7);
 			try {
-				untilTimeOut(driver, "//android.widget.TextView[@text='重新购买']", 8);
-				back(driver);
-			} catch (Exception e) {
-			}
-			try {
-				untilTimeOut(driver, "//android.widget.TextView[@text='更新']", 5);
-				back(driver);
-			}catch (Exception e) {
-			}
+				//升级监测
+					updateAndBack(driver, "//android.widget.TextView[@text='重新购买']", "云音乐");
+					updateAndBack(driver, "//android.widget.TextView[@text='更新']", "云音乐");
+					updateAndBack(driver, "//android.widget.TextView[@text='安装']", "云音乐");
+			}catch (Exception e) {}
+			
+			
 			untilTimeOut(driver, "//android.widget.TextView[@text='私人FM']",5);
 			stepXTimeOut(driver, "//android.widget.ImageView[@content-desc='抽屉菜单']",3);
 			deng(3);
@@ -359,6 +359,7 @@ public class extendAutoSignDo extends autoSignDo  {
 		tuichu(driver, "网易云音乐");
 	}
 
+	@SuppressWarnings("unchecked")
 	void KFC(String packageName, String ActivityName, String deviceName) 
 			throws MalformedURLException, FileNotFoundException, InterruptedException {
 		AndroidDriver driver1 = this.rundriver(packageName, ActivityName, deviceName);
@@ -368,13 +369,7 @@ public class extendAutoSignDo extends autoSignDo  {
 		AndroidDriver driver = this.rundriver(packageName, ActivityName, deviceName);
 		try {
 				deng(2);
-				try{
-					untilTimeOut(driver, "//android.widget.TextView[@text='发现新版本']", 5);
-					Run.list.add("KFC需要升级");
-					stepXTimeOut(driver, "//android.widget.Button[@text='【取消】']", 3);
-				}catch (Exception e) {
-					
-				}
+				updateAndBack(driver, "//android.widget.TextView[@text='发现新版本']", "KFC");
 				untilTimeOut(driver, "//android.widget.TextView[@text='我的余额']", 10);
 				deng(2);
 				touchmiddle(driver, "[918,204][1050,279]");
